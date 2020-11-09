@@ -30,8 +30,8 @@ def get_size_properties(x):
     """
 
     num_rows, num_cols = x.shape
-    num_elements = num_rows * num_cols
-    num_dimensions = len(x.shape)
+    num_elements = x.size
+    num_dimensions = x.ndims
 
     return num_rows, num_cols, num_elements, num_dimensions
 
@@ -41,10 +41,10 @@ def append_vector_to_matrix(x, y):
     Append row vector y to the end (bottom) of matrix x.
     Result may be a new matrix (rather than the input matrix itself)
     """
-    num_cols = x.shape[1]
-    new_mat = np.zeros([3, num_cols])
-    new_mat[0:2, :] = x
-    new_mat[2, :] = y
+    num_rows, num_cols = x.shape
+    new_mat = np.zeros([num_rows+1, num_cols])
+    new_mat[0:num_rows, :] = x
+    new_mat[num_rows, :] = y
 
     return new_mat
 
