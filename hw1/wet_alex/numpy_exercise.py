@@ -186,6 +186,7 @@ def main():
 
     # TODO  - what the f do i do here
     # TODO -------------------
+    # I think they wrote the answer for some reason.. weird 
 
     # Fill in the expected value of the functions Q1-Q2.
     # Yes, we're aware you can print the value and copy-paste it.
