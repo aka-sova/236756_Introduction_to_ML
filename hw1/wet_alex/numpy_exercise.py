@@ -78,8 +78,7 @@ def view_face():
     """
     face = sp.misc.face()
     plt.imshow(face)
-
-    # that's all?
+    plt.show()
 
 
 
