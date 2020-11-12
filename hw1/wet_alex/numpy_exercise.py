@@ -31,7 +31,7 @@ def get_size_properties(x):
 
     num_rows, num_cols = x.shape
     num_elements = x.size
-    num_dimensions = x.ndims
+    num_dimensions = x.ndim
 
     return num_rows, num_cols, num_elements, num_dimensions
 
