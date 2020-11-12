@@ -10,8 +10,8 @@ def one_hot_5_of_10():
     """
     Return a zero vector of size 10 but the fifth value which is 1
     """
-    my_arr = np.zeros([10])
-    my_arr[5] = 1
+    my_arr = np.zeros(10, dtype=int)
+    my_arr[4] = 1
 
     return my_arr
 
