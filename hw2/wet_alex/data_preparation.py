@@ -24,13 +24,14 @@ def main():
 
 
     # push the dataframe through the pipeline
-    # pipe = Pipeline([('scaler', StandardScaler()), ('svc', SVC())])
     data_processing_pipe = customPipeline(steps = [('BMI_handler', BMI_handler(max_threshold=50)),
-                                                   ('BMI_handler2', BMI_handler(max_threshold=50))])
+                                                   ('PCR_results_handler', PCR_results_handler())])
 
-    df = data_processing_pipe.apply_transforms(df)
+    # apply all the transforms one by one
+    df["train"] = data_processing_pipe.apply_transforms(df["train"])
 
-    print(df.head(10))
+
+    print(df["train"].head(10))
 
 
     

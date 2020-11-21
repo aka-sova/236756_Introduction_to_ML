@@ -28,15 +28,13 @@ class CustomFeatureHandler():
     and "fit" function which won't be used in our case.
 
     """
-    def __init__(self, max_threshold: int):
-        self.max_threshold = max_threshold
+    def __init__(self):
+        pass
 
-    @abc.abstractmethod
     def fit(self):
         # no fit required
         return self
 
-    @abc.abstractmethod
     def transform(self, df_dut : pd.DataFrame()):
         return df_dut
 
@@ -73,3 +71,4 @@ def split_the_data(df: pd.DataFrame(), split_list):
     ds_obj["test_original"] = split_data[2]
 
     return ds_obj
+
