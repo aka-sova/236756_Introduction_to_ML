@@ -203,6 +203,8 @@ class BMI_handler(CustomFeatureHandler):
         return df
 
 
+from sklearn import decomposition
+import pandas as pd
 class PCR_results_handler(CustomFeatureHandler):
     """From the analysis, the PCR results 3, 12, and 16 can be removed"""
     def __init__(self):
@@ -210,13 +212,26 @@ class PCR_results_handler(CustomFeatureHandler):
 
     def transform(self, df : pd.DataFrame()):
 
-        pcr_results_to_remove = [3, 12, 16]
-        fields_to_drop = ["pcrResult" + str(i) for i in pcr_results_to_remove]
+        pca = decomposition.PCA(n_components=5)
+        pca.fit_transform(df_scalar) #plug in scaled values ( with outliers )
+        V = pca.components_
 
-        for field_to_drop in fields_to_drop:
-            df = df.drop(field_to_drop, axis=1)
+        cov = np.zeros( (5,4) )
+        for i in range(5):
+            sort = np.sort( np.absolute(V[i]) )
+            for j in range(4):
+                cov[i][j]=sort[15-j]
+        cov_idx = np.zeros( (5,4) )
 
-        return df
+        for i in range(5):
+            where =  [ (idx+1)  for idx, item in enumerate(V[i]) if np.absolute(item) >= cov[i][3] ] #  indices of 3 maximal coefficients
+        for j in range(4):
+            cov_idx[i][j] = where[j]
+        keep = [ int(cov_idx[i][j])  for i in range(3) for j in range(4)]
+        keep_cols =[ 'pcrResult{}'.format(itr) for itr in keep]
+
+        
+        return df[keep_cols]
 
 
 
