@@ -217,3 +217,14 @@ class PCR_results_handler(CustomFeatureHandler):
             df = df.drop(field_to_drop, axis=1)
 
         return df
+
+
+
+class DropNA(CustomFeatureHandler):
+    """Drop all columns, which have any N/A value"""
+
+    def __init__(self):
+        super().__init__()
+
+    def transform(self, df : pd.DataFrame()):
+        return df.dropna()

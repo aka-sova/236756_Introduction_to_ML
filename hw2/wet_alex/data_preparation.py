@@ -25,9 +25,11 @@ def main():
     # push the dataframe through the pipeline
     data_processing_pipe = customPipeline(steps = [('Drop_Irrelevant', Drop_Irrelevant()),
                                                    ('SexHandler', SexHandler()),
+                                                   ('BMI_handler', BMI_handler(max_threshold=50)),
                                                    ('BloodTypeHandler', BloodTypeHandler()),
                                                    ('SelfDeclaration_to_Categories', SelfDeclaration_to_Categories()),
                                                    ('Modify_Results_Code', Modify_Results_Code()),
+                                                   ('DropNA', DropNA()),
                                                    ])
 
     # data_processing_pipe = customPipeline(steps = [('BMI_handler', BMI_handler(max_threshold=50)),
@@ -35,6 +37,8 @@ def main():
 
     # apply all the transforms one by one
     df["train"] = data_processing_pipe.apply_transforms(df["train"])
+    df["valid"] = data_processing_pipe.apply_transforms(df["valid"])
+    df["test"] = data_processing_pipe.apply_transforms(df["test"])
 
 
     print(df["train"].head(10))
