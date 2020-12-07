@@ -3,7 +3,7 @@ import numpy as np
 
 import sklearn
 from sklearn.pipeline import Pipeline
-import abc
+import os
 
 
 class customPipeline(Pipeline):
@@ -59,16 +59,38 @@ def split_the_data(df: pd.DataFrame(), split_list):
     Valid df: {split_data[1].shape[0]}\n\
     Test df: {split_data[2].shape[0]}")
 
-    ds_obj = {}
+    ds_dict = {}
 
-    ds_obj["train"] = split_data[0]
-    ds_obj["train_original"] = split_data[0]
+    ds_dict["train"] = split_data[0]
+    ds_dict["train_original"] = split_data[0]
 
-    ds_obj["valid"] = split_data[1]
-    ds_obj["valid_original"] = split_data[1]
+    ds_dict["valid"] = split_data[1]
+    ds_dict["valid_original"] = split_data[1]
 
-    ds_obj["test"] = split_data[2]
-    ds_obj["test_original"] = split_data[2]
+    ds_dict["test"] = split_data[2]
+    ds_dict["test_original"] = split_data[2]
 
-    return ds_obj
+    return ds_dict
 
+
+
+def save_csv_files(ds_dict : dict, output_folder_name : str):
+
+    """Save all 6 pd.Dataframe objects in 6 csv files"""
+
+    curdir = os.getcwd()
+    output_dir = os.path.abspath(os.path.join(curdir, output_folder_name))
+
+    if not os.path.isdir(output_dir):
+        os.mkdir(output_dir)
+
+
+    ds_dict["train"].to_csv(os.path.join(output_dir, "train.csv"))
+    ds_dict["train_original"].to_csv(os.path.join(output_dir, "train_original.csv"))
+    ds_dict["valid"].to_csv(os.path.join(output_dir, "valid.csv"))
+    ds_dict["valid_original"].to_csv(os.path.join(output_dir, "valid_original.csv"))
+    ds_dict["test"].to_csv(os.path.join(output_dir, "test.csv"))
+    ds_dict["test_original"].to_csv(os.path.join(output_dir, "test_original.csv"))
+
+
+    return
