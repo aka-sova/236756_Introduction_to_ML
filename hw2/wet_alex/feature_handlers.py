@@ -205,6 +205,7 @@ class BMI_handler(CustomFeatureHandler):
         df.loc[outlier_bmi_mask, "BMI"] = mean_train_BMI
         return df
 
+
 class PCR_results_handler(CustomFeatureHandler):
     """From the analysis, the PCR results 3, 12, and 16 can be removed"""
     def __init__(self, scaler_obj, pca_obj):
@@ -244,6 +245,7 @@ class PCR_results_handler(CustomFeatureHandler):
                 df = df.drop(column, axis=1)
         
         return df
+
 
 
 
