@@ -202,37 +202,35 @@ class BMI_handler(CustomFeatureHandler):
         df.loc[outlier_bmi_mask, "BMI"] = mean_train_BMI
         return df
 
-
-from sklearn import decomposition
-import pandas as pd
-class PCR_results_handler(CustomFeatureHandler):
-    """From the analysis, the PCR results 3, 12, and 16 can be removed"""
-    def __init__(self):
-        super().__init__()
-
-    def transform(self, df : pd.DataFrame()):
-
-        pca = decomposition.PCA(n_components=5)
-        pca.fit_transform(df_scalar) #plug in scaled values ( with outliers )
-        V = pca.components_
-
-        cov = np.zeros( (5,4) )
-        for i in range(5):
-            sort = np.sort( np.absolute(V[i]) )
-            for j in range(4):
-                cov[i][j]=sort[15-j]
-        cov_idx = np.zeros( (5,4) )
-
-        for i in range(5):
-            where =  [ (idx+1)  for idx, item in enumerate(V[i]) if np.absolute(item) >= cov[i][3] ] #  indices of 3 maximal coefficients
-        for j in range(4):
-            cov_idx[i][j] = where[j]
-        keep = [ int(cov_idx[i][j])  for i in range(3) for j in range(4)]
-        keep_cols =[ 'pcrResult{}'.format(itr) for itr in keep]
-
-        
-        return df[keep_cols]
-
+#from sklearn.neighbors import KNeighborsClassifier
+#from sklearn.model_selection import train_test_split
+#from sklearn.metrics import f1_score
+#import pandas as pd
+#class PCR_results_handler(CustomFeatureHandler): #SBS - DIDNT CHECK IF INTEGREATES TO CODE
+#    """From the analysis, the PCR results 3, 12, and 16 can be removed"""
+#    def __init__(self):
+#        super().__init__()
+#
+#    def transform(self, X_train : pd.DataFrame(), X_test : pd.DataFrame(), y_train : pd.DataFrame, y_test : pd.DataFrame() ):
+#        full = [ item+1 for item in range(16)] #backward propegation
+#        
+#        for m in range(6): #picked some number of removals of features
+#            scores= []
+#            for item in full:
+#                kn = KNeighborsClassifier( n_neighbors = 5, weights= 'distance' ) # weights= 'uniform'
+#                removed_cols = [ 'pcrResult{}'.format(itr+1) for itr in range(16) if itr+1 not in full]
+#                removed_df = X_train.drop( columns= ['pcrResult{}'.format(item)] + removed_cols ) 
+#                kn.fit( removed_df, y_train.atRisk )
+#                vals = kn.predict(X_test.drop( columns=['pcrResult{}'.format(item)] + removed_cols ))
+#                this_score = f1_score(y_test.atRisk, vals, average='weighted' )
+#                scores.append( ( item ,this_score) )
+#            arr = [ scores[k][1] for k in range(len(scores))]
+#            amax = np.amax(np.array(arr))
+#            amax_idx = [ scores[l] for l in range(len(scores)) if scores[l][1]  == amax ][0][0] #indx when dropped scoring is maximal
+#            full = [ item for item in full if item != amax_idx]
+#        drop = [ 'pcrResult{}'.format(item+1) for item in range(16) if (item+1) not in full]
+#        return X_train.drop[columns=drop]
+#
 
 
 class DropNA(CustomFeatureHandler):
