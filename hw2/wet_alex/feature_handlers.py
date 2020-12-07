@@ -9,6 +9,8 @@ from sklearn.pipeline import Pipeline
 import pandas as pd
 import numpy as np
 
+import copy
+
 from utils import customPipeline, CustomFeatureHandler
 
 """
@@ -192,6 +194,7 @@ class BMI_handler(CustomFeatureHandler):
     """Apply transformation on the BMI parameters"""
 
     def __init__(self, max_threshold: int):
+        super().__init__()
         self.max_threshold = max_threshold
 
     def transform(self, df : pd.DataFrame()):
@@ -202,36 +205,45 @@ class BMI_handler(CustomFeatureHandler):
         df.loc[outlier_bmi_mask, "BMI"] = mean_train_BMI
         return df
 
-
-from sklearn import decomposition
-import pandas as pd
 class PCR_results_handler(CustomFeatureHandler):
     """From the analysis, the PCR results 3, 12, and 16 can be removed"""
-    def __init__(self):
+    def __init__(self, scaler_obj, pca_obj):
         super().__init__()
+        self.scaler_obj = scaler_obj
+        self.pca_obj = pca_obj
 
     def transform(self, df : pd.DataFrame()):
 
-        pca = decomposition.PCA(n_components=5)
-        pca.fit_transform(df_scalar) #plug in scaled values ( with outliers )
-        V = pca.components_
+        pcr_results = range(17)
+        pcr_fields = ["pcrResult" + str(i) for i in pcr_results]
 
-        cov = np.zeros( (5,4) )
-        for i in range(5):
-            sort = np.sort( np.absolute(V[i]) )
-            for j in range(4):
-                cov[i][j]=sort[15-j]
-        cov_idx = np.zeros( (5,4) )
+        df_pcr = copy.deepcopy(df)
 
-        for i in range(5):
-            where =  [ (idx+1)  for idx, item in enumerate(V[i]) if np.absolute(item) >= cov[i][3] ] #  indices of 3 maximal coefficients
-        for j in range(4):
-            cov_idx[i][j] = where[j]
-        keep = [ int(cov_idx[i][j])  for i in range(3) for j in range(4)]
-        keep_cols =[ 'pcrResult{}'.format(itr) for itr in keep]
+        # create new dataframe only with PCR results
+        # fill NA values with median
+        for column in df_pcr.columns:
+            if column not in pcr_fields:
+                df_pcr = df_pcr.drop(column, axis=1)
+            else:
+                df_pcr[column] = df_pcr[column].fillna(np.nanmedian(df_pcr[column]))
 
+        # apply the Scaler on the whole dataframe
+        df_pcr_scaled = self.scaler_obj.transform(df_pcr)
+
+        # apply the PCA on the whole dataframe
+        df_pcr_pca = self.pca_obj.transform(df_pcr_scaled)
+
+        # Fit back the columns into the original dataset with field names PC1, PC2 ... etc
+        for pca_component in range(df_pcr_pca.shape[1]):
+            df[f"PCA_{pca_component}"] = df_pcr_pca[:, pca_component]
+
+
+        # drop all the old pcr results from the original dataframe
+        for column in df.columns:
+            if column in pcr_fields:
+                df = df.drop(column, axis=1)
         
-        return df[keep_cols]
+        return df
 
 
 
@@ -242,4 +254,4 @@ class DropNA(CustomFeatureHandler):
         super().__init__()
 
     def transform(self, df : pd.DataFrame()):
-        return df.dropna()
+        return df.dropna(axis=1)

@@ -59,6 +59,10 @@ def split_the_data(df: pd.DataFrame(), split_list):
     Valid df: {split_data[1].shape[0]}\n\
     Test df: {split_data[2].shape[0]}")
 
+    # return indexes to 0
+    split_data[1].index -= split_data[1].index.start
+    split_data[2].index -= split_data[2].index.start
+
     ds_dict = {}
 
     ds_dict["train"] = split_data[0]
