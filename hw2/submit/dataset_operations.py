@@ -9,8 +9,6 @@ from sklearn.preprocessing import StandardScaler
 
 from sklearn.model_selection import train_test_split
 
-from sklearn.neighbors import KNeighborsClassifier
-from mlxtend.feature_selection import SequentialFeatureSelector as SFS #import mlxtend library
 
 def learn_pcr_transform(df : pd.DataFrame, n_components : int):
 
@@ -103,7 +101,8 @@ def get_srs_features(df):
     results = pd.concat( [risk_encode, spread_encode, disease_encode], axis=1 )
     results = results.drop(['NotSpreader', 'NotatRisk'], axis=1)
 
- 
+    from sklearn.neighbors import KNeighborsClassifier
+    from mlxtend.feature_selection import SequentialFeatureSelector as SFS #import mlxtend library
 
     X_train,  X_val, y_train, y_val = train_test_split( df2, results, test_size=0.33, random_state=33 ) #tr is test results numerically coded
     X_val, X_test, y_val, y_test = train_test_split( X_val, y_val , test_size=0.4, random_state=33)
