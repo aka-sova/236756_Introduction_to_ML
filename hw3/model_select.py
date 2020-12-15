@@ -14,7 +14,12 @@ def main():
     virus_df = pd.read_csv("csv_outputs") #csv with selected features- make sure vlidation and test sets went through preprocessing as well as training
     cf = [ 'Spreader', 'atRisk', 'notdetected', 'flue', 'covid', 'measles', 'cmv' ] # binary classification on each 
     models = [  'logistic_regression',  'SVM', 'kNN', 'perceptron', 'decision_tree' ] #models for classification
-    hyper = [  ] #hyperparameters for models
+    hyper = [ ('SVM', { 'kernel' :  ['linear', 'poly', 'rbf', 'sigmoid', 'precomputed'], 'C' : [ 0.5, 1, 2, 4] , 'degree' : [2,3,4,5] }), /
+                ('kNN', { 'n_neighbors': [3,5,7] , 'weights': ['uniform', 'distance']})/
+                ] #hyperparameters for models
+    
+    
+                                                                                                         
 
 
 
