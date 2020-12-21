@@ -6,14 +6,16 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.linear_model import LogisticRegression
 
 import pandas as pd
-
+import numpy as np
 
 
 class customGridSearch(GridSearchCV):
     """return dataframe of params of best estimator"""
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self,estimator,param_grid):
+        super().__init__(estimator, param_grid, scoring=None, n_jobs=None, iid='deprecated',\
+                         refit=True, cv=None, verbose=0, pre_dispatch='2*n_jobs',\
+                         error_score=np.nan, return_train_score=False)
 
     def best(self): #returns dataframe rather than dict
         best_ = self.best_estimator_
