@@ -30,3 +30,5 @@ def test_size( e, d, H ):
     size = np.divide( np.log(np.divide(1,d)), 2*np.square(e) )
 
     return size  
+
+
