@@ -55,7 +55,7 @@ class customKLogisticRegression(LogisticRegression):
     def __init__(self, penalty, C):
         super().__init__(penalty=penalty,  dual=False, tol=0.0001, C=C,\
          fit_intercept=True, intercept_scaling=1, class_weight='balanced', \
-          random_state=None, solver='lbfgs', max_iter=100, \
+          random_state=None, solver='newton-cg', max_iter=100, \
           multi_class='ovr', verbose=0, warm_start=False, n_jobs=None, l1_ratio=None) #multi_class ovr is binary classification
 
 

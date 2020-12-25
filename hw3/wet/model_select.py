@@ -12,7 +12,7 @@ from execute import *
 def main():
 
 
-    print( get_best_model_spreader() )
+    print( get_best_model_virus() )
                                                                                                          
 
 
