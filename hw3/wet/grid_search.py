@@ -4,6 +4,8 @@ from sklearn.model_selection import ParameterGrid
 from sklearn.svm import SVC
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.linear_model import LogisticRegression
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.ensemble import AdaBoostRegressor
 
 from sklearn.metrics import recall_score
 from sklearn.metrics import accuracy_score
@@ -52,11 +54,11 @@ class customKNeighborsClassifier(KNeighborsClassifier):
 
 class customKLogisticRegression(LogisticRegression):
     """ configure constant params"""
-    def __init__(self, penalty, C):
+    def __init__(self, penalty, C, solver):
         super().__init__(penalty=penalty,  dual=False, tol=0.0001, C=C,\
-         fit_intercept=True, intercept_scaling=1, class_weight='balanced', \
-          random_state=None, solver='newton-cg', max_iter=100, \
-          multi_class='ovr', verbose=0, warm_start=False, n_jobs=None, l1_ratio=None) #multi_class ovr is binary classification
+         fit_intercept=True, intercept_scaling=1, class_weight=None, \
+          random_state=None, solver=solver, max_iter=1000, \
+          multi_class='auto', verbose=0, warm_start=False, n_jobs=None, l1_ratio=None) #multi_class ovr is binary classification
 
 
 
