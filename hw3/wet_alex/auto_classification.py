@@ -23,7 +23,7 @@ class Task(object):
 
 
 
-def choose_best_model( tasks : list, models: list, dataset : Bunch, output_folder_path : str):
+def choose_best_model( tasks : list, models: list, train_dataset : Bunch, valid_dataset : Bunch, output_folder_path : str):
     """Iterates over every task, and every model, returning the best model for each class."""
 
     # returns
@@ -37,7 +37,7 @@ def choose_best_model( tasks : list, models: list, dataset : Bunch, output_folde
         print("-"*40)
         print(f"\n\nInitializing model selection for task : {task.task_name}")
         # train on different classifiers
-        metrics_dict = iterate_over_models(task, models, dataset)
+        metrics_dict = iterate_over_models(task, models, train_dataset)
 
         # choose the best according to the specified metric in the task
         for model_idx in metrics_dict.keys():
@@ -60,7 +60,7 @@ def choose_best_model( tasks : list, models: list, dataset : Bunch, output_folde
 # clf.cv_results_['params'][clf.best_index_]
 #
 
-def iterate_over_models(task, models: list, dataset : Bunch):
+def iterate_over_models(task, models: list, train_dataset : Bunch):
     """For a specific task, iterates over models. Returns all kinds of metrics"""
 
     # inputs
@@ -75,16 +75,16 @@ def iterate_over_models(task, models: list, dataset : Bunch):
     metrics_dict = {}
 
     # obtain the correct X and y  (features and target) for this specific task
-    # from the dataset
+    # from the train_dataset
 
-    X = dataset.data
-    y = dataset.target_types[task.target_type]["targets"]
+    X = train_dataset.data
+    y = train_dataset.target_types[task.target_type]["targets"]
 
     for model_idx, model in enumerate(models):
         print(f"Checking model : {model[0]} over params {model[1]}")
         # use the GridSearch cross validation method to find the best parameters for the model
         # from the specified parameters
-        clf_scorer = metrics.make_scorer(metrics.accuracy_score)
+        clf_scorer = metrics.make_scorer(task.main_metrics)
 
         clf = GridSearchCV(model[0], model[1], scoring = clf_scorer)
         clf.fit(X, y)
@@ -96,6 +96,8 @@ def iterate_over_models(task, models: list, dataset : Bunch):
         for rank_idx in sorted_rank_idxs:
             print(f"\t\tScore : {round(clf.cv_results_['mean_test_score'][rank_idx], 3)} , "
                   f"Params : {clf.cv_results_['params'][rank_idx]}")
+
+        # apply all those models on the validation set and pick the best
 
         # take best score value
         metrics_dict[model_idx] = max(clf.cv_results_['mean_test_score'])

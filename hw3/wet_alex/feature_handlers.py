@@ -239,52 +239,54 @@ class Modify_Results_Code(CustomFeatureHandler):
     def transform(self, df: pd.DataFrame()):
         """Replace the test results with the new dataframe"""
 
-        # test result classified by labels
-        li = df.TestResultsCode.tolist()
-        labels = [item.split('_') for item in li]
-        for item in labels:
-            if len(item) == 4:
-                add = item[0] + item[1]
-                item = item.insert(0, add)
-        for item in labels:
-            if 'not' in item:
-                item.remove('not')
-            if 'detected' in item:
-                item.remove('detected')
+        if 'TestResultsCode' in df.columns:
 
-        disease = [la[0] for la in labels]
-        spread = [la[1] for la in labels]
-        risk = [la[2] for la in labels]
+            # test result classified by labels
+            li = df.TestResultsCode.tolist()
+            labels = [item.split('_') for item in li]
+            for item in labels:
+                if len(item) == 4:
+                    add = item[0] + item[1]
+                    item = item.insert(0, add)
+            for item in labels:
+                if 'not' in item:
+                    item.remove('not')
+                if 'detected' in item:
+                    item.remove('detected')
 
-        # mapping dict
-        # mapping = {}
-        # for i,x in enumerate(set(disease)):
-        #     mapping[x] = i
+            disease = [la[0] for la in labels]
+            spread = [la[1] for la in labels]
+            risk = [la[2] for la in labels]
 
-        # to be sure we're consistent. is also used in automatic classificaion
-        disease_mapping = {'flue': 0, 'covid': 1, 'cmv': 2, 'cold': 3, 'measles': 4, 'notdetected': 5}
+            # mapping dict
+            # mapping = {}
+            # for i,x in enumerate(set(disease)):
+            #     mapping[x] = i
 
-        disease_indexed = [disease_mapping[disease_name] for disease_name in disease]
+            # to be sure we're consistent. is also used in automatic classificaion
+            disease_mapping = {'flue': 0, 'covid': 1, 'cmv': 2, 'cold': 3, 'measles': 4, 'notdetected': 5}
 
-
-        # disease_encode = pd.Series(disease).str.get_dummies()
-        spread_encode = pd.Series(spread).str.get_dummies()
-        risk_encode = pd.Series(risk).str.get_dummies()
-
-        # disease_encode = pd.DataFrame(disease_encode)
-        disease_encode = pd.DataFrame({'Disease' : disease_indexed})
-        spread_encode = pd.DataFrame(spread_encode)
-        risk_encode = pd.DataFrame(risk_encode)
+            disease_indexed = [disease_mapping[disease_name] for disease_name in disease]
 
 
-        spread_encode = spread_encode.drop(['NotSpreader'], axis=1)
-        risk_encode = risk_encode.drop(['NotatRisk'], axis=1)
+            # disease_encode = pd.Series(disease).str.get_dummies()
+            spread_encode = pd.Series(spread).str.get_dummies()
+            risk_encode = pd.Series(risk).str.get_dummies()
 
-        frames = [df, disease_encode, spread_encode, risk_encode]
-        df = pd.concat(frames, axis=1)
+            # disease_encode = pd.DataFrame(disease_encode)
+            disease_encode = pd.DataFrame({'Disease' : disease_indexed})
+            spread_encode = pd.DataFrame(spread_encode)
+            risk_encode = pd.DataFrame(risk_encode)
 
-        # drop the original label
-        df = df.drop(columns='TestResultsCode')
+
+            spread_encode = spread_encode.drop(['NotSpreader'], axis=1)
+            risk_encode = risk_encode.drop(['NotatRisk'], axis=1)
+
+            frames = [df, disease_encode, spread_encode, risk_encode]
+            df = pd.concat(frames, axis=1)
+
+            # drop the original label
+            df = df.drop(columns='TestResultsCode')
 
         return df
 
