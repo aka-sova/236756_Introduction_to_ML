@@ -43,21 +43,24 @@ def init_automatic_classification(regenerate_features : bool, dataset_type : str
         tasks.append(Task(task_name = 'Spreader_Detection',
                           target_type = 'Spreader',
                           main_metrics = metrics.accuracy_score,
-                          pipeline = risk_pipe,
+                          pipeline = risk_pipe(dataset_path=virus_dataset_path,
+                                               split_list=[0.75, 0.15, 0.10]),
                           mapping_dict = targets_mappings['spreader_mapping'],
                           order  = 1))
 
         tasks.append(Task(task_name = 'At_Risk_Detection',
                           target_type = 'atRisk',
                           main_metrics = metrics.accuracy_score,
-                          pipeline=risk_pipe,
+                          pipeline=risk_pipe(dataset_path=virus_dataset_path,
+                                             split_list=[0.75, 0.15, 0.10]),
                           mapping_dict = targets_mappings['at_risk_mapping'],
                           order  = 2))
 
         tasks.append(Task(task_name = 'Disease_Detection',
                           target_type = 'Disease',
                           main_metrics = metrics.accuracy_score,
-                          pipeline=pca_srs_pipe,
+                          pipeline=pca_srs_pipe(dataset_path=virus_dataset_path,
+                                                split_list=[0.75, 0.15, 0.10]),
                           mapping_dict = targets_mappings['disease_mapping'],
                           order  = 0))
 
@@ -83,8 +86,7 @@ def init_automatic_classification(regenerate_features : bool, dataset_type : str
 
             prepare_dataset(dataset_path=virus_dataset_path,
                             split_list = split_list,
-                            data_processing_pipe = task.pipeline(dataset_path=virus_dataset_path,
-                                                                 split_list=[0.75, 0.15, 0.10]),
+                            data_processing_pipe = task.pipeline,
                             output_folder_name = os.path.join(features_folder_path, task.task_name))
 
             task.datasets['train'], task.datasets['valid'], task.datasets['test'] = \
@@ -130,16 +132,14 @@ def init_automatic_classification(regenerate_features : bool, dataset_type : str
         #       we need to create dataset for each task as previously
 
 
-        # patient_IDs = preprocess_csv_input(os.path.join('input_ds', 'virus_hw3_unlabeled.csv'),
-        #                                    os.path.join('input_ds', 'virus_hw3_unlabeled_preprocessed.csv'),
-        #                                    features_pipe, True, True)
-        #
-        # unseen_dataset = get_virus_dataset(os.path.join('input_ds', 'virus_hw3_unlabeled_preprocessed.csv'),
-        #                                    targets_mappings,
-        #                                    has_targets = False)
-        #
-        # predicted_out_path = os.path.join(outputs_folder_path, 'unseen_predicted.csv')
-        # test_best_model(tasks, models, chosen_models_dict, unseen_dataset, predicted_out_path, logfd, patient_IDs)
+        external_datasets, patient_IDs = get_external_datasets(os.path.join('input_ds', 'virus_hw3_unlabeled.csv'),
+                                                               tasks,
+                                                               targets_mappings,
+                                                               os.path.join('input_ds', 'virus_hw3_unlabeled'))
+
+        predicted_out_path = os.path.join(outputs_folder_path, 'unseen_predicted.csv')
+        test_best_model(tasks, models, chosen_models_dict, predicted_out_path, logfd, patient_IDs,
+                        external_datasets, True)
 
 
     logfd.close()

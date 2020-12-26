@@ -10,6 +10,7 @@ from sklearn import metrics
 
 import timeit
 from utils import print_all
+from data_preparation import preprocess_csv_input, make_datasets, get_virus_dataset
 
 from sklearn.model_selection import GridSearchCV
 from sklearn.pipeline import Pipeline
@@ -178,7 +179,8 @@ def test_metrics_on_validation(task, models: list, metrics_dict : dict, validati
         print_all(logfd, row_format.format(*row))
 
 
-def test_best_model(tasks, models, chosen_models_dict, predicted_out_path, logfd, patient_IDs : list = []):
+def test_best_model(tasks, models, chosen_models_dict, predicted_out_path, logfd, patient_IDs : list = [],
+                    external_datasets = None, use_external_datasets : bool = False):
 
     # the dict with best model for each task
     # chosen_models_dict:  { task_1_idx : (model_2_idx, main_metrics, best_classifier) ,
@@ -199,15 +201,20 @@ def test_best_model(tasks, models, chosen_models_dict, predicted_out_path, logfd
         task = tasks[task_idx]
         best_model = chosen_models_dict[task_idx][2]
 
-        X = task.datasets['test'].data
+        if use_external_datasets == False:
+            X = task.datasets['test'].data
+        else:
+            X = external_datasets[task_idx].data
+
         y_pred = best_model.predict(X)
 
         # if targets exist, evaluate on the targets
-        if task.datasets['test'].target_types != {}:
-            y_true = task.datasets['test'].target_types[task.target_type]["targets"]
-            metrics_result = task.main_metrics(y_true = y_true, y_pred = y_pred)
-            print_all(logfd, f"\tTask : {task.task_name}, targets were supplied."
-                             f" {task.main_metrics.__name__} = {metrics_result}")
+        if use_external_datasets == False:
+            if task.datasets['test'].target_types != {}:
+                y_true = task.datasets['test'].target_types[task.target_type]["targets"]
+                metrics_result = task.main_metrics(y_true = y_true, y_pred = y_pred)
+                print_all(logfd, f"\tTask : {task.task_name}, targets were supplied."
+                                 f" {task.main_metrics.__name__} = {metrics_result}")
 
         # convert the predictions into the actual target names according to mapping
         task_inv_mapping = {v: k for k, v in task.mapping_dict.items()}
@@ -283,3 +290,23 @@ def forward_select(X_train, y_train, scoring):
     gs = gs.fit(X_train, y_train)
     return gs.best_estimator_.steps[0][1].k_feature_idx_ #returns list of best features by index
 
+
+
+def get_external_datasets(input_csv_filename, tasks, targets_mappings, output_folder_name):
+
+    datasets = []
+    patient_IDs = []
+    os.makedirs(output_folder_name, exist_ok=True)
+
+    for task_idx, task in enumerate(tasks):
+
+        patient_IDs = preprocess_csv_input(input_csv_filename,
+                                           os.path.join(output_folder_name, f'virus_hw3_unlabeled_{task.task_name}.csv'),
+                                           task.pipeline, True, True)
+
+        task_dataset = get_virus_dataset(os.path.join(output_folder_name, f'virus_hw3_unlabeled_{task.task_name}.csv'),
+                                           targets_mappings,
+                                           has_targets = False)
+        datasets.append(task_dataset)
+
+    return datasets, patient_IDs
