@@ -50,7 +50,7 @@ def init_automatic_classification(regenerate_features : bool, evaluate_on_test :
 
         tasks.append(Task(task_name = 'At_Risk_Detection',
                           target_type = 'atRisk',
-                          main_metrics = metrics.accuracy_score,
+                          main_metrics = metrics.accuracy,
                           pipeline=risk_pipe(dataset_path=virus_dataset_path,
                                              split_list=[0.75, 0.15, 0.10]),
                           mapping_dict = targets_mappings['at_risk_mapping'],
