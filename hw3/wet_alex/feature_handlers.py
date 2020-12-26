@@ -2,6 +2,8 @@
 
 import sklearn
 from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+
 
 # from sklearn.preprocessing import StandardScaler
 # from sklearn.svm import SVC
@@ -150,6 +152,75 @@ class SexHandler(CustomFeatureHandler):
 
         return df
 
+class AgeHandler(CustomFeatureHandler):
+    """Deal with age class"""
+
+    def __init__(self):
+        super().__init__()
+
+    def transform(self, df : pd.DataFrame()):
+        df['AgeGroup'] = df.AgeGroup.fillna(np.mean(df.AgeGroup))
+
+        return df
+
+
+class SportsHandler(CustomFeatureHandler):
+    """Deal with AvgMinSportsPerDay class"""
+
+    def __init__(self):
+        super().__init__()
+
+    def transform(self, df : pd.DataFrame()):
+        df['AvgMinSportsPerDay'] = df.AvgMinSportsPerDay.fillna(np.mean(df.AvgMinSportsPerDay))
+
+        return df
+
+class PresentsHandler(CustomFeatureHandler):
+    """Deal with AvgHouseholdExpenseOnPresents class"""
+
+    def __init__(self):
+        super().__init__()
+
+    def transform(self, df : pd.DataFrame()):
+        df['AvgHouseholdExpenseOnPresents'] = df.AvgHouseholdExpenseOnPresents.fillna(np.mean(df.AvgHouseholdExpenseOnPresents))
+
+        return df
+
+class HappyHandler(CustomFeatureHandler):
+    """Deal with AvgHouseholdExpenseOnPresents class"""
+
+    def __init__(self):
+        super().__init__()
+
+    def transform(self, df : pd.DataFrame()):
+        df['HappinessScore'] = df.HappinessScore.fillna(np.mean(df.HappinessScore))
+
+        return df
+class StepsHandler(CustomFeatureHandler):
+    """Deal with steps class, normalize"""
+
+    def __init__(self):
+        super().__init__()
+
+    def transform(self, df : pd.DataFrame()):
+        std = StandardScaler()
+        df['StepsPerYear'] = std.fit_transform(np.array(df.StepsPerYear.fillna(np.mean(df.StepsPerYear))).reshape(-1, 1))
+
+        return df
+
+
+
+class CousinsHandler(CustomFeatureHandler):
+    """Deal with nr cousins class, normalize"""
+
+    def __init__(self):
+        super().__init__()
+
+    def transform(self, df : pd.DataFrame()):
+        std = StandardScaler()
+        df['NrCousins'] = std.fit_transform(np.array(df.NrCousins.fillna(np.mean(df.NrCousins))).reshape(-1, 1))      
+
+        return df
 
 
 class SelfDeclaration_to_Categories(CustomFeatureHandler):

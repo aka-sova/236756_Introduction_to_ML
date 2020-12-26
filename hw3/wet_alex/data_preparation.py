@@ -62,6 +62,57 @@ def pca_srs_pipe(dataset_path : str, split_list : list):
 
     return data_processing_pipe
 
+def risk_pipe(dataset_path : str, split_list : list):
+
+    virus_df = pd.read_csv(dataset_path)
+    df = split_the_data(virus_df, split_list)
+
+    mean_bmi = 29
+    mean_discipline = 4.95
+    mean_social_activity_time = 5.32
+
+    # PCR results learning
+    pcr_scaler, pcr_pca = learn_pcr_transform(df["train"], n_components=5)
+
+    # features that should stay according to SFS
+    srs_features_to_stay = ["BMI", "DisciplineScore", "TimeOnSocialActivities","AgeGroup",'AvgMinSportsPerDay','AvgHouseholdExpenseOnPresents','HappinessScore','StepsPerYear','NrCousins']
+    PCA_components = range(0) #no pac components
+    pca_components_fields = ["PCA_" + str(i) for i in PCA_components]
+    results_fields = ['Disease', 'Spreader', 'atRisk']
+    #self_declaration_categories = ['DiarrheaInt', 'Nausea_or_vomitingInt', 'Shortness_of_breathInt',
+    #                               'Congestion_or_runny noseInt', 'HeadacheInt', 'FatigueInt',
+    #                               'Muscle_or_body_achesInt', 'ChillsInt', 'Skin_rednessInt',
+    #                               'New_loss_of_taste_or_smellInt', 'Sore_throatInt']
+    other_features_to_stay = ["SexInt", "BloodTypeInt", "SyndromeClass"] + \
+                              pca_components_fields + \
+                             results_fields
+
+
+
+    # push the dataframe through the pipeline
+    data_processing_pipe = customPipeline(steps =
+                                          [('Drop_Irrelevant', Drop_Irrelevant()),
+                                           ('PCR_results_handler', PCR_results_handler(pcr_scaler, pcr_pca)),
+                                           ('SexHandler', SexHandler()),
+                                           ('AgeHandler', AgeHandler()),
+                                           ('StepsHandler', StepsHandler()),
+                                           ('SportsHandler', SportsHandler()),
+                                           ('NrCousins', CousinsHandler()),
+                                           ('AvgHouseholdExpenseOnPresents', PresentsHandler()  ),  
+                                           ('HappinessScore', HappyHandler()),
+                                           ('BMI_handler', BMI_handler(max_threshold=45, mean_bmi=mean_bmi)),
+                                           ('DisciplineScoreHandler', DisciplineScoreHandler(mean_discipline=mean_discipline)),
+                                           ('BloodTypeHandler', BloodTypeHandler()),
+                                           ('SocialActivitiesHandler', SocialActivitiesHandler(mean_social_activity_time = mean_social_activity_time)),
+                                           ('SelfDeclaration_to_Categories', SelfDeclaration_to_Categories()),
+                                           ('SyndromClassHandler', SyndromClassHandler()),
+                                           ('Modify_Results_Code', Modify_Results_Code()),
+                                           ('RemoveNotSRSColumns', RemoveNotSRSColumns(srs_features_to_stay,
+                                                                                       other_features_to_stay)),
+                                           ('DropNA', DropNA()),
+                                           ])
+
+    return data_processing_pipe
 
 
 def prepare_dataset(dataset_path : str, split_list : list, data_processing_pipe, output_folder_name : str):
