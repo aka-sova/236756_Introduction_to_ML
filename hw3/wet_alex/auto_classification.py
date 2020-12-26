@@ -18,24 +18,27 @@ import mlxtend
 from sklearn.neighbors import KNeighborsClassifier
 
 class Task(object):
-    def __init__(self, task_name : str, target_type : str, main_metrics : str, mapping_dict : dict = {}, order : int = None):
+    def __init__(self, task_name : str, target_type : str, main_metrics : str,
+                 pipeline, mapping_dict : dict = {}, order : int = None):
         self.task_name = task_name
         self.target_type = target_type
         self.main_metrics = main_metrics
+        self.pipeline = pipeline
         self.mapping_dict = mapping_dict
         self.order = order
+        self.datasets = {}
 
     def print_attributes(self):
         print(f"task_name = {self.task_name}")
         print(f"target_type = {self.target_type}")
         print(f"main_metrics = {self.main_metrics}")
+        print(f"pipeline = {self.pipeline}")
         print(f"mapping_dict = {self.mapping_dict}")
         print(f"order = {self.order}")
 
 
 
-def choose_best_model( tasks : list, models: list, train_dataset : Bunch, valid_dataset : Bunch,
-                       validation_metrics : list, output_folder_path : str, logfd):
+def choose_best_model( tasks : list, models: list, validation_metrics : list, output_folder_path : str, logfd):
     """Iterates over every task, and every model, returning the best model for each class."""
 
     # returns
@@ -52,7 +55,7 @@ def choose_best_model( tasks : list, models: list, train_dataset : Bunch, valid_
         print_all(logfd, "-"*40)
         print_all(logfd, f"\n\nInitializing model selection for task : {task.task_name}")
         # train on different classifiers
-        metrics_dict = iterate_over_models(task, models, train_dataset, logfd)
+        metrics_dict = iterate_over_models(task, models, logfd)
 
         # choose the best according to the specified metric in the task
         for model_idx in metrics_dict.keys():
@@ -71,8 +74,7 @@ def choose_best_model( tasks : list, models: list, train_dataset : Bunch, valid_
         print_all(logfd, "-"*40)
         print_all(logfd, f"\n\nTrying on the validation dataset with different metrics")
 
-        test_metrics_on_validation(task, models, metrics_dict, valid_dataset,
-                                   validation_metrics, logfd)
+        test_metrics_on_validation(task, models, metrics_dict, validation_metrics, logfd)
 
 
 
@@ -82,7 +84,7 @@ def choose_best_model( tasks : list, models: list, train_dataset : Bunch, valid_
 
 
 
-def iterate_over_models(task, models: list, train_dataset : Bunch, logfd):
+def iterate_over_models(task, models: list, logfd):
     """For a specific task, iterates over models. Returns all kinds of metrics"""
 
     # inputs
@@ -100,8 +102,8 @@ def iterate_over_models(task, models: list, train_dataset : Bunch, logfd):
     # obtain the correct X and y  (features and target) for this specific task
     # from the train_dataset
 
-    X = train_dataset.data
-    y = train_dataset.target_types[task.target_type]["targets"]
+    X = task.datasets['train'].data
+    y = task.datasets['train'].target_types[task.target_type]["targets"]
 
     for model_idx, model in enumerate(models):
         print_all(logfd, f"\nChecking model : {model[0]} over params {model[1]}")
@@ -135,13 +137,17 @@ def iterate_over_models(task, models: list, train_dataset : Bunch, logfd):
 
 
 
-def test_metrics_on_validation(task, models: list, metrics_dict : dict, valid_dataset, validation_metrics, logfd):
+def test_metrics_on_validation(task, models: list, metrics_dict : dict, validation_metrics, logfd):
 
     # 1. for each model, test each metric, organize all in a table
 
-    y_true = valid_dataset.target_types[task.target_type]["targets"]
-    X_valid = valid_dataset.data
+    X_valid = task.datasets['valid'].data
+    y_true = task.datasets['valid'].target_types[task.target_type]["targets"]
     metrics_data = [] # list of lists for each model
+
+    is_multiclass_task = False
+    if len(set(y_true)) > 2:
+        is_multiclass_task = True
 
     for model_idx, model in enumerate(models):
 
@@ -152,8 +158,16 @@ def test_metrics_on_validation(task, models: list, metrics_dict : dict, valid_da
         metrics_data.append([])
         metrics_data[-1].append(str(model_ut.estimator))
 
-        for metrics in validation_metrics:
-            metrics_data[-1].append(round(metrics[0](y_true = y_true, y_pred = y_pred, **metrics[1]), 3))
+
+
+        for i in range(len(validation_metrics)):
+            # for multitask we need to specify the 'average' parameter
+            if is_multiclass_task:
+                metric_calculated = validation_metrics[i][0](y_true, y_pred, **validation_metrics[i][1])
+            else:
+                metric_calculated = validation_metrics[i][0](y_true, y_pred)
+
+            metrics_data[-1].append(round(metric_calculated, 3))
 
 
     titles_metrics = [metrics[0].__name__ for metrics in validation_metrics]
@@ -164,18 +178,19 @@ def test_metrics_on_validation(task, models: list, metrics_dict : dict, valid_da
         print_all(logfd, row_format.format(*row))
 
 
-def test_best_model(tasks, models, chosen_models_dict, test_dataset, predicted_out_path, logfd, patient_IDs : list = []):
+def test_best_model(tasks, models, chosen_models_dict, predicted_out_path, logfd, patient_IDs : list = []):
 
     # the dict with best model for each task
     # chosen_models_dict:  { task_1_idx : (model_2_idx, main_metrics, best_classifier) ,
     #                        task_2_idx : (model_3_idx, main_metrics, best_classifier), ... etc }
 
-    print_all(logfd, f"\n\n\nEvaluating best model on the dataset: \t{test_dataset.filename}")
+    print_all(logfd, f"\n\n\nEvaluating best model on the test dataset")
     print_all(logfd, f"\nResult will be printed in : \t{predicted_out_path}")
 
-    X = test_dataset.data
+
     # for each task, get the best model, and get predictions
 
+    # sort the tasks according to the order of the TestResultsCode
     sorted_task_idxs = sorted(range(len(tasks)), key=lambda k: tasks[k].order)
     final_results_list = []
 
@@ -183,13 +198,16 @@ def test_best_model(tasks, models, chosen_models_dict, test_dataset, predicted_o
 
         task = tasks[task_idx]
         best_model = chosen_models_dict[task_idx][2]
+
+        X = task.datasets['test'].data
         y_pred = best_model.predict(X)
 
         # if targets exist, evaluate on the targets
-        if test_dataset.target_types != {}:
-            y_true = test_dataset.target_types[task.target_type]["targets"]
+        if task.datasets['test'].target_types != {}:
+            y_true = task.datasets['test'].target_types[task.target_type]["targets"]
             metrics_result = task.main_metrics(y_true = y_true, y_pred = y_pred)
-            print_all(logfd, f"\tTargets were supplied. {task.main_metrics.__name__} = {metrics_result}")
+            print_all(logfd, f"\tTask : {task.task_name}, targets were supplied."
+                             f" {task.main_metrics.__name__} = {metrics_result}")
 
         # convert the predictions into the actual target names according to mapping
         task_inv_mapping = {v: k for k, v in task.mapping_dict.items()}
