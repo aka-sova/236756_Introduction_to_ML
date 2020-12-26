@@ -98,3 +98,11 @@ def save_csv_files(ds_dict : dict, output_folder_name : str):
 
 
     return
+
+
+def print_all(fd, msg, print_to_screen : bool = True):
+
+    fd.write('\n'+msg)
+
+    if print_to_screen:
+        print(msg)

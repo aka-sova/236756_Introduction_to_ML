@@ -6,8 +6,10 @@ import numpy as np                  # Numerical computing tools
 from sklearn.svm import SVC
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
+from sklearn.naive_bayes import GaussianNB
+from sklearn.naive_bayes import MultinomialNB
 
-from sklearn.model_selection import GridSearchCV
+import sklearn.metrics
 
 
 
@@ -20,6 +22,8 @@ def init_automatic_classification(regenerate_features : bool, dataset_type : str
 
     cur_dir = os.getcwd()
     outputs_folder_path = os.path.abspath(os.path.join(cur_dir, 'outputs_clf'))
+    os.makedirs(outputs_folder_path, exist_ok = True)
+    logfd = open(os.path.join(outputs_folder_path, 'log.txt'), 'w')
 
     # 1. prepare the virus features using the hw2 features handling
     features_folder_path = 'outputs_csv'
@@ -75,21 +79,31 @@ def init_automatic_classification(regenerate_features : bool, dataset_type : str
     #          those models are later inserted into the cross validation,
 
     models = []
-    models.append((KNeighborsClassifier(), {'n_neighbors':[3, 5, 10]}))
+    models.append((KNeighborsClassifier(), {'n_neighbors':[3, 5, 10, 20, 50]}))
     # models.append((SVC(), {'kernel':('linear', 'rbf'), 'C':[1, 10]}))
-    # models.append((SVC(), {'kernel': ['linear'], 'C': [1, 10]}))
-    models.append((DecisionTreeClassifier(), {'max_depth':[5, 10, 15]}))
+    # models.append((GaussianNB(), {}))
+    models.append((DecisionTreeClassifier(), {'max_depth':[5, 10, 15, 20]}))
 
-    # 3.3 Find best model for each task according to the validation dataset
-    chosen_models_dict = choose_best_model(tasks, models, train_dataset, valid_dataset, outputs_folder_path)
+    # 3.3 Choose the metrics for validation to display
+    validation_metrics = []
+    validation_metrics.append((metrics.accuracy_score, {}))
+    validation_metrics.append((metrics.precision_score, {'average' : 'micro'}))
+    validation_metrics.append((metrics.f1_score, {'average' : 'micro'}))
+    validation_metrics.append((metrics.recall_score, {'average' : 'micro'}))
 
-    # 3.4 print nicely
-    print_best_task_models(chosen_models_dict, tasks, models)
 
-    # 3.5 Check scores of the best model on the test dataset
+    # 3.4 Find best model for each task according to the validation dataset
+    chosen_models_dict = choose_best_model(tasks, models, train_dataset, valid_dataset,
+                                           validation_metrics, outputs_folder_path, logfd)
+
+    # 3.5 print nicely
+    print_best_task_models(chosen_models_dict, tasks, models, logfd)
+
+    # 3.6 Check scores of the best model on the test dataset
+    predicted_out_path = os.path.join(outputs_folder_path, 'test_predicted.csv')
     # test_best_model(tasks, models, chosen_models_dict, test_dataset, predicted_out_path)
 
-    # 3.6 Check scores of the best model on the unseen dataset, print into 'predicted' file
+    # 3.7 Check scores of the best model on the unseen dataset, print into 'predicted' file
 
     preprocess_csv_input(os.path.join('input_ds', 'virus_hw3_unlabeled.csv'),
                          os.path.join('input_ds', 'virus_hw3_unlabeled_preprocessed.csv'),
@@ -100,6 +114,7 @@ def init_automatic_classification(regenerate_features : bool, dataset_type : str
     # test_best_model(tasks, models, chosen_models_dict, unseen_dataset, predicted_out_path)
 
     # TODO write the test_best_model function
+    logfd.close()
 
 
 
@@ -108,7 +123,7 @@ if __name__ == "__main__":
 
     # dataset_type = virus / iris
 
-    init_automatic_classification(regenerate_features = True,
+    init_automatic_classification(regenerate_features = False,
                                   dataset_type = 'virus')
 
 
