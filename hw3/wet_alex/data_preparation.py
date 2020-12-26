@@ -77,26 +77,33 @@ def prepare_dataset(dataset_path : str, split_list : list, data_processing_pipe,
 
     save_csv_files(df, output_folder_name)
 
-def preprocess_csv_input(input_csv_path : str, output_csv_path : str, data_processing_pipe, dropResults : str):
+def preprocess_csv_input(input_csv_path : str, output_csv_path : str, data_processing_pipe,
+                         dropResults : bool, return_patient_IDs : bool):
 
     input_df = pd.read_csv(input_csv_path)
     if dropResults == True:
         input_df = input_df.drop(columns = 'TestResultsCode')
 
+    if return_patient_IDs == True:
+        patient_IDs = input_df["PatientID"].to_list()
+
     output_df = data_processing_pipe.apply_transforms(input_df)
     output_df.to_csv(output_csv_path, index=False)
 
+    if return_patient_IDs == True:
+        return patient_IDs
+    return
 
 
 
-def make_datasets(dataset_type : str, features_folder_path : str):
+def make_datasets(dataset_type : str, features_folder_path : str, targets_mappings : dict):
     """Make datasets for the classifier in our special format"""
 
     if dataset_type == 'virus':
 
-        train_dataset = get_virus_dataset(os.path.join(features_folder_path, 'train.csv'))
-        valid_dataset = get_virus_dataset(os.path.join(features_folder_path, 'valid.csv'))
-        test_dataset = get_virus_dataset(os.path.join(features_folder_path, 'test.csv'))
+        train_dataset = get_virus_dataset(os.path.join(features_folder_path, 'train.csv'), targets_mappings)
+        valid_dataset = get_virus_dataset(os.path.join(features_folder_path, 'valid.csv'), targets_mappings)
+        test_dataset = get_virus_dataset(os.path.join(features_folder_path, 'test.csv'), targets_mappings)
 
     else:
         iris_dataset = datasets.load_iris()
@@ -120,14 +127,14 @@ def make_datasets(dataset_type : str, features_folder_path : str):
     return train_dataset, valid_dataset, test_dataset
 
 
-def get_virus_dataset(csv_filename : str, has_targets : bool = True):
+def get_virus_dataset(csv_filename : str, targets_mappings : dict, has_targets : bool = True):
     """Create a Bunch object with data and targets according to the mapping"""
 
     pd_dataset = pd.read_csv(csv_filename)
 
-    disease_mapping = {'flue': 0, 'covid': 1, 'cmv': 2, 'cold': 3, 'measles': 4, 'notdetected': 5}
-    spreader_mapping = {'NotSpreader': 0, 'Spreader': 1}
-    at_risk_mapping = {'NotAtRisk': 0, 'atRisk': 1}
+    disease_mapping = targets_mappings['disease_mapping']
+    spreader_mapping = targets_mappings['spreader_mapping']
+    at_risk_mapping = targets_mappings['at_risk_mapping']
 
     dataset = Bunch()
     dataset.filename = csv_filename
@@ -152,6 +159,16 @@ def get_virus_dataset(csv_filename : str, has_targets : bool = True):
     dataset.feature_names = pd_dataset.columns.to_list()
 
     return dataset
+
+def get_targets_mappings():
+
+    mappings_dict = {}
+
+    mappings_dict['disease_mapping'] = {'flue': 0, 'covid': 1, 'cmv': 2, 'cold': 3, 'measles': 4, 'notdetected': 5}
+    mappings_dict['spreader_mapping'] = {'NotSpreader': 0, 'Spreader': 1}
+    mappings_dict['at_risk_mapping'] = {'NotAtRisk': 0, 'atRisk': 1}
+
+    return mappings_dict
 
 if __name__ == "__main__":
 

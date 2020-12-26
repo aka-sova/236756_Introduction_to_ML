@@ -8,6 +8,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.naive_bayes import GaussianNB
 from sklearn.naive_bayes import MultinomialNB
+from sklearn.linear_model import LogisticRegression
 
 import sklearn.metrics
 
@@ -46,7 +47,8 @@ def init_automatic_classification(regenerate_features : bool, dataset_type : str
     #       we need it to have 'data', 'feature_names',
     #                           'target_types' (has dict for every target type of 'target_names', 'targets')
 
-    train_dataset, valid_dataset, test_dataset = make_datasets(dataset_type, features_folder_path)
+    targets_mappings = get_targets_mappings()
+    train_dataset, valid_dataset, test_dataset = make_datasets(dataset_type, features_folder_path, targets_mappings)
 
 
     # 3. Find the best classifier for each task
@@ -57,15 +59,21 @@ def init_automatic_classification(regenerate_features : bool, dataset_type : str
     if dataset_type == 'virus':
         tasks.append(Task(task_name = 'Spreader Detection',
                           target_type = 'Spreader',
-                          main_metrics = metrics.accuracy_score))
+                          main_metrics = metrics.accuracy_score,
+                          mapping_dict = targets_mappings['spreader_mapping'],
+                          order  = 1))
 
         tasks.append(Task(task_name = 'At Risk Detection',
                           target_type = 'atRisk',
-                          main_metrics = metrics.accuracy_score))
+                          main_metrics = metrics.accuracy_score,
+                          mapping_dict = targets_mappings['at_risk_mapping'],
+                          order  = 2))
 
         tasks.append(Task(task_name = 'Disease Detection',
                           target_type = 'Disease',
-                          main_metrics = metrics.accuracy_score))
+                          main_metrics = metrics.accuracy_score,
+                          mapping_dict = targets_mappings['disease_mapping'],
+                          order  = 0))
 
     else:
         # iris
@@ -81,8 +89,10 @@ def init_automatic_classification(regenerate_features : bool, dataset_type : str
     models = []
     models.append((KNeighborsClassifier(), {'n_neighbors':[3, 5, 10, 20, 50]}))
     # models.append((SVC(), {'kernel':('linear', 'rbf'), 'C':[1, 10]}))
-    # models.append((GaussianNB(), {}))
+    # models.append((SVC(), {'kernel': ('linear'), 'C': [1, 10]}))
+    models.append((GaussianNB(), {}))
     models.append((DecisionTreeClassifier(), {'max_depth':[5, 10, 15, 20]}))
+    # models.append((LogisticRegression(), {'max_iter': [1000, 3000, 10000]}))
 
     # 3.3 Choose the metrics for validation to display
     validation_metrics = []
@@ -99,21 +109,25 @@ def init_automatic_classification(regenerate_features : bool, dataset_type : str
     # 3.5 print nicely
     print_best_task_models(chosen_models_dict, tasks, models, logfd)
 
-    # 3.6 Check scores of the best model on the test dataset
-    predicted_out_path = os.path.join(outputs_folder_path, 'test_predicted.csv')
-    # test_best_model(tasks, models, chosen_models_dict, test_dataset, predicted_out_path)
+    if dataset_type == 'virus':
+        # 3.6 Check scores of the best model on the test dataset
+        predicted_out_path = os.path.join(outputs_folder_path, 'test_predicted.csv')
+        test_best_model(tasks, models, chosen_models_dict, test_dataset, predicted_out_path, logfd)
 
-    # 3.7 Check scores of the best model on the unseen dataset, print into 'predicted' file
+        # 3.7 Check scores of the best model on the unseen dataset, print into 'predicted' file
 
-    preprocess_csv_input(os.path.join('input_ds', 'virus_hw3_unlabeled.csv'),
-                         os.path.join('input_ds', 'virus_hw3_unlabeled_preprocessed.csv'),
-                         features_pipe, True)
-    unseen_dataset = get_virus_dataset(os.path.join('input_ds', 'virus_hw3_unlabeled_preprocessed.csv'), has_targets = False)
+        patient_IDs = preprocess_csv_input(os.path.join('input_ds', 'virus_hw3_unlabeled.csv'),
+                                           os.path.join('input_ds', 'virus_hw3_unlabeled_preprocessed.csv'),
+                                           features_pipe, True, True)
 
-    predicted_out_path = os.path.join(outputs_folder_path, 'unseen_predicted.csv')
-    # test_best_model(tasks, models, chosen_models_dict, unseen_dataset, predicted_out_path)
+        unseen_dataset = get_virus_dataset(os.path.join('input_ds', 'virus_hw3_unlabeled_preprocessed.csv'),
+                                           targets_mappings,
+                                           has_targets = False)
 
-    # TODO write the test_best_model function
+        predicted_out_path = os.path.join(outputs_folder_path, 'unseen_predicted.csv')
+        test_best_model(tasks, models, chosen_models_dict, unseen_dataset, predicted_out_path, logfd, patient_IDs)
+
+
     logfd.close()
 
 
@@ -122,7 +136,6 @@ def init_automatic_classification(regenerate_features : bool, dataset_type : str
 if __name__ == "__main__":
 
     # dataset_type = virus / iris
-
     init_automatic_classification(regenerate_features = False,
                                   dataset_type = 'virus')
 

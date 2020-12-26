@@ -13,15 +13,19 @@ from utils import print_all
 
 
 class Task(object):
-    def __init__(self, task_name : str, target_type : str, main_metrics : str):
+    def __init__(self, task_name : str, target_type : str, main_metrics : str, mapping_dict : dict = {}, order : int = None):
         self.task_name = task_name
         self.target_type = target_type
         self.main_metrics = main_metrics
+        self.mapping_dict = mapping_dict
+        self.order = order
 
     def print_attributes(self):
         print(f"task_name = {self.task_name}")
         print(f"target_type = {self.target_type}")
         print(f"main_metrics = {self.main_metrics}")
+        print(f"mapping_dict = {self.mapping_dict}")
+        print(f"order = {self.order}")
 
 
 
@@ -30,7 +34,8 @@ def choose_best_model( tasks : list, models: list, train_dataset : Bunch, valid_
     """Iterates over every task, and every model, returning the best model for each class."""
 
     # returns
-    #   dict:       { task_1_idx : (model_2_idx, main_metrics) , task_2_idx : (model_3_idx, main_metrics), ... etc }
+    #   dict:       { task_1_idx : (model_2_idx, main_metrics, clf) ,
+    #                 task_2_idx : (model_3_idx, main_metrics, clf),  ... etc }
 
 
 
@@ -50,12 +55,12 @@ def choose_best_model( tasks : list, models: list, train_dataset : Bunch, valid_
             # if this is the first model, take it
             if best_task_metrics[task_idx] == None:
                 best_task_metrics[task_idx] = metrics_dict[model_idx][0]
-                best_task_models[task_idx] = (model_idx, metrics_dict[model_idx][0])
+                best_task_models[task_idx] = (model_idx, metrics_dict[model_idx][0], metrics_dict[model_idx][1])
 
             # if the metrics are higher than currently highest, choose this model for this task
             elif metrics_dict[model_idx][0] > best_task_metrics[task_idx]:
                 best_task_metrics[task_idx] = metrics_dict[model_idx][0]
-                best_task_models[task_idx] = (model_idx, metrics_dict[model_idx][0])
+                best_task_models[task_idx] = (model_idx, metrics_dict[model_idx][0], metrics_dict[model_idx][1])
 
         # try the classifiers on the validation dataset and print the results
         print_all(logfd, "-"*40)
@@ -79,8 +84,8 @@ def iterate_over_models(task, models: list, train_dataset : Bunch, logfd):
     #   models -
 
     # returns
-    #   {0 : { clf : <clf> , metric : <value> },
-    #    1 : { clf : <clf> , metric : <value> }, ....}
+    #   {0 : [metric : <value>,  clf : <clf> ],
+    #    1 : [metric : <value>,  clf : <clf> ], ....}
     #
     #   where 0,1, ..  = indexes in the models list, clf is the trained classifier,
     #   metric - values according to chosen metric
@@ -94,7 +99,7 @@ def iterate_over_models(task, models: list, train_dataset : Bunch, logfd):
     y = train_dataset.target_types[task.target_type]["targets"]
 
     for model_idx, model in enumerate(models):
-        print_all(logfd, f"Checking model : {model[0]} over params {model[1]}")
+        print_all(logfd, f"\nChecking model : {model[0]} over params {model[1]}")
         init_time = timeit.default_timer()
         # use the GridSearch cross validation method to find the best parameters for the model
         # from the specified parameters
@@ -119,7 +124,7 @@ def iterate_over_models(task, models: list, train_dataset : Bunch, logfd):
         # apply all those models on the validation set and pick the best
 
         # take best score value
-        metrics_dict[model_idx] = ( max(clf.cv_results_['mean_test_score']), clf )
+        metrics_dict[model_idx] = [max(clf.cv_results_['mean_test_score']), clf]
 
     return metrics_dict
 
@@ -152,6 +157,60 @@ def test_metrics_on_validation(task, models: list, metrics_dict : dict, valid_da
     print_all(logfd, row_format.format("", *titles_metrics)) # titles
     for row in metrics_data:
         print_all(logfd, row_format.format(*row))
+
+
+def test_best_model(tasks, models, chosen_models_dict, test_dataset, predicted_out_path, logfd, patient_IDs : list = []):
+
+    # the dict with best model for each task
+    # chosen_models_dict:  { task_1_idx : (model_2_idx, main_metrics, best_classifier) ,
+    #                        task_2_idx : (model_3_idx, main_metrics, best_classifier), ... etc }
+
+    print_all(logfd, f"\n\n\nEvaluating best model on the dataset: \t{test_dataset.filename}")
+    print_all(logfd, f"\nResult will be printed in : \t{predicted_out_path}")
+
+    X = test_dataset.data
+    # for each task, get the best model, and get predictions
+
+    sorted_task_idxs = sorted(range(len(tasks)), key=lambda k: tasks[k].order)
+    final_results_list = []
+
+    for task_idx in sorted_task_idxs:
+
+        task = tasks[task_idx]
+        best_model = chosen_models_dict[task_idx][2]
+        y_pred = best_model.predict(X)
+
+        # if targets exist, evaluate on the targets
+        if test_dataset.target_types != {}:
+            y_true = test_dataset.target_types[task.target_type]["targets"]
+            metrics_result = task.main_metrics(y_true = y_true, y_pred = y_pred)
+            print_all(logfd, f"\tTargets were supplied. {task.main_metrics.__name__} = {metrics_result}")
+
+        # convert the predictions into the actual target names according to mapping
+        task_inv_mapping = {v: k for k, v in task.mapping_dict.items()}
+        targets_mapped = [task_inv_mapping[y_pred_single] for y_pred_single in y_pred]
+        final_results_list.append(targets_mapped)
+
+    results_dict = {}
+
+    for result in final_results_list:
+        if results_dict == {}:
+            results_dict = {idx : specific_result for idx, specific_result in enumerate(result)}
+        else:
+            results_dict = {idx: results_dict[idx] + '_' + specific_result for idx, specific_result in enumerate(result)}
+
+    final_results_list_united = list(results_dict.values())
+
+    # check if input csv has patient ID
+    if patient_IDs != []:
+        patient_id_list = patient_IDs
+    else:
+        patient_id_list = range(len(final_results_list_united))
+
+
+    # put those results in an output csv file
+    output_pd = pd.DataFrame({'PatientID' : patient_id_list, 'TestResultsCode' :  final_results_list_united})
+    output_pd.to_csv(predicted_out_path, index=False)
 
 
 

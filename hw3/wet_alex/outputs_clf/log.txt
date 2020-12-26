@@ -1,0 +1,136 @@
+
+----------------------------------------
+
+
+Initializing model selection for task : Spreader Detection
+
+Checking model : KNeighborsClassifier() over params {'n_neighbors': [3, 5, 10, 20, 50]}
+Finished. Time elapsed: 0.037 [min]
+	Reached accuracies:
+		Score : 0.757 , Params : {'n_neighbors': 50}
+		Score : 0.757 , Params : {'n_neighbors': 20}
+		Score : 0.751 , Params : {'n_neighbors': 10}
+		Score : 0.744 , Params : {'n_neighbors': 5}
+		Score : 0.726 , Params : {'n_neighbors': 3}
+
+Checking model : GaussianNB() over params {}
+Finished. Time elapsed: 0.0 [min]
+	Reached accuracies:
+		Score : 0.617 , Params : {}
+
+Checking model : DecisionTreeClassifier() over params {'max_depth': [5, 10, 15, 20]}
+Finished. Time elapsed: 0.007 [min]
+	Reached accuracies:
+		Score : 0.839 , Params : {'max_depth': 10}
+		Score : 0.837 , Params : {'max_depth': 5}
+		Score : 0.805 , Params : {'max_depth': 15}
+		Score : 0.801 , Params : {'max_depth': 20}
+----------------------------------------
+
+
+Trying on the validation dataset with different metrics
+                                         accuracy_score          precision_score                 f1_score             recall_score
+        KNeighborsClassifier()                    0.777                    0.777                    0.777                    0.777
+                  GaussianNB()                    0.557                    0.557                    0.557                    0.557
+      DecisionTreeClassifier()                    0.765                    0.765                    0.765                    0.765
+----------------------------------------
+
+
+Initializing model selection for task : At Risk Detection
+
+Checking model : KNeighborsClassifier() over params {'n_neighbors': [3, 5, 10, 20, 50]}
+Finished. Time elapsed: 0.038 [min]
+	Reached accuracies:
+		Score : 0.525 , Params : {'n_neighbors': 5}
+		Score : 0.522 , Params : {'n_neighbors': 10}
+		Score : 0.518 , Params : {'n_neighbors': 3}
+		Score : 0.517 , Params : {'n_neighbors': 50}
+		Score : 0.507 , Params : {'n_neighbors': 20}
+
+Checking model : GaussianNB() over params {}
+Finished. Time elapsed: 0.0 [min]
+	Reached accuracies:
+		Score : 0.506 , Params : {}
+
+Checking model : DecisionTreeClassifier() over params {'max_depth': [5, 10, 15, 20]}
+Finished. Time elapsed: 0.009 [min]
+	Reached accuracies:
+		Score : 0.513 , Params : {'max_depth': 15}
+		Score : 0.504 , Params : {'max_depth': 10}
+		Score : 0.503 , Params : {'max_depth': 20}
+		Score : 0.499 , Params : {'max_depth': 5}
+----------------------------------------
+
+
+Trying on the validation dataset with different metrics
+                                         accuracy_score          precision_score                 f1_score             recall_score
+        KNeighborsClassifier()                    0.513                    0.513                    0.513                    0.513
+                  GaussianNB()                    0.503                    0.503                    0.503                    0.503
+      DecisionTreeClassifier()                    0.528                    0.528                    0.528                    0.528
+----------------------------------------
+
+
+Initializing model selection for task : Disease Detection
+
+Checking model : KNeighborsClassifier() over params {'n_neighbors': [3, 5, 10, 20, 50]}
+Finished. Time elapsed: 0.038 [min]
+	Reached accuracies:
+		Score : 0.4 , Params : {'n_neighbors': 50}
+		Score : 0.397 , Params : {'n_neighbors': 20}
+		Score : 0.375 , Params : {'n_neighbors': 10}
+		Score : 0.346 , Params : {'n_neighbors': 5}
+		Score : 0.323 , Params : {'n_neighbors': 3}
+
+Checking model : GaussianNB() over params {}
+Finished. Time elapsed: 0.0 [min]
+	Reached accuracies:
+		Score : 0.172 , Params : {}
+
+Checking model : DecisionTreeClassifier() over params {'max_depth': [5, 10, 15, 20]}
+Finished. Time elapsed: 0.012 [min]
+	Reached accuracies:
+		Score : 0.574 , Params : {'max_depth': 5}
+		Score : 0.543 , Params : {'max_depth': 10}
+		Score : 0.488 , Params : {'max_depth': 15}
+		Score : 0.48 , Params : {'max_depth': 20}
+----------------------------------------
+
+
+Trying on the validation dataset with different metrics
+                                         accuracy_score          precision_score                 f1_score             recall_score
+        KNeighborsClassifier()                    0.408                    0.408                    0.408                    0.408
+                  GaussianNB()                    0.148                    0.148                    0.148                    0.148
+      DecisionTreeClassifier()                    0.545                    0.545                    0.545                    0.545
+========================================
+SUMMARY
+========================================
+
+For task : Spreader Detection
+	Chosen model : (DecisionTreeClassifier(), {'max_depth': [5, 10, 15, 20]})
+	Metrics : accuracy_score
+	Value : 0.839
+
+For task : At Risk Detection
+	Chosen model : (KNeighborsClassifier(), {'n_neighbors': [3, 5, 10, 20, 50]})
+	Metrics : accuracy_score
+	Value : 0.525
+
+For task : Disease Detection
+	Chosen model : (DecisionTreeClassifier(), {'max_depth': [5, 10, 15, 20]})
+	Metrics : accuracy_score
+	Value : 0.574
+
+
+
+Evaluating best model on the dataset: 	outputs_csv\test.csv
+
+Result will be printed in : 	S:\236756_intro_machine_learning\git\hw3\wet_alex\outputs_clf\test_predicted.csv
+	Targets were supplied. accuracy_score = 0.542
+	Targets were supplied. accuracy_score = 0.782
+	Targets were supplied. accuracy_score = 0.516
+
+
+
+Evaluating best model on the dataset: 	input_ds\virus_hw3_unlabeled_preprocessed.csv
+
+Result will be printed in : 	S:\236756_intro_machine_learning\git\hw3\wet_alex\outputs_clf\unseen_predicted.csv
