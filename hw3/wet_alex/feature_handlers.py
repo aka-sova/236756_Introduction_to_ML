@@ -32,6 +32,10 @@ class Template(CustomFeatureHandler):
 
 """=========================================================="""
 
+
+
+
+
 class SyndromClassHandler(CustomFeatureHandler):
     """SyndromClassHandler"""
 
@@ -196,6 +200,8 @@ class HappyHandler(CustomFeatureHandler):
         df['HappinessScore'] = df.HappinessScore.fillna(np.mean(df.HappinessScore))
 
         return df
+
+
 class StepsHandler(CustomFeatureHandler):
     """Deal with steps class, normalize"""
 
@@ -381,6 +387,65 @@ class BMI_handler(CustomFeatureHandler):
 
         return df
 
+class Scale_All(CustomFeatureHandler):
+    """Scale the whole dataframe"""
+
+    def __init__(self, results_fields):
+        super().__init__()
+        self.results_fields = results_fields
+
+    def transform(self, df : pd.DataFrame()):
+
+        df_scaled = copy.deepcopy(df)
+
+        sc = StandardScaler()
+
+        for result_field in self.results_fields:
+            if result_field in df_scaled.columns:
+                df_scaled = df_scaled.drop(result_field, axis=1)
+
+        df_scaled_np = sc.fit_transform(df_scaled)
+        df_scaled = pd.DataFrame(df_scaled_np, index=df_scaled.index, columns=df_scaled.columns)
+
+        for result_field in self.results_fields:
+            df_scaled[result_field] = df[result_field]
+
+        return df_scaled
+
+
+class PCR_standart_scaler_handler(CustomFeatureHandler):
+    """Scaler to the PCR results"""
+
+    def __init__(self):
+        super().__init__()
+
+    def transform(self, df: pd.DataFrame()):
+
+        pcr_results = range(17)
+        pcr_fields = ["pcrResult" + str(i) for i in pcr_results]
+
+        df_pcr = copy.deepcopy(df)
+
+        # create new dataframe only with PCR results
+        # fill NA values with median
+        for column in df_pcr.columns:
+            if column not in pcr_fields:
+                df_pcr = df_pcr.drop(column, axis=1)
+            else:
+                df_pcr[column] = df_pcr[column].fillna(np.nanmedian(df_pcr[column]))
+
+        sc = StandardScaler()
+        df_scaled = sc.fit_transform(df_pcr)
+
+        # replace the pcr results with their scaled counterparts
+
+        for column in df.columns:
+
+            if column in pcr_fields:
+                pcr_number = int(column[9:]) -1
+                df[column] = df_scaled[:, pcr_number]
+
+        return df
 
 class PCR_results_handler(CustomFeatureHandler):
     """From the analysis, the PCR results 3, 12, and 16 can be removed"""
