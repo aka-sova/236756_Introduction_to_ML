@@ -29,7 +29,7 @@ def init_automatic_classification(regenerate_features : bool, dataset_type : str
     # 1. prepare the virus features using the hw2 features handling
     features_folder_path = 'outputs_csv'
     virus_dataset_path = os.path.join('input_ds', 'virus_hw2.csv')
-    features_pipe = pca_srs_pipe(dataset_path=virus_dataset_path,
+    features_pipe = risk_pipe(dataset_path=virus_dataset_path,
                                  split_list=[0.75, 0.15, 0.10])
 
     if regenerate_features == True or os.path.isdir(features_folder_path) == False:
@@ -136,7 +136,7 @@ def init_automatic_classification(regenerate_features : bool, dataset_type : str
 if __name__ == "__main__":
 
     # dataset_type = virus / iris
-    init_automatic_classification(regenerate_features = False,
+    init_automatic_classification(regenerate_features = True,
                                   dataset_type = 'virus')
 
 
