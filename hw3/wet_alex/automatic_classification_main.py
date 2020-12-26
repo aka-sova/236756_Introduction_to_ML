@@ -42,8 +42,8 @@ def init_automatic_classification(regenerate_features : bool, evaluate_on_test :
     if dataset_type == 'virus':
         tasks.append(Task(task_name = 'Spreader_Detection',
                           target_type = 'Spreader',
-                          main_metrics = metrics.accuracy_score,
-                          pipeline = risk_pipe(dataset_path=virus_dataset_path,
+                          main_metrics = metrics.f1_score,
+                          pipeline = spread_pipe(dataset_path=virus_dataset_path,
                                                split_list=[0.75, 0.15, 0.10]),
                           mapping_dict = targets_mappings['spreader_mapping'],
                           order  = 1))
