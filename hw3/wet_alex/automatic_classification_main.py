@@ -19,7 +19,7 @@ from auto_classification import *
 
 
 
-def init_automatic_classification(regenerate_features : bool, dataset_type : str):
+def init_automatic_classification(regenerate_features : bool, evaluate_on_test : bool, dataset_type : str):
 
     cur_dir = os.getcwd()
     outputs_folder_path = os.path.abspath(os.path.join(cur_dir, 'outputs_clf'))
@@ -79,18 +79,19 @@ def init_automatic_classification(regenerate_features : bool, dataset_type : str
     #       we need it to have 'data', 'feature_names',
     #                           'target_types' (has dict for every target type of 'target_names', 'targets')
 
-    if regenerate_features == True or os.path.isdir(features_folder_path) == False:
 
-        os.makedirs(features_folder_path, exist_ok=True)
-        for task in tasks:
 
+    os.makedirs(features_folder_path, exist_ok=True)
+    for task in tasks:
+
+        if regenerate_features == True:
             prepare_dataset(dataset_path=virus_dataset_path,
                             split_list = split_list,
                             data_processing_pipe = task.pipeline,
                             output_folder_name = os.path.join(features_folder_path, task.task_name))
 
-            task.datasets['train'], task.datasets['valid'], task.datasets['test'] = \
-                    make_datasets(dataset_type, os.path.join(features_folder_path, task.task_name), targets_mappings)
+        task.datasets['train'], task.datasets['valid'], task.datasets['test'] = \
+                make_datasets(dataset_type, os.path.join(features_folder_path, task.task_name), targets_mappings)
 
 
 
@@ -122,7 +123,7 @@ def init_automatic_classification(regenerate_features : bool, dataset_type : str
     # 3.5 print nicely
     print_best_task_models(chosen_models_dict, tasks, models, logfd)
 
-    if dataset_type == 'virus':
+    if dataset_type == 'virus' and evaluate_on_test == True:
         # 3.6 Check scores of the best model on the test dataset
         predicted_out_path = os.path.join(outputs_folder_path, 'test_predicted.csv')
         test_best_model(tasks, models, chosen_models_dict, predicted_out_path, logfd)
@@ -151,6 +152,7 @@ if __name__ == "__main__":
 
     # dataset_type = virus / iris
     init_automatic_classification(regenerate_features = True,
+                                  evaluate_on_test = True,
                                   dataset_type = 'virus')
 
 
