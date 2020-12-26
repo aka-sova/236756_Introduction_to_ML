@@ -14,6 +14,54 @@ from feature_handlers import *
 from dataset_operations import *
 
 
+def pca_srs_pipe_scaled(dataset_path : str, split_list : list):
+
+    virus_df = pd.read_csv(dataset_path)
+    df = split_the_data(virus_df, split_list)
+
+    mean_bmi = 29
+    mean_discipline = 4.95
+    mean_social_activity_time = 5.32
+
+    # PCR results learning
+    pcr_scaler, pcr_pca = learn_pcr_transform(df["train"], n_components=5)
+
+    # features that should stay according to SRS
+    srs_features_to_stay = ["BMI", "DisciplineScore", "TimeOnSocialActivities"]
+    PCA_components = range(5)
+    pca_components_fields = ["PCA_" + str(i) for i in PCA_components]
+    results_fields = ['Disease', 'Spreader', 'atRisk']
+    self_declaration_categories = ['DiarrheaInt', 'Nausea_or_vomitingInt', 'Shortness_of_breathInt',
+                                   'Congestion_or_runny noseInt', 'HeadacheInt', 'FatigueInt',
+                                   'Muscle_or_body_achesInt', 'ChillsInt', 'Skin_rednessInt',
+                                   'New_loss_of_taste_or_smellInt', 'Sore_throatInt']
+    other_features_to_stay = ["SexInt", "BloodTypeInt", "SyndromeClass"] + \
+                              pca_components_fields + \
+                             self_declaration_categories +\
+                             results_fields
+
+
+
+    # push the dataframe through the pipeline
+    data_processing_pipe = customPipeline(steps =
+                                          [('Drop_Irrelevant', Drop_Irrelevant()),
+                                           ('PCR_results_handler', PCR_results_handler(pcr_scaler, pcr_pca)),
+                                           ('SexHandler', SexHandler()),
+                                           ('BMI_handler', BMI_handler(max_threshold=45, mean_bmi=mean_bmi)),
+                                           ('DisciplineScoreHandler', DisciplineScoreHandler(mean_discipline=mean_discipline)),
+                                           ('BloodTypeHandler', BloodTypeHandler()),
+                                           ('SocialActivitiesHandler', SocialActivitiesHandler(mean_social_activity_time = mean_social_activity_time)),
+                                           ('SelfDeclaration_to_Categories', SelfDeclaration_to_Categories()),
+                                           ('SyndromClassHandler', SyndromClassHandler()),
+                                           ('Modify_Results_Code', Modify_Results_Code()),
+                                           ('RemoveNotSRSColumns', RemoveNotSRSColumns(srs_features_to_stay,
+                                                                                       other_features_to_stay)),
+                                           ('Total_Scaler', Scale_All(results_fields)),
+                                           ('DropNA', DropNA()),
+                                           ])
+
+    return data_processing_pipe
+
 
 def pca_srs_pipe(dataset_path : str, split_list : list):
 
@@ -61,6 +109,56 @@ def pca_srs_pipe(dataset_path : str, split_list : list):
                                            ])
 
     return data_processing_pipe
+
+
+def disease_pipe(dataset_path : str, split_list : list):
+
+    virus_df = pd.read_csv(dataset_path)
+    df = split_the_data(virus_df, split_list)
+
+    mean_bmi = 29
+    mean_discipline = 4.95
+    mean_social_activity_time = 5.32
+
+    # PCR results learning
+    pcr_scaler, pcr_pca = learn_pcr_transform(df["train"], n_components=10)
+
+    # features that should stay according to SRS
+    srs_features_to_stay = ["BMI", "DisciplineScore", "TimeOnSocialActivities"]
+    PCA_components = range(10)
+    pca_components_fields = ["PCA_" + str(i) for i in PCA_components]
+    pcr_components_fields = ["pcrResult" + str(i) for i in range(17)]
+    results_fields = ['Disease', 'Spreader', 'atRisk']
+    self_declaration_categories = ['DiarrheaInt', 'Nausea_or_vomitingInt', 'Shortness_of_breathInt',
+                                   'Congestion_or_runny noseInt', 'HeadacheInt', 'FatigueInt',
+                                   'Muscle_or_body_achesInt', 'ChillsInt', 'Skin_rednessInt',
+                                   'New_loss_of_taste_or_smellInt', 'Sore_throatInt']
+    other_features_to_stay = pcr_components_fields + \
+                             pca_components_fields + \
+                             self_declaration_categories +\
+                             results_fields
+
+
+
+    # push the dataframe through the pipeline
+    data_processing_pipe = customPipeline(steps =
+                                          [('Drop_Irrelevant', Drop_Irrelevant()),
+                                           ('PCR_results_handler', PCR_standart_scaler_handler()),
+                                           ('SexHandler', SexHandler()),
+                                           ('BMI_handler', BMI_handler(max_threshold=45, mean_bmi=mean_bmi)),
+                                           ('DisciplineScoreHandler', DisciplineScoreHandler(mean_discipline=mean_discipline)),
+                                           ('BloodTypeHandler', BloodTypeHandler()),
+                                           ('SocialActivitiesHandler', SocialActivitiesHandler(mean_social_activity_time = mean_social_activity_time)),
+                                           ('SelfDeclaration_to_Categories', SelfDeclaration_to_Categories()),
+                                           ('SyndromClassHandler', SyndromClassHandler()),
+                                           ('Modify_Results_Code', Modify_Results_Code()),
+                                           ('RemoveNotSRSColumns', RemoveNotSRSColumns(srs_features_to_stay,
+                                                                                       other_features_to_stay)),
+                                           ('DropNA', DropNA()),
+                                           ])
+
+    return data_processing_pipe
+
 
 def risk_pipe(dataset_path : str, split_list : list):
 

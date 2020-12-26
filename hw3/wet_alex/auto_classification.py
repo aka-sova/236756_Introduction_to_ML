@@ -172,7 +172,7 @@ def test_metrics_on_validation(task, models: list, metrics_dict : dict, validati
 
 
     titles_metrics = [metrics[0].__name__ for metrics in validation_metrics]
-    row_format = "{:>30}" + "{:>25}" * (len(titles_metrics))
+    row_format = "{:>60}" + "{:>25}" * (len(titles_metrics))
 
     print_all(logfd, row_format.format("", *titles_metrics)) # titles
     for row in metrics_data:
