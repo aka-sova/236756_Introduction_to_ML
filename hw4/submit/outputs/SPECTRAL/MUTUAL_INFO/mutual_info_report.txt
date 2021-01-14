@@ -1,0 +1,13 @@
+
+
+Mutual Information
+  feature_0    feature_1    feature_2    feature_3    feature_4    feature_5    feature_6    feature_7    feature_8    feature_9
+-----------  -----------  -----------  -----------  -----------  -----------  -----------  -----------  -----------  -----------
+     0.1636       0.2912       0.1387       0.8887       0.8375       0.4126       0.1074       0.2122       0.3839       0.1829
+
+Mutual Information sorted by value
+  feature_0    feature_1    feature_2    feature_3    feature_4    feature_5    feature_6    feature_7    feature_8    feature_9
+-----------  -----------  -----------  -----------  -----------  -----------  -----------  -----------  -----------  -----------
+          2            5            1            9            8            7            0            4            6            3
+Highest MI features:[6, 2, 0, 9, 7, 1, 8, 5, 4, 3]
+best_features_list:[1, 8, 5, 4, 3]

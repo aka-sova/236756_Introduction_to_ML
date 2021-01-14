@@ -1,0 +1,14 @@
+
+
+Number of cases for each mutation
+              Num cases
+----------  -----------
+Mutation 0          162
+Mutation 1          135
+Mutation 2          125
+Mutation 3           63
+Mutation 4            9
+
+Most prevalent 3 mutations
+Sorted mutations amount:[4, 3, 2, 1, 0]
+Mutations to treat:[2, 1, 0]

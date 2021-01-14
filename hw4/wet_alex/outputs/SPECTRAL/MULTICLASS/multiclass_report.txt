@@ -1,0 +1,23 @@
+
+
+SUPPORT MATRIX. 1 = Take this feature
+       feature_0    feature_1    feature_2    feature_3    feature_4    feature_5    feature_6    feature_7    feature_8    feature_9
+---  -----------  -----------  -----------  -----------  -----------  -----------  -----------  -----------  -----------  -----------
+LR             0            0            0            1            1            1            0            1            1            0
+DTC            0            0            1            1            1            1            0            1            0            0
+ETC            0            0            0            1            1            1            0            1            1            0
+
+RANKING MATRIX. 1 = Good feature!
+       feature_0    feature_1    feature_2    feature_3    feature_4    feature_5    feature_6    feature_7    feature_8    feature_9
+---  -----------  -----------  -----------  -----------  -----------  -----------  -----------  -----------  -----------  -----------
+LR             3            2            5            1            1            1            6            1            1            4
+DTC            5            3            1            1            1            1            2            1            4            6
+ETC            5            3            6            1            1            1            2            1            1            4
+
+Accuracy on test set
+       Accuracy
+---  ----------
+LR     0.973333
+DTC    0.933333
+ETC    0.986667
+best_features_list:[array([3, 4, 5, 7, 8], dtype=int64)]

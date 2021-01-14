@@ -1,0 +1,4 @@
+Score: silhouette_l1 : 0.2686343779391996
+Score: silhouette_l2 : 0.29672166096549774
+Score: silhouette_cosine : 0.4379674692427987
+Score: db_score : 1.3816274504147477
