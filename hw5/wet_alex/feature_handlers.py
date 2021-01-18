@@ -3,6 +3,8 @@
 import sklearn
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
+from sklearn.impute import KNNImputer
+from scipy import stats
 
 
 # from sklearn.preprocessing import StandardScaler
@@ -431,6 +433,83 @@ class Scale_All(CustomFeatureHandler):
 
         return df_scaled
 
+class PCR_imputation(CustomFeatureHandler):
+    """Impute the PCR results"""
+
+    def __init__(self, type : str = "knn"):
+        super().__init__()
+        self.type = type
+
+    def transform(self, df: pd.DataFrame()):
+
+        df_pcr = df.copy()
+
+        pcr_results = [i+1 for i in range(16)]
+        pcr_fields = ["pcrResult" + str(i) for i in pcr_results]
+
+        # leave only PCR columns
+        for column in df_pcr.columns:
+            if column not in pcr_fields and column != "PatientID":
+                df_pcr = df_pcr.drop(columns = column)
+
+        # validation and test IDs start with offset
+        ID_offset = df_pcr.PatientID[0]
+
+        # for KNN : Replace outliers with mean, later do KNN imputation
+        # for MEAN : Replace outliers with mean for the current class
+
+        for key in pcr_fields:
+
+            new_df = df_pcr[['PatientID', key]].copy()
+
+            # remove nans
+            new_df = new_df.dropna()
+
+            IDs_list = list(new_df.PatientID)
+
+            z = np.abs(stats.zscore(new_df[key]))
+            outliers_arr = np.where(z > 2.5)
+
+            if len(outliers_arr[0]) != 0:
+
+                for outlier_idx in outliers_arr[0]:
+                    # dropping those rows from the new_df for mean calculation
+                    new_df = new_df.drop(IDs_list[outlier_idx] - ID_offset)
+
+            else:
+                pass  # no outliers were detected
+
+            # find the mean WITHOUT the outliers
+            new_mean = new_df[key].mean()
+
+            # fill the outliers in the original df with mean / nan
+            for outlier_idx in outliers_arr[0]:
+                # dropping those rows from the new_df
+
+                if self.type == "knn":
+                    # later do the knn imputation on all
+                    df_pcr.at[IDs_list[outlier_idx] - ID_offset, key] = np.nan
+                elif self.type == "mean":
+                    # replace the outliers with mean
+                    df_pcr.at[IDs_list[outlier_idx] - ID_offset, key] = new_mean
+
+
+        if self.type == "knn":
+            # IMPUTER using KNN
+            df_pcr = df_pcr.drop(['PatientID'], axis=1)
+            imputer = KNNImputer(n_neighbors=3)  # k-nearest neighbors impute,
+
+            df_mx = imputer.fit_transform(df_pcr)
+            df_pcr = pd.DataFrame(df_mx, list(df["PatientID"]), pcr_fields)
+
+        elif self.type == "mean":
+            df_pcr = df_pcr.fillna(df.mean())
+
+        # replace the original pcr columns with new imputed columns
+        for column in df_pcr.columns:
+            df[column] = df_pcr[column]
+
+        return df
 
 class PCR_standart_scaler_handler(CustomFeatureHandler):
     """Scaler to the PCR results"""

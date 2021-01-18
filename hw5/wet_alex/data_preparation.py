@@ -35,7 +35,7 @@ def given_features_pipe(dataset_path : str, split_list : list):
                                            ('SocialActivitiesHandler', SocialActivitiesHandler(mean_social_activity_time = mean_social_activity_time)),
                                            ('AgeHandler', AgeHandler()),
                                            ('StepsHandler', StepsHandler()),
-                                           ('PCR_results_handler', PCR_standart_scaler_handler()),
+                                           ('PCR_results_handler', PCR_imputation('mean')),
                                            ('SyndromClassHandler', SyndromClassHandler()),
                                            ('Modify_Results_Code', Modify_Results_Code()),
                                            ('Leave_Relevant_Features', Leave_Relevant(relevant_features, results_fields)),
