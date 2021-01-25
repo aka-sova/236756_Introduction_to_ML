@@ -18,6 +18,10 @@ from mlxtend.feature_selection import SequentialFeatureSelector as SFS
 import mlxtend
 from sklearn.neighbors import KNeighborsClassifier
 
+from imblearn.combine import SMOTETomek
+from collections import Counter
+import copy
+
 class Task(object):
     def __init__(self, task_name : str, target_type : str, main_metrics : str,
                  pipeline, mapping_dict : dict = {}, order : int = None, output_column_name : str = None):
@@ -107,6 +111,10 @@ def iterate_over_models(task, models: list, logfd):
     X = task.datasets['train'].data
     y = task.datasets['train'].target_types[task.target_type]["targets"]
 
+    sm = SMOTETomek(random_state=42)
+
+    X_res, y_res = sm.fit_resample(X, y)
+
     for model_idx, model in enumerate(models):
         print_all(logfd, f"\nChecking model : {model[0]} over params {model[1]}")
         init_time = timeit.default_timer()
@@ -114,26 +122,52 @@ def iterate_over_models(task, models: list, logfd):
         # from the specified parameters
         clf_scorer = metrics.make_scorer(task.main_metrics)
 
-        if model[1] is not {}:
-            clf = GridSearchCV(model[0], model[1], scoring = clf_scorer)
-        else:
-            clf = model[0]
-        clf.fit(X, y)
 
-        s = clf.cv_results_['rank_test_score']
-        sorted_rank_idxs = sorted(range(len(s)), key=lambda k: s[k])
+        # for case we want to pass empty dict of parameters to CV, but we want it to do the validation operations
+        use_CV_anyway = False
+
+        if len(model) > 2:
+            use_CV_anyway = model[2]
+
+        if model[1] != {} or use_CV_anyway == True:
+            model_copy = copy.deepcopy(model[0])
+            clf = GridSearchCV(model_copy, model[1], scoring = clf_scorer)
+        else:
+            clf = copy.deepcopy(model[0])
+
+        clf.fit(X_res, y_res)
+
+
 
         print_all(logfd, f"Finished. Time elapsed: {round(((timeit.default_timer() - init_time)/60), 3)} [min]")
 
         print_all(logfd, "\tReached accuracies:")
-        for rank_idx in sorted_rank_idxs:
-            print_all(logfd, f"\t\tScore : {round(clf.cv_results_['mean_test_score'][rank_idx], 3)} , "
-                  f"Params : {clf.cv_results_['params'][rank_idx]}")
 
-        # apply all those models on the validation set and pick the best
 
-        # take best score value
-        metrics_dict[model_idx] = [max(clf.cv_results_['mean_test_score']), clf]
+        if model[1] != {} or use_CV_anyway == True:
+            s = clf.cv_results_['rank_test_score']
+            sorted_rank_idxs = sorted(range(len(s)), key=lambda k: s[k])
+
+            for rank_idx in sorted_rank_idxs:
+                print_all(logfd, f"\t\tScore : {round(clf.cv_results_['mean_test_score'][rank_idx], 3)} , "
+                      f"Params : {clf.cv_results_['params'][rank_idx]}")
+
+            # take best score value
+            metrics_dict[model_idx] = [max(clf.cv_results_['mean_test_score']), clf]
+
+        else:
+            # take best score value
+            if hasattr(clf, "best_validation_score_"):
+                # MLP has its own validation inside
+                print_all(logfd, f"\t\tBest validation score: {clf.best_validation_score_}")
+                metrics_dict[model_idx] = [clf.best_validation_score_, clf]
+            else:
+                # CAUTION - this is done only on training data. Use the cross validation with empty dict
+                # if you want the score on the validation dataset automatically
+                training_data_score = clf_scorer(clf, X_res, y_res)
+                metrics_dict[model_idx] = [training_data_score, clf]
+
+
 
     return metrics_dict
 
@@ -158,7 +192,11 @@ def test_metrics_on_validation(task, models: list, metrics_dict : dict, validati
         y_pred = model_ut.predict(X_valid)
 
         metrics_data.append([])
-        metrics_data[-1].append(str(model_ut.estimator))
+
+        if hasattr(model_ut, 'estimator'):
+            metrics_data[-1].append(str(model_ut.estimator))
+        else:
+            metrics_data[-1].append(str(model_ut))
 
 
 

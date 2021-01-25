@@ -86,16 +86,21 @@ class SocialActivitiesHandler(CustomFeatureHandler):
         # so if such parameter exists, we use it to fill the missing data
 
         # find all the values where it is nan
-        no_discipline_score_mask = df.DisciplineScore.isna()
+
+        no_social_activities_score_mask = df.TimeOnSocialActivities.isna()
+        invalid_activities_score_mask = df.TimeOnSocialActivities < 5
 
         # check where it is not nan at AvgHouseholdExpenseOnPresents
-        expenses_mask = ~ df.AvgHouseholdExpenseOnPresents.isna()
+        no_expenses_expenses_mask = df.AvgHouseholdExpenseOnPresents.isna()
 
         # merge 2 masks
-        discipline_refill_series = no_discipline_score_mask & expenses_mask
+        social_activities_na_refill_series = no_social_activities_score_mask & ~no_expenses_expenses_mask
+        social_activities_invalid_refill_series = invalid_activities_score_mask & ~no_expenses_expenses_mask
 
-        df.loc[discipline_refill_series, "DisciplineScore"] = \
-            df.loc[discipline_refill_series, "AvgHouseholdExpenseOnPresents"] / 10
+        df.loc[social_activities_na_refill_series, "TimeOnSocialActivities"] \
+            = df.loc[social_activities_na_refill_series, "AvgHouseholdExpenseOnPresents"] / 10
+        df.loc[social_activities_invalid_refill_series, "TimeOnSocialActivities"] \
+            = df.loc[social_activities_invalid_refill_series, "AvgHouseholdExpenseOnPresents"] / 10
 
         # all the other missing data will receive the mean value, since no other dependency was found.
 
@@ -158,6 +163,18 @@ class SexHandler(CustomFeatureHandler):
 
         return df
 
+class NewAgeHandler(CustomFeatureHandler):
+    """Deal with age class"""
+
+    def __init__(self, mean_age):
+        super().__init__()
+        self.mean_age = mean_age
+
+    def transform(self, df : pd.DataFrame()):
+        df['AgeGroup'] = df.AgeGroup.fillna(self.mean_age)
+
+        return df
+
 class AgeHandler(CustomFeatureHandler):
     """Deal with age class"""
 
@@ -216,6 +233,31 @@ class StepsHandler(CustomFeatureHandler):
 
         return df
 
+class NewStepsHandler(CustomFeatureHandler):
+    """Deal with steps class, normalize"""
+
+    def __init__(self, delta, mean):
+        super().__init__()
+        self.delta = delta
+        self.mean = mean
+
+    def transform(self, df : pd.DataFrame()):
+
+        # fill the missing StepsPerYear with AvgMinSportsPerDay
+        no_StepsPerYear_score_mask = df.StepsPerYear.isna()
+
+        # check where it is not nan at AvgMinSportsPerDay
+        AvgMinSportsPerDay_mask = df.AvgMinSportsPerDay.isna()
+
+        # merge 2 masks
+        StepsPerYear_na_refill_series = no_StepsPerYear_score_mask & ~AvgMinSportsPerDay_mask
+
+        df.loc[StepsPerYear_na_refill_series, "StepsPerYear"] = df.loc[StepsPerYear_na_refill_series, "AvgMinSportsPerDay"] * self.delta
+
+        # all the other missing data will receive the mean value, since no other dependency was found.
+
+        df['StepsPerYear'] = df.StepsPerYear.fillna(self.mean)
+        return df
 
 
 class CousinsHandler(CustomFeatureHandler):
@@ -429,18 +471,24 @@ class Scale_All(CustomFeatureHandler):
         df_scaled = pd.DataFrame(df_scaled_np, index=df_scaled.index, columns=df_scaled.columns)
 
         for result_field in self.results_fields:
-            df_scaled[result_field] = df[result_field]
+            if result_field in df.columns:
+                df_scaled[result_field] = df[result_field]
 
         return df_scaled
 
 class PCR_imputation(CustomFeatureHandler):
     """Impute the PCR results"""
 
-    def __init__(self, type : str = "knn"):
+    def __init__(self, pcr_mean : dict, pcr_std : dict, z_threshold : int):
         super().__init__()
-        self.type = type
+        self.pcr_mean = pcr_mean
+        self.pcr_std = pcr_std
+        self.z_threshold = z_threshold
 
     def transform(self, df: pd.DataFrame()):
+
+        # for each feature, find the outliers by calculating the Z-score manually
+        # and replace those values with the mean values calculated from the training set
 
         df_pcr = df.copy()
 
@@ -455,7 +503,6 @@ class PCR_imputation(CustomFeatureHandler):
         # validation and test IDs start with offset
         ID_offset = df_pcr.PatientID[0]
 
-        # for KNN : Replace outliers with mean, later do KNN imputation
         # for MEAN : Replace outliers with mean for the current class
 
         for key in pcr_fields:
@@ -467,43 +514,19 @@ class PCR_imputation(CustomFeatureHandler):
 
             IDs_list = list(new_df.PatientID)
 
-            z = np.abs(stats.zscore(new_df[key]))
-            outliers_arr = np.where(z > 2.5)
+            z_manual = np.abs((np.array(new_df[key]) - self.pcr_mean[key])/ self.pcr_std[key])
 
-            if len(outliers_arr[0]) != 0:
-
-                for outlier_idx in outliers_arr[0]:
-                    # dropping those rows from the new_df for mean calculation
-                    new_df = new_df.drop(IDs_list[outlier_idx] - ID_offset)
-
-            else:
-                pass  # no outliers were detected
-
-            # find the mean WITHOUT the outliers
-            new_mean = new_df[key].mean()
+            outliers_arr = np.where(z_manual > 2.5)
 
             # fill the outliers in the original df with mean / nan
             for outlier_idx in outliers_arr[0]:
                 # dropping those rows from the new_df
 
-                if self.type == "knn":
-                    # later do the knn imputation on all
-                    df_pcr.at[IDs_list[outlier_idx] - ID_offset, key] = np.nan
-                elif self.type == "mean":
-                    # replace the outliers with mean
-                    df_pcr.at[IDs_list[outlier_idx] - ID_offset, key] = new_mean
+                # replace the outliers with mean
+                df_pcr.at[IDs_list[outlier_idx] - ID_offset, key] = self.pcr_mean[key]
 
-
-        if self.type == "knn":
-            # IMPUTER using KNN
-            df_pcr = df_pcr.drop(['PatientID'], axis=1)
-            imputer = KNNImputer(n_neighbors=3)  # k-nearest neighbors impute,
-
-            df_mx = imputer.fit_transform(df_pcr)
-            df_pcr = pd.DataFrame(df_mx, list(df["PatientID"]), pcr_fields)
-
-        elif self.type == "mean":
-            df_pcr = df_pcr.fillna(df.mean())
+            # replace the missing values with appropriating mean for this feature
+            df_pcr = df_pcr.fillna(self.pcr_mean[key])
 
         # replace the original pcr columns with new imputed columns
         for column in df_pcr.columns:

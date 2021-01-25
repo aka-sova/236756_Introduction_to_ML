@@ -38,7 +38,7 @@ def init_automatic_classification(regenerate_features: bool, evaluate_on_test: b
     if dataset_type == 'virus':
         tasks.append(Task(task_name='Spreader_Detection',
                           target_type='Spreader',
-                          main_metrics=metrics.recall_score,
+                          main_metrics=metrics.accuracy_score,
                           pipeline=given_features_pipe(dataset_path=virus_dataset_path,
                                                        split_list=split_list),
                           mapping_dict=targets_mappings['spreader_mapping'],
@@ -47,7 +47,7 @@ def init_automatic_classification(regenerate_features: bool, evaluate_on_test: b
 
         tasks.append(Task(task_name='At_Risk_Detection',
                           target_type='atRisk',
-                          main_metrics=metrics.f1_score,
+                          main_metrics=metrics.accuracy_score,
                           pipeline=given_features_pipe(dataset_path=virus_dataset_path,
                                                        split_list=split_list),
                           mapping_dict=targets_mappings['at_risk_mapping'],
@@ -101,10 +101,29 @@ def init_automatic_classification(regenerate_features: bool, evaluate_on_test: b
     # models.append((OneVsRestClassifier(DecisionTreeClassifier(max_depth=5)), {}))
     # models.append((MLPClassifier(alpha=0.0001, max_iter=100000, hidden_layer_sizes = (100,100,100),
     #                              solver='sgd', momentum=0.9, early_stopping=True), {}))
-    # models.append((RandomForestClassifier(max_depth=3, n_estimators=500, max_features=10), {}))
 
-    models.append((AdaBoostClassifier(), {'n_estimators': [50, 100],
-                                          'base_estimator': [DecisionTreeClassifier(max_depth=1)]}))
+
+    models.append((RandomForestClassifier(max_depth=3, n_estimators=500, max_features=10), {}, True))
+
+    clf_adaboost = AdaBoostClassifier(learning_rate=0.07,
+                                     random_state=0,
+                                     algorithm = 'SAMME',
+                                     base_estimator = DecisionTreeClassifier(max_depth=4))
+
+    models.append((clf_adaboost, {'n_estimators' : [100, 700]}))
+
+    clf_mlp = MLPClassifier(random_state=1,
+                            activation='relu',
+                            solver='adam',
+                            hidden_layer_sizes=(100, 500, 500, 100),
+                            learning_rate_init=0.001,
+                            alpha=0.0005,
+                            shuffle=True,
+                            early_stopping=True,
+                            verbose=False,
+                            max_iter=500)
+
+    models.append((clf_mlp, {}, False))
 
     # 3.1 Choose the metrics for validation to display
     validation_metrics = []

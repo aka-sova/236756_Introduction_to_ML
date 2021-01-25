@@ -14,18 +14,62 @@ from feature_handlers import *
 from dataset_operations import *
 
 
+
 def given_features_pipe(dataset_path : str, split_list : list):
 
-    virus_df = pd.read_csv(dataset_path)
-    df = split_the_data(virus_df, split_list)
+    # virus_df = pd.read_csv(dataset_path)
 
     # The given features to use are:
     relevant_features = ["DisciplineScore", "TimeOnSocialActivities", "AgeGroup", "StepsPerYear",
                          "pcrResult4", "pcrResult1", "pcrResult12", "pcrResult5", "pcrResult16",
                          "pcrResult14", "SyndromeClass"]
 
-    mean_discipline = 4.95
-    mean_social_activity_time = 5.32
+    mean_discipline = 4.88
+    mean_social_activity_time = 55.03
+    mean_age_group = 3.36
+
+    steps_per_year_delta = 1.75*(10**7) / 150 # from graph
+    mean_steps_per_year = 11538977.98
+
+    # PCR mean values for each feature without outliers on the training set
+    pcr_mean = {}
+    pcr_mean["pcrResult1"] = 0.14324074
+    pcr_mean["pcrResult2"] = -0.31776428
+    pcr_mean["pcrResult3"] = -2.34695487
+    pcr_mean["pcrResult4"] = 0.11646489
+    pcr_mean["pcrResult5"] = 0.00498924
+    pcr_mean["pcrResult6"] = 0.0219719
+    pcr_mean["pcrResult7"] = 0.03309889
+    pcr_mean["pcrResult8"] = 0.01644742
+    pcr_mean["pcrResult9"] = -0.27317063
+    pcr_mean["pcrResult10"] = 0.00210894
+    pcr_mean["pcrResult11"] = 0.02639129
+    pcr_mean["pcrResult12"] = -0.63057441
+    pcr_mean["pcrResult13"] = 0.98307771
+    pcr_mean["pcrResult14"] = 4.87424804
+    pcr_mean["pcrResult15"] = 0.04666256
+    pcr_mean["pcrResult16"] = 1.55639375
+
+    pcr_std = {}
+    pcr_std["pcrResult1"] = 1.08148849
+    pcr_std["pcrResult2"] = 8.8707197
+    pcr_std["pcrResult3"] = 2.18932363
+    pcr_std["pcrResult4"] = 1.08690174
+    pcr_std["pcrResult5"] = 0.58354487
+    pcr_std["pcrResult6"] = 2.52054654
+    pcr_std["pcrResult7"] = 4.72226956
+    pcr_std["pcrResult8"] = 1.23795492
+    pcr_std["pcrResult9"] = 18.18598079
+    pcr_std["pcrResult10"] = 1.50848103
+    pcr_std["pcrResult11"] = 6.19488781
+    pcr_std["pcrResult12"] = 4.3001735
+    pcr_std["pcrResult13"] = 6.04664937
+    pcr_std["pcrResult14"] = 25.74138099
+    pcr_std["pcrResult15"] = 2.52811328
+    pcr_std["pcrResult16"] = 0.80399315
+
+    z_threshold = 2
+
 
     results_fields = ['Disease', 'Spreader', 'atRisk']
 
@@ -33,12 +77,13 @@ def given_features_pipe(dataset_path : str, split_list : list):
     data_processing_pipe = customPipeline(steps =
                                           [('DisciplineScoreHandler', DisciplineScoreHandler(mean_discipline=mean_discipline)),
                                            ('SocialActivitiesHandler', SocialActivitiesHandler(mean_social_activity_time = mean_social_activity_time)),
-                                           ('AgeHandler', AgeHandler()),
-                                           ('StepsHandler', StepsHandler()),
-                                           ('PCR_results_handler', PCR_imputation('mean')),
+                                           ('AgeHandler', NewAgeHandler(mean_age=mean_age_group)),
+                                           ('StepsHandler', NewStepsHandler(delta=steps_per_year_delta, mean=mean_steps_per_year)),
+                                           ('PCR_results_handler', PCR_imputation(pcr_mean, pcr_std, z_threshold)),
                                            ('SyndromClassHandler', SyndromClassHandler()),
                                            ('Modify_Results_Code', Modify_Results_Code()),
                                            ('Leave_Relevant_Features', Leave_Relevant(relevant_features, results_fields)),
+                                           ('Total_Scaler', Scale_All(results_fields)),
                                            ('DropNA', DropNA()),
                                            ])
 
