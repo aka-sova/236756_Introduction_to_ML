@@ -1,0 +1,148 @@
+
+----------------------------------------
+
+
+Initializing model selection for task : Spreader_Detection
+
+Checking model : RandomForestClassifier(max_depth=3, max_features=10, n_estimators=500) over params {}
+Finished. Time elapsed: 0.572 [min]
+	Reached accuracies:
+		Score : 0.846 , Params : {}
+
+Checking model : AdaBoostClassifier(algorithm='SAMME',
+                   base_estimator=DecisionTreeClassifier(max_depth=4),
+                   learning_rate=0.07, random_state=0) over params {'n_estimators': [100, 700]}
+Finished. Time elapsed: 1.962 [min]
+	Reached accuracies:
+		Score : 0.895 , Params : {'n_estimators': 700}
+		Score : 0.893 , Params : {'n_estimators': 100}
+
+Checking model : MLPClassifier(alpha=0.0005, early_stopping=True,
+              hidden_layer_sizes=(100, 500, 500, 100), max_iter=500,
+              random_state=1) over params {}
+Finished. Time elapsed: 0.56 [min]
+	Reached accuracies:
+		Best validation score: 0.8922413793103449
+----------------------------------------
+
+
+Trying on the validation dataset with different metrics
+                                                                       accuracy_score          precision_score                 f1_score             recall_score
+RandomForestClassifier(max_depth=3, max_features=10, n_estimators=500)                    0.824                    0.928                    0.802                    0.706
+AdaBoostClassifier(algorithm='SAMME',
+                   base_estimator=DecisionTreeClassifier(max_depth=4),
+                   learning_rate=0.07, random_state=0)                    0.853                    0.834                    0.859                    0.885
+MLPClassifier(alpha=0.0005, early_stopping=True,
+              hidden_layer_sizes=(100, 500, 500, 100), max_iter=500,
+              random_state=1)                    0.816                    0.803                    0.821                    0.839
+----------------------------------------
+
+
+Initializing model selection for task : At_Risk_Detection
+
+Checking model : RandomForestClassifier(max_depth=3, max_features=10, n_estimators=500) over params {}
+Finished. Time elapsed: 0.669 [min]
+	Reached accuracies:
+		Score : 0.871 , Params : {}
+
+Checking model : AdaBoostClassifier(algorithm='SAMME',
+                   base_estimator=DecisionTreeClassifier(max_depth=4),
+                   learning_rate=0.07, random_state=0) over params {'n_estimators': [100, 700]}
+Finished. Time elapsed: 1.759 [min]
+	Reached accuracies:
+		Score : 0.882 , Params : {'n_estimators': 100}
+		Score : 0.881 , Params : {'n_estimators': 700}
+
+Checking model : MLPClassifier(alpha=0.0005, early_stopping=True,
+              hidden_layer_sizes=(100, 500, 500, 100), max_iter=500,
+              random_state=1) over params {}
+Finished. Time elapsed: 0.399 [min]
+	Reached accuracies:
+		Best validation score: 0.8778089887640449
+----------------------------------------
+
+
+Trying on the validation dataset with different metrics
+                                                                       accuracy_score          precision_score                 f1_score             recall_score
+RandomForestClassifier(max_depth=3, max_features=10, n_estimators=500)                    0.833                    0.865                    0.832                    0.801
+AdaBoostClassifier(algorithm='SAMME',
+                   base_estimator=DecisionTreeClassifier(max_depth=4),
+                   learning_rate=0.07, random_state=0)                    0.829                     0.81                     0.84                    0.873
+MLPClassifier(alpha=0.0005, early_stopping=True,
+              hidden_layer_sizes=(100, 500, 500, 100), max_iter=500,
+              random_state=1)                    0.854                    0.901                    0.851                    0.806
+----------------------------------------
+
+
+Initializing model selection for task : Disease_Detection
+
+Checking model : RandomForestClassifier(max_depth=3, max_features=10, n_estimators=500) over params {}
+Finished. Time elapsed: 1.815 [min]
+	Reached accuracies:
+		Score : 0.582 , Params : {}
+
+Checking model : AdaBoostClassifier(algorithm='SAMME',
+                   base_estimator=DecisionTreeClassifier(max_depth=4),
+                   learning_rate=0.07, random_state=0) over params {'n_estimators': [100, 700]}
+Finished. Time elapsed: 6.446 [min]
+	Reached accuracies:
+		Score : 0.83 , Params : {'n_estimators': 700}
+		Score : 0.788 , Params : {'n_estimators': 100}
+
+Checking model : MLPClassifier(alpha=0.0005, early_stopping=True,
+              hidden_layer_sizes=(100, 500, 500, 100), max_iter=500,
+              random_state=1) over params {}
+Finished. Time elapsed: 2.439 [min]
+	Reached accuracies:
+		Best validation score: 0.9125651418645049
+----------------------------------------
+
+
+Trying on the validation dataset with different metrics
+                                                                       accuracy_score          precision_score                 f1_score             recall_score
+RandomForestClassifier(max_depth=3, max_features=10, n_estimators=500)                    0.622                     0.71                    0.641                    0.622
+AdaBoostClassifier(algorithm='SAMME',
+                   base_estimator=DecisionTreeClassifier(max_depth=4),
+                   learning_rate=0.07, random_state=0)                    0.694                    0.744                    0.693                    0.694
+MLPClassifier(alpha=0.0005, early_stopping=True,
+              hidden_layer_sizes=(100, 500, 500, 100), max_iter=500,
+              random_state=1)                    0.682                    0.694                    0.686                    0.682
+========================================
+SUMMARY
+========================================
+
+For task : Spreader_Detection
+	Chosen model : (AdaBoostClassifier(algorithm='SAMME',
+                   base_estimator=DecisionTreeClassifier(max_depth=4),
+                   learning_rate=0.07, random_state=0), {'n_estimators': [100, 700]})
+	Metrics : accuracy_score
+	Value : 0.895
+
+For task : At_Risk_Detection
+	Chosen model : (AdaBoostClassifier(algorithm='SAMME',
+                   base_estimator=DecisionTreeClassifier(max_depth=4),
+                   learning_rate=0.07, random_state=0), {'n_estimators': [100, 700]})
+	Metrics : accuracy_score
+	Value : 0.882
+
+For task : Disease_Detection
+	Chosen model : (MLPClassifier(alpha=0.0005, early_stopping=True,
+              hidden_layer_sizes=(100, 500, 500, 100), max_iter=500,
+              random_state=1), {}, False)
+	Metrics : accuracy_score
+	Value : 0.913
+
+
+
+Evaluating best model on the test dataset
+
+Result will be printed in : 	S:\236756_intro_machine_learning\git\hw5\wet_alex\outputs_clf\test_predicted.csv
+	Task : Disease_Detection, targets were supplied. accuracy_score = 0.6777777777777778
+	Task : Spreader_Detection, targets were supplied. accuracy_score = 0.8644444444444445
+	Task : At_Risk_Detection, targets were supplied. accuracy_score = 0.8
+
+
+
+Evaluating best model on the test dataset
+
+Result will be printed in : 	S:\236756_intro_machine_learning\git\hw5\wet_alex\outputs_clf\unseen_predicted.csv
