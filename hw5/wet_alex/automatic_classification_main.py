@@ -90,27 +90,101 @@ def init_automatic_classification(regenerate_features: bool, evaluate_on_test: b
             make_datasets(dataset_type, os.path.join(features_folder_path, task.task_name), targets_mappings)
 
     # 3 Define the models that should be tried
-    #          use the tuple (model, parameters)
+    #          use the tuple (model, parameters, use_cv)
     #          those models are later inserted into the cross validation,
+    #          if parameters = {}, and the model is not MLP, set use_cv=True, to use the CV anyway.
 
     models = []
+<<<<<<< Updated upstream
+    models.append((KNeighborsClassifier(), {'n_neighbors':[3, 5, 10, 20, 50]}))
+    models.append((LinearSVC(max_iter=1000), {} , True))
+    # models.append((GaussianNB(), {}, True))
+    # models.append((DecisionTreeClassifier(), {'max_depth':[5, 10, 15, 20]}))
+=======
     # models.append((KNeighborsClassifier(), {'n_neighbors':[3, 5, 10, 20, 50]}))
     # models.append((LinearSVC(max_iter=1000), {}))
     # models.append((GaussianNB(), {}))
-    models.append((DecisionTreeClassifier(), {'max_depth':[5, 10, 15]}, True))
+    models.append((DecisionTreeClassifier(), {'max_depth':[5, 10, 15, 20 ,50]}, True))
+>>>>>>> Stashed changes
     # models.append((LogisticRegression(max_iter=1000), {}))
+<<<<<<< HEAD
     # models.append((OneVsRestClassifier(DecisionTreeClassifier(max_depth=5)), {}))
     models.append((MLPClassifier(alpha=0.0001, max_iter=100000, hidden_layer_sizes = (100,500,500,100),
                                   solver='sgd', momentum=0.9, early_stopping=True), {}))
     #models.append((RandomForestClassifier(max_depth=3, n_estimators=500, max_features=10), {}))
 
     models.append((AdaBoostClassifier(), {'n_estimators': [50, 100],
+<<<<<<< Updated upstream
+                                          'base_estimator': [DecisionTreeClassifier(max_depth=4)]}))
+    models.append( (VotingClassifier(estimators=[('mlp', MLPClassifier(alpha=0.0001, max_iter=100000, hidden_layer_sizes = (100,100,100))),
+    ('rf', RandomForestClassifier(max_depth=3, n_estimators=500, max_features=10)),
+    ('ada', AdaBoostClassifier(n_estimators=100, base_estimator=DecisionTreeClassifier(max_depth=5))) ],voting='hard'), {} ) )
+=======
+    models.append((OneVsRestClassifier(DecisionTreeClassifier(max_depth=5)), {}, True))
+
+
+    models.append((RandomForestClassifier(max_depth=3, n_estimators=500, max_features=10), {}, True))
+
+    # clf_adaboost = AdaBoostClassifier(random_state=0,
+    #                                  algorithm = 'SAMME')
+    #
+    # models.append((clf_adaboost, {'n_estimators' : [100, 700, 1000],
+    #                               'learning_rate' : [0.02, 0.07, 0.1],
+    #                               'base_estimator' : [DecisionTreeClassifier(max_depth=3),
+    #                                                   DecisionTreeClassifier(max_depth=4),
+    #                                                   DecisionTreeClassifier(max_depth=5)]}))
+
+    clf_adaboost = AdaBoostClassifier(random_state=0,
+                                      algorithm = 'SAMME',
+                                      n_estimators=700,
+                                      learning_rate=0.07,
+                                      base_estimator=DecisionTreeClassifier(max_depth=5))
+
+    models.append((clf_adaboost, {}, True))
+
+    # clf_mlp = MLPClassifier(random_state=1,
+    #                         activation='relu',
+    #                         solver='adam',
+    #                         hidden_layer_sizes=(100, 1000, 1000, 100),
+    #                         learning_rate_init=0.005,
+    #                         learning_rate='adaptive',
+    #                         alpha=0.0002,
+    #                         shuffle=True,
+    #                         early_stopping=True,
+    #                         validation_fraction=0.15,
+    #                         n_iter_no_change=5,
+    #                         verbose=True,
+    #                         max_iter=1000)
+
+    # with smote, same net gave 0.677 on validation and 0.86 on training
+    # without smote, this gave 0.7 on validation and validation score 0.74 during training
+
+    clf_mlp = MLPClassifier(random_state=1,
+                            activation='relu',
+                            solver='sgd',
+                            hidden_layer_sizes=(100, 1000, 1000, 100),
+                            learning_rate_init=0.005,
+                            learning_rate='adaptive',
+                            alpha=0.0002,
+                            shuffle=True,
+                            early_stopping=True,
+                            validation_fraction=0.15,
+                            n_iter_no_change=5,
+                            verbose=False,
+                            max_iter=1000)
+
+    models.append((clf_mlp, {}, False))
+
+>>>>>>> 9e08705bae64fa3d16a976c0706064cf693db872
+    # 3.1 Choose the metrics for validation to display
+=======
                                           'base_estimator': [DecisionTreeClassifier(max_depth=4)]}))
     models.append( (VotingClassifier(estimators=[('mlp1', MLPClassifier(alpha=0.0001, max_iter=150, hidden_layer_sizes = (100,150,150,100,10))),
     ('mlp2', MLPClassifier(alpha=0.0001, max_iter=150, hidden_layer_sizes = (50,100,200,200,100))),
     ('mlp3', MLPClassifier(alpha=0.0001, max_iter=150, hidden_layer_sizes = (50,100,100,200,100))),
     ('ada', AdaBoostClassifier(n_estimators=100, base_estimator=DecisionTreeClassifier(max_depth=4))) ],voting='hard'), {} , True) )
     #3.1 Choose the metrics for validation to display
+>>>>>>> Stashed changes
     validation_metrics = []
     validation_metrics.append((metrics.accuracy_score, {}))
     validation_metrics.append((metrics.precision_score, {'average': 'weighted'}))
@@ -118,7 +192,7 @@ def init_automatic_classification(regenerate_features: bool, evaluate_on_test: b
     validation_metrics.append((metrics.recall_score, {'average': 'weighted'}))
 
     # 3.2 Find best model for each task according to the validation dataset
-    chosen_models_dict = choose_best_model(tasks, models,
+    chosen_models_dict = choose_best_model(tasks, models, False,
                                            validation_metrics, outputs_folder_path, logfd)
 
     # 3.3 print nicely

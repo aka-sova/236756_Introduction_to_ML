@@ -19,6 +19,7 @@ import mlxtend
 from sklearn.neighbors import KNeighborsClassifier
 
 from imblearn.combine import SMOTETomek
+from imblearn.over_sampling import SMOTE
 from collections import Counter
 import copy
 
@@ -44,7 +45,7 @@ class Task(object):
 
 
 
-def choose_best_model( tasks : list, models: list, validation_metrics : list, output_folder_path : str, logfd):
+def choose_best_model( tasks : list, models: list, use_smote : bool, validation_metrics : list, output_folder_path : str, logfd):
     """Iterates over every task, and every model, returning the best model for each class."""
 
     # returns
@@ -61,7 +62,7 @@ def choose_best_model( tasks : list, models: list, validation_metrics : list, ou
         print_all(logfd, "-"*40)
         print_all(logfd, f"\n\nInitializing model selection for task : {task.task_name}")
         # train on different classifiers
-        metrics_dict = iterate_over_models(task, models, logfd)
+        metrics_dict = iterate_over_models(task, models, use_smote, logfd)
 
         # choose the best according to the specified metric in the task
         for model_idx in metrics_dict.keys():
@@ -90,7 +91,7 @@ def choose_best_model( tasks : list, models: list, validation_metrics : list, ou
 
 
 
-def iterate_over_models(task, models: list, logfd):
+def iterate_over_models(task, models: list, use_smote : bool, logfd):
     """For a specific task, iterates over models. Returns all kinds of metrics"""
 
     # inputs
@@ -111,9 +112,17 @@ def iterate_over_models(task, models: list, logfd):
     X = task.datasets['train'].data
     y = task.datasets['train'].target_types[task.target_type]["targets"]
 
-    sm = SMOTETomek(random_state=42)
+    if use_smote:
 
-    X_res, y_res = sm.fit_resample(X, y)
+        # find most prevalent class
+        # a = Counter(y)
+        # max_values = np.max(list(a.values()))
+        # strategy = { key : max_values for key in a.keys() }
+        # sm = SMOTE(sampling_strategy=strategy)
+
+        sm = SMOTETomek()
+
+        X, y = sm.fit_resample(X, y)
 
     for model_idx, model in enumerate(models):
         print_all(logfd, f"\nChecking model : {model[0]} over params {model[1]}")
@@ -135,7 +144,7 @@ def iterate_over_models(task, models: list, logfd):
         else:
             clf = copy.deepcopy(model[0])
 
-        clf.fit(X_res, y_res)
+        clf.fit(X, y)
 
 
 
@@ -164,7 +173,7 @@ def iterate_over_models(task, models: list, logfd):
             else:
                 # CAUTION - this is done only on training data. Use the cross validation with empty dict
                 # if you want the score on the validation dataset automatically
-                training_data_score = clf_scorer(clf, X_res, y_res)
+                training_data_score = clf_scorer(clf, X, y)
                 metrics_dict[model_idx] = [training_data_score, clf]
 
 
@@ -190,6 +199,21 @@ def test_metrics_on_validation(task, models: list, metrics_dict : dict, validati
         # predict on the validation data
         model_ut = metrics_dict[model_idx][1]
         y_pred = model_ut.predict(X_valid)
+
+        print_validation = False
+        if print_validation:
+            true_sum = sum(y_true == y_pred)
+            total_amount = len(y_true)
+            print("\n\n")
+            print("-"*40)
+            print(f"Total accuracy: {true_sum}/{total_amount} ({round((true_sum/total_amount)*100, 3)} %)")
+            for disease_num in np.unique(y_true):
+                disease_true_idxs = np.where(y_true == disease_num)
+                total_disease_samples = len(disease_true_idxs[0])
+                true_disease_samples = sum(y_pred[disease_true_idxs[0]] == disease_num)
+                print(f"Disease {disease_num} accuracy: {true_disease_samples}/{total_disease_samples} ({round((true_disease_samples/total_disease_samples)*100, 3)} %)")
+            print("-" * 40)
+            print("\n\n")
 
         metrics_data.append([])
 
