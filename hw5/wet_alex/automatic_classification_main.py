@@ -115,7 +115,7 @@ def init_automatic_classification(regenerate_features: bool, evaluate_on_test: b
 
     models.append((AdaBoostClassifier(), {'n_estimators': [50, 100],
 <<<<<<< Updated upstream
-                                          'base_estimator': [DecisionTreeClassifier(max_depth=1)]}))
+                                          'base_estimator': [DecisionTreeClassifier(max_depth=4)]}))
     models.append( (VotingClassifier(estimators=[('mlp', MLPClassifier(alpha=0.0001, max_iter=100000, hidden_layer_sizes = (100,100,100))),
     ('rf', RandomForestClassifier(max_depth=3, n_estimators=500, max_features=10)),
     ('ada', AdaBoostClassifier(n_estimators=100, base_estimator=DecisionTreeClassifier(max_depth=5))) ],voting='hard'), {} ) )
