@@ -1,8 +1,9 @@
 PatientID,Virus,Spreader,Risk
 9000,cold,Spreader,atRisk
 9001,notdetected,Spreader,atRisk
-9002,notdetected,Spreader,NotAtRisk
+9002,cold,Spreader,NotAtRisk
 9003,cold,Spreader,NotAtRisk
+<<<<<<< Updated upstream
 9004,notdetected,NotSpreader,NotAtRisk
 9005,notdetected,Spreader,NotAtRisk
 9006,cold,NotSpreader,NotAtRisk
@@ -15,16 +16,35 @@ PatientID,Virus,Spreader,Risk
 9013,flue,NotSpreader,NotAtRisk
 9014,cold,Spreader,NotAtRisk
 9015,cmv,Spreader,NotAtRisk
+=======
+9004,notdetected,Spreader,atRisk
+9005,covid,Spreader,NotAtRisk
+9006,notdetected,NotSpreader,NotAtRisk
+9007,cold,NotSpreader,atRisk
+9008,flue,Spreader,NotAtRisk
+9009,cold,Spreader,atRisk
+9010,cold,Spreader,atRisk
+9011,notdetected,Spreader,atRisk
+9012,covid,Spreader,NotAtRisk
+9013,flue,NotSpreader,NotAtRisk
+9014,cold,Spreader,NotAtRisk
+9015,flue,Spreader,atRisk
+>>>>>>> Stashed changes
 9016,flue,NotSpreader,NotAtRisk
 9017,cold,Spreader,NotAtRisk
 9018,cmv,NotSpreader,atRisk
 9019,notdetected,NotSpreader,atRisk
+<<<<<<< Updated upstream
 9020,measles,NotSpreader,NotAtRisk
+=======
+9020,cmv,NotSpreader,NotAtRisk
+>>>>>>> Stashed changes
 9021,notdetected,NotSpreader,atRisk
 9022,notdetected,Spreader,atRisk
-9023,covid,NotSpreader,NotAtRisk
+9023,notdetected,NotSpreader,NotAtRisk
 9024,flue,Spreader,NotAtRisk
 9025,notdetected,NotSpreader,atRisk
+<<<<<<< Updated upstream
 9026,notdetected,NotSpreader,NotAtRisk
 9027,notdetected,Spreader,NotAtRisk
 9028,covid,NotSpreader,NotAtRisk
@@ -44,14 +64,41 @@ PatientID,Virus,Spreader,Risk
 9042,cold,Spreader,atRisk
 9043,cold,Spreader,atRisk
 9044,notdetected,NotSpreader,atRisk
+=======
+9026,cmv,NotSpreader,NotAtRisk
+9027,flue,Spreader,NotAtRisk
+9028,covid,NotSpreader,NotAtRisk
+9029,notdetected,Spreader,atRisk
+9030,covid,Spreader,NotAtRisk
+9031,flue,Spreader,atRisk
+9032,notdetected,Spreader,NotAtRisk
+9033,flue,Spreader,atRisk
+9034,flue,Spreader,atRisk
+9035,cold,Spreader,atRisk
+9036,notdetected,NotSpreader,atRisk
+9037,flue,Spreader,atRisk
+9038,flue,Spreader,atRisk
+9039,cmv,NotSpreader,atRisk
+9040,flue,NotSpreader,atRisk
+9041,notdetected,Spreader,atRisk
+9042,cold,Spreader,atRisk
+9043,cold,Spreader,atRisk
+9044,notdetected,Spreader,atRisk
+>>>>>>> Stashed changes
 9045,cold,NotSpreader,atRisk
 9046,cold,Spreader,atRisk
 9047,cmv,NotSpreader,NotAtRisk
 9048,cold,Spreader,NotAtRisk
 9049,notdetected,Spreader,atRisk
+<<<<<<< Updated upstream
 9050,notdetected,Spreader,NotAtRisk
 9051,notdetected,NotSpreader,atRisk
 9052,cmv,Spreader,atRisk
+=======
+9050,flue,Spreader,NotAtRisk
+9051,notdetected,Spreader,atRisk
+9052,flue,Spreader,atRisk
+>>>>>>> Stashed changes
 9053,flue,Spreader,atRisk
 9054,notdetected,Spreader,NotAtRisk
 9055,notdetected,Spreader,atRisk
@@ -60,16 +107,23 @@ PatientID,Virus,Spreader,Risk
 9058,notdetected,NotSpreader,atRisk
 9059,covid,Spreader,atRisk
 9060,notdetected,NotSpreader,NotAtRisk
-9061,cold,NotSpreader,atRisk
+9061,flue,Spreader,atRisk
 9062,cold,Spreader,atRisk
+<<<<<<< Updated upstream
 9063,notdetected,NotSpreader,atRisk
 9064,notdetected,Spreader,NotAtRisk
 9065,notdetected,NotSpreader,atRisk
+=======
+9063,notdetected,Spreader,atRisk
+9064,notdetected,Spreader,atRisk
+9065,notdetected,Spreader,atRisk
+>>>>>>> Stashed changes
 9066,covid,Spreader,NotAtRisk
 9067,flue,NotSpreader,NotAtRisk
 9068,notdetected,Spreader,atRisk
 9069,notdetected,NotSpreader,atRisk
 9070,cold,Spreader,NotAtRisk
+<<<<<<< Updated upstream
 9071,flue,NotSpreader,NotAtRisk
 9072,notdetected,NotSpreader,atRisk
 9073,notdetected,Spreader,atRisk
@@ -88,14 +142,35 @@ PatientID,Virus,Spreader,Risk
 9086,flue,Spreader,NotAtRisk
 9087,flue,NotSpreader,NotAtRisk
 9088,covid,NotSpreader,atRisk
+=======
+9071,cold,NotSpreader,NotAtRisk
+9072,notdetected,NotSpreader,atRisk
+9073,cold,Spreader,atRisk
+9074,notdetected,Spreader,atRisk
+9075,flue,NotSpreader,atRisk
+9076,covid,NotSpreader,NotAtRisk
+9077,notdetected,Spreader,NotAtRisk
+9078,notdetected,Spreader,NotAtRisk
+9079,notdetected,Spreader,NotAtRisk
+9080,flue,Spreader,NotAtRisk
+9081,flue,Spreader,atRisk
+9082,notdetected,NotSpreader,atRisk
+9083,notdetected,Spreader,atRisk
+9084,flue,NotSpreader,atRisk
+9085,cold,Spreader,atRisk
+9086,flue,Spreader,NotAtRisk
+9087,flue,Spreader,NotAtRisk
+9088,covid,NotSpreader,NotAtRisk
+>>>>>>> Stashed changes
 9089,flue,NotSpreader,atRisk
 9090,flue,Spreader,NotAtRisk
 9091,cold,NotSpreader,NotAtRisk
 9092,cold,NotSpreader,NotAtRisk
-9093,cold,NotSpreader,NotAtRisk
-9094,notdetected,Spreader,NotAtRisk
+9093,cold,Spreader,NotAtRisk
+9094,flue,Spreader,NotAtRisk
 9095,notdetected,NotSpreader,atRisk
 9096,flue,Spreader,atRisk
+<<<<<<< Updated upstream
 9097,notdetected,Spreader,atRisk
 9098,measles,NotSpreader,NotAtRisk
 9099,covid,NotSpreader,NotAtRisk
@@ -105,6 +180,17 @@ PatientID,Virus,Spreader,Risk
 9103,flue,Spreader,atRisk
 9104,measles,Spreader,NotAtRisk
 9105,covid,Spreader,NotAtRisk
+=======
+9097,notdetected,Spreader,NotAtRisk
+9098,cold,NotSpreader,NotAtRisk
+9099,cold,NotSpreader,atRisk
+9100,notdetected,NotSpreader,NotAtRisk
+9101,flue,Spreader,atRisk
+9102,covid,NotSpreader,NotAtRisk
+9103,flue,Spreader,atRisk
+9104,measles,Spreader,atRisk
+9105,notdetected,Spreader,atRisk
+>>>>>>> Stashed changes
 9106,flue,Spreader,atRisk
 9107,cold,NotSpreader,atRisk
 9108,covid,Spreader,atRisk
@@ -112,6 +198,7 @@ PatientID,Virus,Spreader,Risk
 9110,notdetected,NotSpreader,atRisk
 9111,cold,NotSpreader,atRisk
 9112,covid,Spreader,atRisk
+<<<<<<< Updated upstream
 9113,notdetected,NotSpreader,NotAtRisk
 9114,cold,NotSpreader,atRisk
 9115,notdetected,NotSpreader,NotAtRisk
@@ -127,6 +214,23 @@ PatientID,Virus,Spreader,Risk
 9125,notdetected,NotSpreader,NotAtRisk
 9126,notdetected,Spreader,NotAtRisk
 9127,flue,NotSpreader,NotAtRisk
+=======
+9113,notdetected,NotSpreader,atRisk
+9114,notdetected,NotSpreader,atRisk
+9115,covid,NotSpreader,atRisk
+9116,cold,Spreader,atRisk
+9117,cold,Spreader,NotAtRisk
+9118,notdetected,NotSpreader,atRisk
+9119,notdetected,Spreader,atRisk
+9120,flue,Spreader,NotAtRisk
+9121,flue,Spreader,NotAtRisk
+9122,notdetected,Spreader,atRisk
+9123,notdetected,Spreader,atRisk
+9124,cold,NotSpreader,atRisk
+9125,flue,NotSpreader,NotAtRisk
+9126,cold,Spreader,NotAtRisk
+9127,notdetected,NotSpreader,atRisk
+>>>>>>> Stashed changes
 9128,cold,NotSpreader,atRisk
 9129,flue,NotSpreader,atRisk
 9130,notdetected,Spreader,NotAtRisk
@@ -137,8 +241,13 @@ PatientID,Virus,Spreader,Risk
 9135,notdetected,NotSpreader,NotAtRisk
 9136,measles,Spreader,NotAtRisk
 9137,cold,NotSpreader,NotAtRisk
+<<<<<<< Updated upstream
 9138,cold,NotSpreader,atRisk
 9139,notdetected,NotSpreader,NotAtRisk
+=======
+9138,notdetected,NotSpreader,atRisk
+9139,notdetected,Spreader,atRisk
+>>>>>>> Stashed changes
 9140,flue,Spreader,atRisk
 9141,cold,NotSpreader,atRisk
 9142,cold,NotSpreader,NotAtRisk
@@ -148,14 +257,23 @@ PatientID,Virus,Spreader,Risk
 9146,notdetected,Spreader,NotAtRisk
 9147,measles,Spreader,NotAtRisk
 9148,covid,NotSpreader,atRisk
-9149,notdetected,Spreader,atRisk
+9149,flue,Spreader,atRisk
 9150,covid,Spreader,atRisk
+<<<<<<< Updated upstream
 9151,covid,NotSpreader,atRisk
 9152,notdetected,NotSpreader,atRisk
 9153,cmv,Spreader,atRisk
 9154,notdetected,NotSpreader,atRisk
 9155,flue,NotSpreader,atRisk
 9156,covid,NotSpreader,atRisk
+=======
+9151,covid,Spreader,atRisk
+9152,covid,Spreader,atRisk
+9153,flue,Spreader,atRisk
+9154,notdetected,NotSpreader,atRisk
+9155,flue,Spreader,atRisk
+9156,covid,Spreader,atRisk
+>>>>>>> Stashed changes
 9157,cold,NotSpreader,NotAtRisk
 9158,notdetected,Spreader,NotAtRisk
 9159,flue,Spreader,NotAtRisk
@@ -165,47 +283,75 @@ PatientID,Virus,Spreader,Risk
 9163,notdetected,Spreader,atRisk
 9164,covid,NotSpreader,NotAtRisk
 9165,flue,Spreader,NotAtRisk
+<<<<<<< Updated upstream
 9166,cmv,NotSpreader,NotAtRisk
 9167,covid,Spreader,atRisk
 9168,cold,Spreader,NotAtRisk
 9169,notdetected,NotSpreader,atRisk
+=======
+9166,cmv,Spreader,NotAtRisk
+9167,covid,Spreader,atRisk
+9168,cold,Spreader,atRisk
+9169,covid,NotSpreader,atRisk
+>>>>>>> Stashed changes
 9170,flue,NotSpreader,NotAtRisk
 9171,notdetected,Spreader,NotAtRisk
 9172,cold,Spreader,atRisk
 9173,measles,NotSpreader,atRisk
 9174,notdetected,NotSpreader,NotAtRisk
 9175,notdetected,NotSpreader,atRisk
+<<<<<<< Updated upstream
 9176,notdetected,NotSpreader,NotAtRisk
 9177,notdetected,Spreader,NotAtRisk
 9178,notdetected,Spreader,NotAtRisk
 9179,notdetected,NotSpreader,NotAtRisk
+=======
+9176,flue,NotSpreader,NotAtRisk
+9177,flue,Spreader,NotAtRisk
+9178,flue,Spreader,NotAtRisk
+9179,notdetected,Spreader,atRisk
+>>>>>>> Stashed changes
 9180,notdetected,NotSpreader,NotAtRisk
 9181,cold,Spreader,NotAtRisk
 9182,covid,NotSpreader,atRisk
 9183,cold,Spreader,NotAtRisk
-9184,notdetected,NotSpreader,atRisk
+9184,flue,NotSpreader,atRisk
 9185,covid,NotSpreader,NotAtRisk
 9186,flue,Spreader,atRisk
-9187,notdetected,NotSpreader,NotAtRisk
+9187,cold,NotSpreader,atRisk
 9188,notdetected,NotSpreader,NotAtRisk
 9189,notdetected,Spreader,NotAtRisk
 9190,flue,Spreader,atRisk
+<<<<<<< Updated upstream
 9191,notdetected,Spreader,NotAtRisk
 9192,notdetected,NotSpreader,atRisk
 9193,flue,Spreader,NotAtRisk
+=======
+9191,covid,Spreader,atRisk
+9192,notdetected,NotSpreader,atRisk
+9193,cmv,Spreader,NotAtRisk
+>>>>>>> Stashed changes
 9194,notdetected,Spreader,atRisk
 9195,notdetected,NotSpreader,atRisk
 9196,notdetected,NotSpreader,NotAtRisk
 9197,notdetected,NotSpreader,NotAtRisk
 9198,notdetected,NotSpreader,atRisk
+<<<<<<< Updated upstream
 9199,cmv,Spreader,NotAtRisk
 9200,cold,NotSpreader,NotAtRisk
 9201,notdetected,NotSpreader,NotAtRisk
 9202,notdetected,Spreader,atRisk
+=======
+9199,flue,Spreader,NotAtRisk
+9200,notdetected,NotSpreader,atRisk
+9201,notdetected,Spreader,atRisk
+9202,flue,Spreader,atRisk
+>>>>>>> Stashed changes
 9203,notdetected,Spreader,atRisk
 9204,notdetected,NotSpreader,NotAtRisk
 9205,cold,Spreader,NotAtRisk
 9206,notdetected,Spreader,atRisk
+<<<<<<< Updated upstream
 9207,notdetected,NotSpreader,NotAtRisk
 9208,notdetected,NotSpreader,atRisk
 9209,notdetected,Spreader,NotAtRisk
@@ -216,36 +362,68 @@ PatientID,Virus,Spreader,Risk
 9214,flue,Spreader,NotAtRisk
 9215,covid,Spreader,NotAtRisk
 9216,flue,Spreader,atRisk
+=======
+9207,notdetected,NotSpreader,atRisk
+9208,flue,NotSpreader,atRisk
+9209,flue,Spreader,NotAtRisk
+9210,notdetected,Spreader,atRisk
+9211,covid,NotSpreader,atRisk
+9212,notdetected,NotSpreader,atRisk
+9213,covid,Spreader,atRisk
+9214,flue,Spreader,NotAtRisk
+9215,measles,Spreader,NotAtRisk
+9216,cmv,Spreader,atRisk
+>>>>>>> Stashed changes
 9217,flue,Spreader,atRisk
 9218,notdetected,Spreader,atRisk
 9219,flue,Spreader,atRisk
 9220,cold,NotSpreader,NotAtRisk
 9221,covid,Spreader,NotAtRisk
+<<<<<<< Updated upstream
 9222,measles,NotSpreader,NotAtRisk
 9223,cold,NotSpreader,atRisk
 9224,notdetected,Spreader,NotAtRisk
 9225,measles,NotSpreader,atRisk
+=======
+9222,cmv,Spreader,NotAtRisk
+9223,cold,NotSpreader,atRisk
+9224,notdetected,Spreader,atRisk
+9225,cmv,NotSpreader,atRisk
+>>>>>>> Stashed changes
 9226,notdetected,Spreader,atRisk
 9227,cold,Spreader,NotAtRisk
 9228,covid,Spreader,atRisk
 9229,flue,NotSpreader,atRisk
 9230,notdetected,Spreader,atRisk
 9231,notdetected,NotSpreader,NotAtRisk
+<<<<<<< Updated upstream
 9232,flue,NotSpreader,NotAtRisk
+=======
+9232,flue,NotSpreader,atRisk
+>>>>>>> Stashed changes
 9233,cold,Spreader,atRisk
 9234,notdetected,Spreader,atRisk
 9235,measles,Spreader,atRisk
 9236,notdetected,Spreader,NotAtRisk
 9237,notdetected,Spreader,atRisk
 9238,covid,Spreader,atRisk
+<<<<<<< Updated upstream
 9239,flue,Spreader,atRisk
 9240,flue,Spreader,atRisk
 9241,flue,NotSpreader,atRisk
 9242,notdetected,Spreader,atRisk
 9243,covid,Spreader,NotAtRisk
 9244,flue,NotSpreader,NotAtRisk
+=======
+9239,cold,Spreader,NotAtRisk
+9240,flue,Spreader,atRisk
+9241,flue,NotSpreader,atRisk
+9242,notdetected,Spreader,atRisk
+9243,flue,Spreader,NotAtRisk
+9244,flue,Spreader,NotAtRisk
+>>>>>>> Stashed changes
 9245,flue,NotSpreader,atRisk
-9246,notdetected,Spreader,NotAtRisk
+9246,covid,Spreader,NotAtRisk
 9247,notdetected,Spreader,atRisk
 9248,notdetected,Spreader,NotAtRisk
 9249,measles,Spreader,atRisk
@@ -254,11 +432,15 @@ PatientID,Virus,Spreader,Risk
 9252,notdetected,Spreader,NotAtRisk
 9253,covid,NotSpreader,atRisk
 9254,flue,Spreader,NotAtRisk
-9255,notdetected,Spreader,NotAtRisk
-9256,covid,NotSpreader,atRisk
-9257,notdetected,NotSpreader,NotAtRisk
+9255,flue,Spreader,NotAtRisk
+9256,notdetected,NotSpreader,atRisk
+9257,notdetected,Spreader,NotAtRisk
 9258,covid,Spreader,NotAtRisk
+<<<<<<< Updated upstream
 9259,notdetected,Spreader,atRisk
+=======
+9259,cold,Spreader,atRisk
+>>>>>>> Stashed changes
 9260,flue,NotSpreader,NotAtRisk
 9261,flue,NotSpreader,atRisk
 9262,covid,Spreader,atRisk
@@ -268,8 +450,13 @@ PatientID,Virus,Spreader,Risk
 9266,notdetected,Spreader,NotAtRisk
 9267,notdetected,Spreader,atRisk
 9268,notdetected,NotSpreader,atRisk
+<<<<<<< Updated upstream
 9269,notdetected,NotSpreader,NotAtRisk
 9270,flue,NotSpreader,NotAtRisk
+=======
+9269,flue,NotSpreader,atRisk
+9270,flue,NotSpreader,atRisk
+>>>>>>> Stashed changes
 9271,notdetected,NotSpreader,atRisk
 9272,cold,NotSpreader,atRisk
 9273,cold,Spreader,NotAtRisk
@@ -278,8 +465,13 @@ PatientID,Virus,Spreader,Risk
 9276,flue,Spreader,NotAtRisk
 9277,cmv,Spreader,atRisk
 9278,flue,Spreader,NotAtRisk
+<<<<<<< Updated upstream
 9279,notdetected,Spreader,atRisk
 9280,flue,NotSpreader,NotAtRisk
+=======
+9279,covid,Spreader,atRisk
+9280,flue,NotSpreader,atRisk
+>>>>>>> Stashed changes
 9281,notdetected,NotSpreader,atRisk
 9282,notdetected,Spreader,NotAtRisk
 9283,cold,NotSpreader,NotAtRisk
@@ -287,12 +479,16 @@ PatientID,Virus,Spreader,Risk
 9285,notdetected,Spreader,NotAtRisk
 9286,covid,NotSpreader,atRisk
 9287,notdetected,Spreader,atRisk
+<<<<<<< Updated upstream
 9288,notdetected,Spreader,atRisk
+=======
+9288,flue,Spreader,atRisk
+>>>>>>> Stashed changes
 9289,covid,Spreader,atRisk
 9290,covid,NotSpreader,NotAtRisk
 9291,notdetected,NotSpreader,atRisk
-9292,notdetected,NotSpreader,atRisk
-9293,measles,Spreader,NotAtRisk
+9292,notdetected,Spreader,atRisk
+9293,flue,Spreader,NotAtRisk
 9294,notdetected,Spreader,NotAtRisk
 9295,notdetected,Spreader,atRisk
 9296,cold,Spreader,NotAtRisk
@@ -300,14 +496,19 @@ PatientID,Virus,Spreader,Risk
 9298,notdetected,NotSpreader,NotAtRisk
 9299,covid,Spreader,NotAtRisk
 9300,covid,Spreader,atRisk
+<<<<<<< Updated upstream
 9301,cold,NotSpreader,atRisk
+=======
+9301,cold,Spreader,atRisk
+>>>>>>> Stashed changes
 9302,flue,Spreader,NotAtRisk
 9303,cold,NotSpreader,atRisk
-9304,notdetected,NotSpreader,NotAtRisk
+9304,notdetected,Spreader,NotAtRisk
 9305,flue,NotSpreader,atRisk
 9306,flue,NotSpreader,atRisk
 9307,notdetected,Spreader,atRisk
 9308,flue,NotSpreader,atRisk
+<<<<<<< Updated upstream
 9309,notdetected,Spreader,atRisk
 9310,notdetected,Spreader,atRisk
 9311,notdetected,NotSpreader,atRisk
@@ -333,6 +534,33 @@ PatientID,Virus,Spreader,Risk
 9331,notdetected,NotSpreader,NotAtRisk
 9332,notdetected,NotSpreader,NotAtRisk
 9333,notdetected,NotSpreader,atRisk
+=======
+9309,cmv,Spreader,atRisk
+9310,cold,Spreader,atRisk
+9311,notdetected,NotSpreader,atRisk
+9312,covid,Spreader,atRisk
+9313,flue,Spreader,NotAtRisk
+9314,notdetected,Spreader,atRisk
+9315,cold,NotSpreader,atRisk
+9316,measles,Spreader,NotAtRisk
+9317,notdetected,Spreader,atRisk
+9318,notdetected,NotSpreader,atRisk
+9319,covid,Spreader,NotAtRisk
+9320,covid,Spreader,atRisk
+9321,notdetected,Spreader,NotAtRisk
+9322,flue,NotSpreader,atRisk
+9323,notdetected,NotSpreader,atRisk
+9324,flue,NotSpreader,atRisk
+9325,notdetected,Spreader,atRisk
+9326,measles,NotSpreader,atRisk
+9327,notdetected,Spreader,NotAtRisk
+9328,flue,Spreader,atRisk
+9329,notdetected,NotSpreader,NotAtRisk
+9330,notdetected,Spreader,atRisk
+9331,notdetected,NotSpreader,NotAtRisk
+9332,notdetected,NotSpreader,atRisk
+9333,cmv,NotSpreader,atRisk
+>>>>>>> Stashed changes
 9334,notdetected,NotSpreader,atRisk
 9335,notdetected,Spreader,atRisk
 9336,cold,Spreader,atRisk
@@ -341,8 +569,13 @@ PatientID,Virus,Spreader,Risk
 9339,notdetected,NotSpreader,NotAtRisk
 9340,cold,Spreader,NotAtRisk
 9341,notdetected,Spreader,atRisk
+<<<<<<< Updated upstream
 9342,flue,NotSpreader,NotAtRisk
 9343,notdetected,Spreader,NotAtRisk
+=======
+9342,flue,NotSpreader,atRisk
+9343,notdetected,Spreader,atRisk
+>>>>>>> Stashed changes
 9344,covid,NotSpreader,atRisk
 9345,cmv,Spreader,NotAtRisk
 9346,covid,NotSpreader,NotAtRisk
@@ -350,72 +583,117 @@ PatientID,Virus,Spreader,Risk
 9348,cold,NotSpreader,atRisk
 9349,flue,NotSpreader,NotAtRisk
 9350,flue,Spreader,NotAtRisk
-9351,notdetected,NotSpreader,atRisk
+9351,covid,NotSpreader,atRisk
 9352,notdetected,NotSpreader,atRisk
 9353,flue,NotSpreader,atRisk
 9354,notdetected,NotSpreader,NotAtRisk
 9355,cold,Spreader,NotAtRisk
+<<<<<<< Updated upstream
 9356,flue,NotSpreader,atRisk
 9357,covid,Spreader,NotAtRisk
 9358,notdetected,Spreader,NotAtRisk
 9359,notdetected,Spreader,NotAtRisk
 9360,covid,NotSpreader,NotAtRisk
+=======
+9356,flue,Spreader,atRisk
+9357,covid,Spreader,atRisk
+9358,notdetected,Spreader,NotAtRisk
+9359,cold,Spreader,NotAtRisk
+9360,notdetected,NotSpreader,NotAtRisk
+>>>>>>> Stashed changes
 9361,cold,Spreader,atRisk
 9362,flue,Spreader,atRisk
 9363,notdetected,Spreader,NotAtRisk
 9364,covid,NotSpreader,NotAtRisk
+<<<<<<< Updated upstream
 9365,notdetected,NotSpreader,atRisk
 9366,flue,NotSpreader,NotAtRisk
 9367,cold,NotSpreader,atRisk
 9368,notdetected,Spreader,atRisk
 9369,covid,Spreader,NotAtRisk
 9370,cold,NotSpreader,NotAtRisk
+=======
+9365,notdetected,Spreader,atRisk
+9366,flue,NotSpreader,atRisk
+9367,cold,NotSpreader,atRisk
+9368,notdetected,Spreader,atRisk
+9369,covid,Spreader,atRisk
+9370,cold,NotSpreader,atRisk
+>>>>>>> Stashed changes
 9371,cold,NotSpreader,atRisk
 9372,notdetected,Spreader,NotAtRisk
 9373,notdetected,NotSpreader,NotAtRisk
+<<<<<<< Updated upstream
 9374,flue,NotSpreader,NotAtRisk
 9375,notdetected,Spreader,NotAtRisk
 9376,flue,Spreader,NotAtRisk
+=======
+9374,flue,Spreader,atRisk
+9375,cold,Spreader,NotAtRisk
+9376,cmv,Spreader,atRisk
+>>>>>>> Stashed changes
 9377,flue,NotSpreader,atRisk
 9378,notdetected,Spreader,NotAtRisk
-9379,notdetected,NotSpreader,NotAtRisk
+9379,cold,NotSpreader,NotAtRisk
 9380,covid,Spreader,atRisk
-9381,notdetected,Spreader,atRisk
+9381,flue,Spreader,atRisk
 9382,flue,NotSpreader,atRisk
-9383,cold,NotSpreader,NotAtRisk
+9383,cold,Spreader,atRisk
 9384,notdetected,Spreader,atRisk
+<<<<<<< Updated upstream
 9385,covid,NotSpreader,NotAtRisk
 9386,notdetected,NotSpreader,atRisk
+=======
+9385,notdetected,NotSpreader,NotAtRisk
+9386,flue,NotSpreader,atRisk
+>>>>>>> Stashed changes
 9387,notdetected,NotSpreader,atRisk
 9388,notdetected,NotSpreader,NotAtRisk
 9389,notdetected,NotSpreader,atRisk
-9390,cold,Spreader,NotAtRisk
+9390,cold,Spreader,atRisk
 9391,covid,Spreader,NotAtRisk
 9392,flue,Spreader,atRisk
+<<<<<<< Updated upstream
 9393,cold,Spreader,NotAtRisk
 9394,covid,Spreader,atRisk
 9395,cold,NotSpreader,NotAtRisk
 9396,flue,Spreader,atRisk
+=======
+9393,notdetected,Spreader,NotAtRisk
+9394,covid,Spreader,NotAtRisk
+9395,cold,NotSpreader,NotAtRisk
+9396,cold,Spreader,atRisk
+>>>>>>> Stashed changes
 9397,notdetected,NotSpreader,NotAtRisk
 9398,notdetected,Spreader,NotAtRisk
 9399,flue,NotSpreader,NotAtRisk
 9400,cold,NotSpreader,atRisk
 9401,notdetected,Spreader,atRisk
-9402,notdetected,NotSpreader,NotAtRisk
-9403,covid,NotSpreader,NotAtRisk
+9402,cold,NotSpreader,NotAtRisk
+9403,covid,Spreader,NotAtRisk
 9404,notdetected,Spreader,NotAtRisk
 9405,cold,Spreader,NotAtRisk
 9406,flue,Spreader,atRisk
 9407,flue,Spreader,atRisk
+<<<<<<< Updated upstream
 9408,measles,Spreader,NotAtRisk
 9409,notdetected,NotSpreader,atRisk
 9410,cold,Spreader,NotAtRisk
+=======
+9408,cmv,Spreader,NotAtRisk
+9409,flue,Spreader,atRisk
+9410,cold,Spreader,atRisk
+>>>>>>> Stashed changes
 9411,covid,Spreader,NotAtRisk
 9412,cold,NotSpreader,atRisk
 9413,cold,Spreader,atRisk
 9414,flue,Spreader,NotAtRisk
 9415,cmv,Spreader,atRisk
+<<<<<<< Updated upstream
 9416,cold,NotSpreader,NotAtRisk
+=======
+9416,cold,Spreader,NotAtRisk
+>>>>>>> Stashed changes
 9417,cmv,Spreader,atRisk
 9418,notdetected,Spreader,atRisk
 9419,covid,Spreader,NotAtRisk
@@ -423,21 +701,22 @@ PatientID,Virus,Spreader,Risk
 9421,notdetected,NotSpreader,NotAtRisk
 9422,covid,NotSpreader,NotAtRisk
 9423,notdetected,Spreader,atRisk
-9424,measles,Spreader,atRisk
+9424,flue,Spreader,atRisk
 9425,notdetected,Spreader,atRisk
 9426,cold,NotSpreader,NotAtRisk
 9427,notdetected,Spreader,atRisk
 9428,notdetected,Spreader,NotAtRisk
 9429,cold,Spreader,NotAtRisk
-9430,notdetected,NotSpreader,NotAtRisk
-9431,flue,NotSpreader,NotAtRisk
+9430,notdetected,NotSpreader,atRisk
+9431,notdetected,NotSpreader,NotAtRisk
 9432,notdetected,NotSpreader,atRisk
-9433,notdetected,Spreader,atRisk
+9433,flue,Spreader,atRisk
 9434,cold,Spreader,NotAtRisk
 9435,covid,Spreader,NotAtRisk
 9436,flue,NotSpreader,atRisk
 9437,notdetected,NotSpreader,NotAtRisk
 9438,flue,Spreader,atRisk
+<<<<<<< Updated upstream
 9439,flue,NotSpreader,atRisk
 9440,notdetected,Spreader,atRisk
 9441,notdetected,Spreader,NotAtRisk
@@ -446,8 +725,18 @@ PatientID,Virus,Spreader,Risk
 9444,notdetected,NotSpreader,atRisk
 9445,cmv,Spreader,atRisk
 9446,flue,NotSpreader,NotAtRisk
+=======
+9439,flue,Spreader,atRisk
+9440,notdetected,Spreader,atRisk
+9441,notdetected,Spreader,NotAtRisk
+9442,covid,NotSpreader,atRisk
+9443,flue,Spreader,NotAtRisk
+9444,notdetected,NotSpreader,atRisk
+9445,flue,Spreader,atRisk
+9446,flue,NotSpreader,atRisk
+>>>>>>> Stashed changes
 9447,notdetected,NotSpreader,NotAtRisk
-9448,notdetected,NotSpreader,atRisk
+9448,notdetected,Spreader,atRisk
 9449,notdetected,Spreader,atRisk
 9450,covid,NotSpreader,atRisk
 9451,cold,NotSpreader,atRisk
@@ -455,15 +744,22 @@ PatientID,Virus,Spreader,Risk
 9453,cold,Spreader,NotAtRisk
 9454,notdetected,Spreader,atRisk
 9455,covid,NotSpreader,NotAtRisk
+<<<<<<< Updated upstream
 9456,notdetected,NotSpreader,NotAtRisk
 9457,notdetected,Spreader,NotAtRisk
 9458,notdetected,Spreader,NotAtRisk
+=======
+9456,notdetected,NotSpreader,atRisk
+9457,notdetected,Spreader,atRisk
+9458,cold,Spreader,NotAtRisk
+>>>>>>> Stashed changes
 9459,notdetected,NotSpreader,NotAtRisk
-9460,notdetected,NotSpreader,NotAtRisk
+9460,notdetected,Spreader,NotAtRisk
 9461,cold,NotSpreader,atRisk
 9462,cold,NotSpreader,NotAtRisk
 9463,notdetected,NotSpreader,atRisk
 9464,covid,Spreader,NotAtRisk
+<<<<<<< Updated upstream
 9465,cold,Spreader,NotAtRisk
 9466,notdetected,NotSpreader,atRisk
 9467,notdetected,Spreader,NotAtRisk
@@ -474,23 +770,50 @@ PatientID,Virus,Spreader,Risk
 9472,covid,NotSpreader,atRisk
 9473,notdetected,Spreader,atRisk
 9474,cold,NotSpreader,atRisk
+=======
+9465,cold,Spreader,atRisk
+9466,notdetected,NotSpreader,atRisk
+9467,notdetected,Spreader,atRisk
+9468,flue,Spreader,atRisk
+9469,flue,NotSpreader,NotAtRisk
+9470,flue,NotSpreader,atRisk
+9471,flue,NotSpreader,NotAtRisk
+9472,covid,NotSpreader,atRisk
+9473,notdetected,Spreader,atRisk
+9474,cmv,Spreader,atRisk
+>>>>>>> Stashed changes
 9475,covid,NotSpreader,NotAtRisk
 9476,cold,Spreader,NotAtRisk
 9477,notdetected,NotSpreader,NotAtRisk
 9478,notdetected,NotSpreader,NotAtRisk
+<<<<<<< Updated upstream
 9479,cmv,NotSpreader,atRisk
 9480,notdetected,NotSpreader,NotAtRisk
 9481,notdetected,Spreader,NotAtRisk
+=======
+9479,flue,NotSpreader,atRisk
+9480,cold,NotSpreader,NotAtRisk
+9481,covid,Spreader,atRisk
+>>>>>>> Stashed changes
 9482,cmv,NotSpreader,NotAtRisk
 9483,flue,Spreader,atRisk
 9484,covid,NotSpreader,NotAtRisk
 9485,measles,NotSpreader,NotAtRisk
+<<<<<<< Updated upstream
 9486,covid,NotSpreader,NotAtRisk
 9487,notdetected,Spreader,atRisk
 9488,notdetected,Spreader,NotAtRisk
 9489,cold,Spreader,NotAtRisk
 9490,covid,NotSpreader,atRisk
 9491,measles,NotSpreader,NotAtRisk
+=======
+9486,covid,Spreader,NotAtRisk
+9487,cold,Spreader,atRisk
+9488,notdetected,Spreader,NotAtRisk
+9489,cold,Spreader,NotAtRisk
+9490,covid,NotSpreader,atRisk
+9491,flue,NotSpreader,atRisk
+>>>>>>> Stashed changes
 9492,notdetected,NotSpreader,NotAtRisk
 9493,notdetected,Spreader,atRisk
 9494,notdetected,NotSpreader,NotAtRisk
@@ -504,17 +827,28 @@ PatientID,Virus,Spreader,Risk
 9502,flue,NotSpreader,atRisk
 9503,cold,NotSpreader,atRisk
 9504,notdetected,NotSpreader,NotAtRisk
+<<<<<<< Updated upstream
 9505,flue,Spreader,NotAtRisk
 9506,cold,NotSpreader,atRisk
+=======
+9505,cold,Spreader,NotAtRisk
+9506,cold,Spreader,atRisk
+>>>>>>> Stashed changes
 9507,covid,NotSpreader,atRisk
 9508,flue,NotSpreader,atRisk
 9509,cmv,Spreader,atRisk
 9510,measles,NotSpreader,atRisk
-9511,notdetected,NotSpreader,NotAtRisk
+9511,flue,NotSpreader,atRisk
 9512,flue,NotSpreader,NotAtRisk
+<<<<<<< Updated upstream
 9513,notdetected,Spreader,NotAtRisk
 9514,cold,NotSpreader,NotAtRisk
 9515,measles,Spreader,atRisk
+=======
+9513,flue,Spreader,atRisk
+9514,cold,NotSpreader,atRisk
+9515,cmv,Spreader,NotAtRisk
+>>>>>>> Stashed changes
 9516,notdetected,NotSpreader,NotAtRisk
 9517,notdetected,NotSpreader,atRisk
 9518,cold,NotSpreader,atRisk
@@ -527,6 +861,7 @@ PatientID,Virus,Spreader,Risk
 9525,flue,Spreader,NotAtRisk
 9526,flue,Spreader,NotAtRisk
 9527,covid,Spreader,atRisk
+<<<<<<< Updated upstream
 9528,cmv,Spreader,NotAtRisk
 9529,covid,NotSpreader,atRisk
 9530,notdetected,NotSpreader,atRisk
@@ -537,17 +872,35 @@ PatientID,Virus,Spreader,Risk
 9535,notdetected,Spreader,NotAtRisk
 9536,notdetected,NotSpreader,atRisk
 9537,flue,NotSpreader,NotAtRisk
+=======
+9528,flue,Spreader,NotAtRisk
+9529,cold,NotSpreader,atRisk
+9530,covid,NotSpreader,atRisk
+9531,covid,Spreader,NotAtRisk
+9532,cold,Spreader,NotAtRisk
+9533,cold,NotSpreader,atRisk
+9534,notdetected,NotSpreader,NotAtRisk
+9535,notdetected,Spreader,atRisk
+9536,notdetected,NotSpreader,atRisk
+9537,cold,NotSpreader,atRisk
+>>>>>>> Stashed changes
 9538,covid,Spreader,NotAtRisk
 9539,covid,NotSpreader,atRisk
 9540,notdetected,NotSpreader,NotAtRisk
-9541,notdetected,Spreader,atRisk
+9541,covid,Spreader,atRisk
 9542,cmv,NotSpreader,atRisk
 9543,notdetected,Spreader,NotAtRisk
-9544,measles,NotSpreader,NotAtRisk
+9544,flue,Spreader,NotAtRisk
 9545,notdetected,Spreader,atRisk
+<<<<<<< Updated upstream
 9546,covid,Spreader,NotAtRisk
 9547,cold,NotSpreader,NotAtRisk
 9548,cmv,Spreader,NotAtRisk
+=======
+9546,notdetected,Spreader,NotAtRisk
+9547,cold,NotSpreader,NotAtRisk
+9548,flue,Spreader,NotAtRisk
+>>>>>>> Stashed changes
 9549,flue,Spreader,atRisk
 9550,notdetected,NotSpreader,atRisk
 9551,notdetected,Spreader,NotAtRisk
@@ -565,26 +918,41 @@ PatientID,Virus,Spreader,Risk
 9563,notdetected,NotSpreader,atRisk
 9564,notdetected,NotSpreader,atRisk
 9565,flue,NotSpreader,atRisk
-9566,notdetected,Spreader,NotAtRisk
+9566,covid,Spreader,NotAtRisk
 9567,cold,Spreader,atRisk
+<<<<<<< Updated upstream
 9568,cmv,Spreader,NotAtRisk
+=======
+9568,measles,Spreader,atRisk
+>>>>>>> Stashed changes
 9569,cold,Spreader,atRisk
 9570,flue,Spreader,atRisk
 9571,notdetected,Spreader,NotAtRisk
 9572,notdetected,NotSpreader,atRisk
-9573,measles,NotSpreader,NotAtRisk
+9573,measles,NotSpreader,atRisk
 9574,notdetected,Spreader,atRisk
+<<<<<<< Updated upstream
 9575,notdetected,NotSpreader,atRisk
 9576,notdetected,NotSpreader,NotAtRisk
+=======
+9575,covid,NotSpreader,atRisk
+9576,flue,NotSpreader,NotAtRisk
+>>>>>>> Stashed changes
 9577,covid,Spreader,atRisk
 9578,notdetected,NotSpreader,atRisk
 9579,flue,NotSpreader,NotAtRisk
 9580,covid,Spreader,atRisk
-9581,covid,NotSpreader,atRisk
+9581,covid,Spreader,atRisk
 9582,covid,NotSpreader,NotAtRisk
+<<<<<<< Updated upstream
 9583,notdetected,NotSpreader,NotAtRisk
 9584,notdetected,NotSpreader,atRisk
 9585,notdetected,NotSpreader,atRisk
+=======
+9583,covid,NotSpreader,NotAtRisk
+9584,notdetected,NotSpreader,atRisk
+9585,cold,NotSpreader,atRisk
+>>>>>>> Stashed changes
 9586,notdetected,NotSpreader,atRisk
 9587,notdetected,Spreader,atRisk
 9588,cmv,Spreader,atRisk
@@ -592,13 +960,23 @@ PatientID,Virus,Spreader,Risk
 9590,notdetected,NotSpreader,NotAtRisk
 9591,notdetected,Spreader,atRisk
 9592,flue,Spreader,NotAtRisk
+<<<<<<< Updated upstream
 9593,notdetected,NotSpreader,NotAtRisk
+=======
+9593,flue,Spreader,NotAtRisk
+>>>>>>> Stashed changes
 9594,notdetected,NotSpreader,NotAtRisk
-9595,notdetected,NotSpreader,NotAtRisk
+9595,notdetected,Spreader,NotAtRisk
 9596,notdetected,Spreader,NotAtRisk
+<<<<<<< Updated upstream
 9597,cold,NotSpreader,atRisk
 9598,notdetected,Spreader,NotAtRisk
 9599,notdetected,Spreader,NotAtRisk
+=======
+9597,cold,Spreader,atRisk
+9598,cold,Spreader,NotAtRisk
+9599,notdetected,Spreader,atRisk
+>>>>>>> Stashed changes
 9600,notdetected,NotSpreader,NotAtRisk
 9601,measles,NotSpreader,atRisk
 9602,cmv,NotSpreader,atRisk
@@ -607,6 +985,7 @@ PatientID,Virus,Spreader,Risk
 9605,notdetected,NotSpreader,atRisk
 9606,covid,Spreader,NotAtRisk
 9607,flue,NotSpreader,atRisk
+<<<<<<< Updated upstream
 9608,notdetected,NotSpreader,NotAtRisk
 9609,covid,NotSpreader,NotAtRisk
 9610,notdetected,NotSpreader,atRisk
@@ -622,10 +1001,27 @@ PatientID,Virus,Spreader,Risk
 9620,cold,Spreader,atRisk
 9621,covid,NotSpreader,NotAtRisk
 9622,covid,Spreader,NotAtRisk
+=======
+9608,notdetected,Spreader,NotAtRisk
+9609,notdetected,NotSpreader,NotAtRisk
+9610,cold,Spreader,atRisk
+9611,cold,NotSpreader,NotAtRisk
+9612,cmv,Spreader,NotAtRisk
+9613,cold,Spreader,NotAtRisk
+9614,notdetected,NotSpreader,atRisk
+9615,notdetected,Spreader,atRisk
+9616,notdetected,Spreader,atRisk
+9617,cmv,Spreader,atRisk
+9618,flue,Spreader,NotAtRisk
+9619,notdetected,NotSpreader,atRisk
+9620,cold,Spreader,atRisk
+9621,covid,Spreader,NotAtRisk
+9622,notdetected,Spreader,NotAtRisk
+>>>>>>> Stashed changes
 9623,cold,NotSpreader,NotAtRisk
 9624,notdetected,Spreader,atRisk
 9625,flue,NotSpreader,atRisk
-9626,cold,NotSpreader,NotAtRisk
+9626,cmv,NotSpreader,NotAtRisk
 9627,flue,NotSpreader,NotAtRisk
 9628,covid,Spreader,NotAtRisk
 9629,cold,NotSpreader,atRisk
@@ -638,6 +1034,7 @@ PatientID,Virus,Spreader,Risk
 9636,flue,Spreader,NotAtRisk
 9637,notdetected,Spreader,atRisk
 9638,flue,Spreader,NotAtRisk
+<<<<<<< Updated upstream
 9639,covid,Spreader,atRisk
 9640,notdetected,NotSpreader,NotAtRisk
 9641,covid,Spreader,atRisk
@@ -654,13 +1051,36 @@ PatientID,Virus,Spreader,Risk
 9652,flue,NotSpreader,atRisk
 9653,covid,NotSpreader,atRisk
 9654,notdetected,NotSpreader,atRisk
+=======
+9639,cold,Spreader,atRisk
+9640,notdetected,NotSpreader,NotAtRisk
+9641,notdetected,Spreader,atRisk
+9642,notdetected,NotSpreader,NotAtRisk
+9643,covid,NotSpreader,atRisk
+9644,notdetected,Spreader,atRisk
+9645,cold,Spreader,NotAtRisk
+9646,notdetected,NotSpreader,NotAtRisk
+9647,covid,NotSpreader,atRisk
+9648,flue,Spreader,NotAtRisk
+9649,flue,Spreader,atRisk
+9650,flue,Spreader,atRisk
+9651,flue,NotSpreader,atRisk
+9652,flue,NotSpreader,atRisk
+9653,covid,NotSpreader,atRisk
+9654,flue,NotSpreader,atRisk
+>>>>>>> Stashed changes
 9655,cold,Spreader,atRisk
 9656,flue,NotSpreader,atRisk
 9657,notdetected,Spreader,atRisk
 9658,cold,Spreader,NotAtRisk
 9659,notdetected,Spreader,atRisk
+<<<<<<< Updated upstream
 9660,measles,Spreader,NotAtRisk
 9661,notdetected,Spreader,NotAtRisk
+=======
+9660,measles,Spreader,atRisk
+9661,covid,Spreader,atRisk
+>>>>>>> Stashed changes
 9662,flue,NotSpreader,atRisk
 9663,flue,NotSpreader,atRisk
 9664,cold,NotSpreader,atRisk
@@ -668,44 +1088,63 @@ PatientID,Virus,Spreader,Risk
 9666,notdetected,NotSpreader,NotAtRisk
 9667,flue,Spreader,atRisk
 9668,flue,Spreader,atRisk
-9669,cold,NotSpreader,NotAtRisk
+9669,cold,NotSpreader,atRisk
 9670,cold,NotSpreader,NotAtRisk
 9671,notdetected,Spreader,atRisk
-9672,notdetected,NotSpreader,NotAtRisk
+9672,notdetected,NotSpreader,atRisk
 9673,flue,Spreader,NotAtRisk
+<<<<<<< Updated upstream
 9674,flue,Spreader,NotAtRisk
 9675,notdetected,NotSpreader,atRisk
 9676,cold,Spreader,atRisk
 9677,notdetected,Spreader,atRisk
 9678,measles,NotSpreader,NotAtRisk
+=======
+9674,cmv,Spreader,NotAtRisk
+9675,notdetected,Spreader,atRisk
+9676,flue,Spreader,atRisk
+9677,cold,Spreader,atRisk
+9678,notdetected,NotSpreader,atRisk
+>>>>>>> Stashed changes
 9679,notdetected,Spreader,NotAtRisk
-9680,cold,Spreader,atRisk
+9680,notdetected,Spreader,atRisk
 9681,covid,Spreader,NotAtRisk
 9682,notdetected,Spreader,atRisk
 9683,notdetected,Spreader,atRisk
 9684,notdetected,NotSpreader,NotAtRisk
 9685,covid,Spreader,NotAtRisk
 9686,covid,Spreader,NotAtRisk
+<<<<<<< Updated upstream
 9687,flue,NotSpreader,atRisk
 9688,notdetected,NotSpreader,NotAtRisk
+=======
+9687,flue,Spreader,atRisk
+9688,notdetected,NotSpreader,atRisk
+>>>>>>> Stashed changes
 9689,notdetected,Spreader,atRisk
 9690,notdetected,NotSpreader,atRisk
 9691,notdetected,NotSpreader,NotAtRisk
 9692,measles,NotSpreader,NotAtRisk
 9693,cold,Spreader,NotAtRisk
 9694,measles,Spreader,NotAtRisk
-9695,notdetected,NotSpreader,atRisk
+9695,notdetected,Spreader,atRisk
 9696,notdetected,NotSpreader,atRisk
 9697,covid,Spreader,atRisk
 9698,notdetected,Spreader,NotAtRisk
+<<<<<<< Updated upstream
 9699,notdetected,Spreader,atRisk
 9700,measles,NotSpreader,NotAtRisk
+=======
+9699,flue,Spreader,atRisk
+9700,flue,Spreader,NotAtRisk
+>>>>>>> Stashed changes
 9701,cold,Spreader,NotAtRisk
 9702,notdetected,Spreader,atRisk
 9703,measles,NotSpreader,NotAtRisk
 9704,flue,Spreader,atRisk
 9705,flue,Spreader,NotAtRisk
 9706,flue,Spreader,atRisk
+<<<<<<< Updated upstream
 9707,cold,NotSpreader,atRisk
 9708,notdetected,Spreader,NotAtRisk
 9709,flue,Spreader,NotAtRisk
@@ -716,11 +1155,24 @@ PatientID,Virus,Spreader,Risk
 9714,notdetected,NotSpreader,NotAtRisk
 9715,notdetected,NotSpreader,atRisk
 9716,notdetected,Spreader,NotAtRisk
+=======
+9707,cold,Spreader,atRisk
+9708,cmv,Spreader,NotAtRisk
+9709,covid,Spreader,NotAtRisk
+9710,flue,Spreader,atRisk
+9711,cold,Spreader,atRisk
+9712,notdetected,Spreader,NotAtRisk
+9713,measles,NotSpreader,NotAtRisk
+9714,notdetected,NotSpreader,NotAtRisk
+9715,covid,NotSpreader,atRisk
+9716,notdetected,Spreader,atRisk
+>>>>>>> Stashed changes
 9717,cmv,Spreader,NotAtRisk
 9718,notdetected,NotSpreader,NotAtRisk
 9719,notdetected,Spreader,NotAtRisk
 9720,notdetected,NotSpreader,atRisk
 9721,notdetected,Spreader,NotAtRisk
+<<<<<<< Updated upstream
 9722,flue,NotSpreader,NotAtRisk
 9723,cold,NotSpreader,NotAtRisk
 9724,notdetected,Spreader,NotAtRisk
@@ -729,13 +1181,24 @@ PatientID,Virus,Spreader,Risk
 9727,notdetected,Spreader,NotAtRisk
 9728,notdetected,Spreader,NotAtRisk
 9729,cold,Spreader,NotAtRisk
+=======
+9722,cmv,NotSpreader,NotAtRisk
+9723,cold,NotSpreader,atRisk
+9724,notdetected,Spreader,NotAtRisk
+9725,notdetected,Spreader,atRisk
+9726,cold,Spreader,atRisk
+9727,notdetected,Spreader,atRisk
+9728,notdetected,Spreader,NotAtRisk
+9729,cold,Spreader,atRisk
+>>>>>>> Stashed changes
 9730,flue,Spreader,NotAtRisk
 9731,cold,Spreader,atRisk
-9732,cold,NotSpreader,NotAtRisk
+9732,cold,Spreader,NotAtRisk
 9733,notdetected,NotSpreader,NotAtRisk
 9734,notdetected,NotSpreader,atRisk
 9735,notdetected,Spreader,atRisk
 9736,cold,Spreader,NotAtRisk
+<<<<<<< Updated upstream
 9737,flue,Spreader,atRisk
 9738,flue,Spreader,NotAtRisk
 9739,cold,NotSpreader,atRisk
@@ -748,6 +1211,20 @@ PatientID,Virus,Spreader,Risk
 9746,flue,NotSpreader,NotAtRisk
 9747,notdetected,NotSpreader,NotAtRisk
 9748,covid,Spreader,NotAtRisk
+=======
+9737,covid,Spreader,atRisk
+9738,flue,Spreader,NotAtRisk
+9739,cold,NotSpreader,atRisk
+9740,notdetected,NotSpreader,NotAtRisk
+9741,covid,Spreader,atRisk
+9742,cmv,Spreader,atRisk
+9743,covid,Spreader,NotAtRisk
+9744,flue,Spreader,NotAtRisk
+9745,covid,Spreader,atRisk
+9746,flue,NotSpreader,atRisk
+9747,notdetected,Spreader,NotAtRisk
+9748,cold,Spreader,NotAtRisk
+>>>>>>> Stashed changes
 9749,cold,NotSpreader,atRisk
 9750,flue,Spreader,atRisk
 9751,cold,Spreader,atRisk
@@ -757,40 +1234,57 @@ PatientID,Virus,Spreader,Risk
 9755,cold,Spreader,atRisk
 9756,cold,Spreader,atRisk
 9757,flue,Spreader,NotAtRisk
+<<<<<<< Updated upstream
 9758,notdetected,NotSpreader,atRisk
+=======
+9758,cold,Spreader,atRisk
+>>>>>>> Stashed changes
 9759,notdetected,NotSpreader,atRisk
 9760,flue,NotSpreader,atRisk
 9761,flue,NotSpreader,NotAtRisk
 9762,flue,Spreader,atRisk
 9763,covid,NotSpreader,NotAtRisk
+<<<<<<< Updated upstream
 9764,cold,NotSpreader,atRisk
 9765,notdetected,Spreader,atRisk
 9766,covid,NotSpreader,NotAtRisk
+=======
+9764,notdetected,NotSpreader,atRisk
+9765,covid,Spreader,atRisk
+9766,covid,Spreader,NotAtRisk
+>>>>>>> Stashed changes
 9767,covid,Spreader,atRisk
 9768,flue,NotSpreader,atRisk
 9769,cold,Spreader,NotAtRisk
 9770,cold,NotSpreader,NotAtRisk
-9771,notdetected,NotSpreader,NotAtRisk
-9772,notdetected,Spreader,atRisk
+9771,notdetected,NotSpreader,atRisk
+9772,cold,Spreader,atRisk
 9773,cold,NotSpreader,atRisk
+<<<<<<< Updated upstream
 9774,cold,Spreader,atRisk
 9775,flue,Spreader,atRisk
 9776,cold,NotSpreader,NotAtRisk
+=======
+9774,notdetected,Spreader,atRisk
+9775,notdetected,Spreader,atRisk
+9776,covid,Spreader,atRisk
+>>>>>>> Stashed changes
 9777,flue,NotSpreader,NotAtRisk
 9778,notdetected,Spreader,NotAtRisk
 9779,flue,Spreader,NotAtRisk
 9780,notdetected,NotSpreader,NotAtRisk
 9781,notdetected,NotSpreader,atRisk
 9782,flue,Spreader,NotAtRisk
-9783,notdetected,NotSpreader,NotAtRisk
+9783,covid,Spreader,NotAtRisk
 9784,notdetected,NotSpreader,atRisk
 9785,notdetected,NotSpreader,atRisk
 9786,notdetected,NotSpreader,atRisk
-9787,notdetected,NotSpreader,atRisk
+9787,notdetected,Spreader,atRisk
 9788,notdetected,NotSpreader,atRisk
 9789,covid,Spreader,NotAtRisk
 9790,notdetected,Spreader,NotAtRisk
 9791,notdetected,NotSpreader,NotAtRisk
+<<<<<<< Updated upstream
 9792,covid,Spreader,NotAtRisk
 9793,covid,NotSpreader,NotAtRisk
 9794,notdetected,Spreader,atRisk
@@ -799,42 +1293,77 @@ PatientID,Virus,Spreader,Risk
 9797,cmv,Spreader,NotAtRisk
 9798,cmv,Spreader,atRisk
 9799,cold,Spreader,NotAtRisk
+=======
+9792,covid,Spreader,atRisk
+9793,covid,NotSpreader,NotAtRisk
+9794,flue,Spreader,atRisk
+9795,covid,Spreader,atRisk
+9796,flue,NotSpreader,NotAtRisk
+9797,cmv,Spreader,atRisk
+9798,cmv,Spreader,atRisk
+9799,notdetected,Spreader,NotAtRisk
+>>>>>>> Stashed changes
 9800,covid,NotSpreader,NotAtRisk
 9801,cold,Spreader,NotAtRisk
 9802,cmv,NotSpreader,atRisk
 9803,covid,Spreader,NotAtRisk
 9804,notdetected,Spreader,atRisk
 9805,flue,NotSpreader,atRisk
+<<<<<<< Updated upstream
 9806,notdetected,NotSpreader,NotAtRisk
 9807,notdetected,NotSpreader,NotAtRisk
 9808,covid,Spreader,NotAtRisk
+=======
+9806,notdetected,NotSpreader,atRisk
+9807,notdetected,Spreader,NotAtRisk
+9808,notdetected,Spreader,NotAtRisk
+>>>>>>> Stashed changes
 9809,measles,Spreader,atRisk
-9810,measles,Spreader,NotAtRisk
+9810,measles,Spreader,atRisk
 9811,cmv,Spreader,NotAtRisk
 9812,cold,Spreader,atRisk
 9813,flue,NotSpreader,atRisk
+<<<<<<< Updated upstream
 9814,notdetected,NotSpreader,atRisk
 9815,cmv,Spreader,atRisk
+=======
+9814,cold,NotSpreader,atRisk
+9815,notdetected,Spreader,atRisk
+>>>>>>> Stashed changes
 9816,notdetected,Spreader,NotAtRisk
-9817,covid,Spreader,NotAtRisk
+9817,notdetected,Spreader,atRisk
 9818,notdetected,Spreader,atRisk
+<<<<<<< Updated upstream
 9819,notdetected,Spreader,atRisk
 9820,cold,NotSpreader,NotAtRisk
+=======
+9819,covid,Spreader,atRisk
+9820,cold,NotSpreader,atRisk
+>>>>>>> Stashed changes
 9821,flue,NotSpreader,NotAtRisk
-9822,notdetected,NotSpreader,NotAtRisk
+9822,notdetected,Spreader,NotAtRisk
 9823,notdetected,NotSpreader,atRisk
 9824,notdetected,NotSpreader,NotAtRisk
 9825,cold,Spreader,atRisk
 9826,flue,NotSpreader,NotAtRisk
 9827,covid,NotSpreader,atRisk
+<<<<<<< Updated upstream
 9828,covid,NotSpreader,NotAtRisk
 9829,notdetected,Spreader,atRisk
 9830,notdetected,Spreader,NotAtRisk
 9831,flue,Spreader,NotAtRisk
 9832,notdetected,Spreader,atRisk
+=======
+9828,covid,NotSpreader,atRisk
+9829,covid,Spreader,atRisk
+9830,flue,Spreader,atRisk
+9831,measles,Spreader,NotAtRisk
+9832,covid,Spreader,atRisk
+>>>>>>> Stashed changes
 9833,notdetected,NotSpreader,atRisk
 9834,notdetected,NotSpreader,atRisk
 9835,measles,NotSpreader,NotAtRisk
+<<<<<<< Updated upstream
 9836,notdetected,NotSpreader,NotAtRisk
 9837,flue,Spreader,atRisk
 9838,covid,NotSpreader,NotAtRisk
@@ -847,6 +1376,20 @@ PatientID,Virus,Spreader,Risk
 9845,notdetected,Spreader,NotAtRisk
 9846,notdetected,NotSpreader,atRisk
 9847,flue,Spreader,atRisk
+=======
+9836,flue,NotSpreader,NotAtRisk
+9837,flue,Spreader,NotAtRisk
+9838,covid,NotSpreader,NotAtRisk
+9839,flue,NotSpreader,NotAtRisk
+9840,cmv,NotSpreader,NotAtRisk
+9841,flue,Spreader,NotAtRisk
+9842,notdetected,Spreader,atRisk
+9843,flue,NotSpreader,NotAtRisk
+9844,cold,Spreader,atRisk
+9845,covid,Spreader,atRisk
+9846,notdetected,NotSpreader,atRisk
+9847,notdetected,Spreader,NotAtRisk
+>>>>>>> Stashed changes
 9848,notdetected,Spreader,atRisk
 9849,notdetected,NotSpreader,atRisk
 9850,notdetected,NotSpreader,NotAtRisk
@@ -861,30 +1404,44 @@ PatientID,Virus,Spreader,Risk
 9859,notdetected,Spreader,NotAtRisk
 9860,notdetected,NotSpreader,atRisk
 9861,covid,Spreader,NotAtRisk
+<<<<<<< Updated upstream
 9862,notdetected,NotSpreader,atRisk
+=======
+9862,flue,Spreader,atRisk
+>>>>>>> Stashed changes
 9863,flue,NotSpreader,atRisk
-9864,flue,NotSpreader,NotAtRisk
-9865,notdetected,NotSpreader,NotAtRisk
+9864,flue,Spreader,atRisk
+9865,notdetected,NotSpreader,atRisk
 9866,notdetected,Spreader,NotAtRisk
 9867,notdetected,NotSpreader,atRisk
 9868,notdetected,NotSpreader,NotAtRisk
 9869,notdetected,NotSpreader,NotAtRisk
+<<<<<<< Updated upstream
 9870,cold,NotSpreader,atRisk
 9871,covid,NotSpreader,NotAtRisk
+=======
+9870,flue,NotSpreader,atRisk
+9871,notdetected,Spreader,NotAtRisk
+>>>>>>> Stashed changes
 9872,cold,Spreader,atRisk
 9873,notdetected,Spreader,NotAtRisk
 9874,measles,Spreader,NotAtRisk
 9875,covid,NotSpreader,atRisk
 9876,covid,NotSpreader,NotAtRisk
 9877,notdetected,NotSpreader,NotAtRisk
+<<<<<<< Updated upstream
 9878,notdetected,NotSpreader,NotAtRisk
+=======
+9878,covid,NotSpreader,NotAtRisk
+>>>>>>> Stashed changes
 9879,cmv,Spreader,atRisk
 9880,notdetected,Spreader,atRisk
 9881,cold,Spreader,NotAtRisk
 9882,notdetected,Spreader,atRisk
-9883,flue,Spreader,NotAtRisk
+9883,notdetected,Spreader,NotAtRisk
 9884,cold,Spreader,atRisk
 9885,flue,Spreader,atRisk
+<<<<<<< Updated upstream
 9886,cmv,NotSpreader,NotAtRisk
 9887,covid,Spreader,NotAtRisk
 9888,notdetected,NotSpreader,atRisk
@@ -897,8 +1454,22 @@ PatientID,Virus,Spreader,Risk
 9895,notdetected,NotSpreader,NotAtRisk
 9896,notdetected,NotSpreader,atRisk
 9897,notdetected,NotSpreader,NotAtRisk
+=======
+9886,cmv,Spreader,NotAtRisk
+9887,notdetected,Spreader,NotAtRisk
+9888,notdetected,NotSpreader,atRisk
+9889,covid,Spreader,atRisk
+9890,notdetected,NotSpreader,atRisk
+9891,covid,Spreader,NotAtRisk
+9892,cold,NotSpreader,NotAtRisk
+9893,notdetected,Spreader,atRisk
+9894,notdetected,NotSpreader,atRisk
+9895,notdetected,NotSpreader,atRisk
+9896,notdetected,Spreader,atRisk
+9897,flue,NotSpreader,NotAtRisk
+>>>>>>> Stashed changes
 9898,cold,NotSpreader,NotAtRisk
-9899,covid,NotSpreader,NotAtRisk
+9899,covid,Spreader,NotAtRisk
 9900,notdetected,Spreader,NotAtRisk
 9901,notdetected,Spreader,atRisk
 9902,cold,NotSpreader,atRisk
@@ -912,16 +1483,24 @@ PatientID,Virus,Spreader,Risk
 9910,covid,NotSpreader,NotAtRisk
 9911,notdetected,NotSpreader,atRisk
 9912,flue,NotSpreader,atRisk
+<<<<<<< Updated upstream
 9913,cold,NotSpreader,atRisk
 9914,flue,Spreader,NotAtRisk
 9915,notdetected,NotSpreader,atRisk
 9916,covid,Spreader,NotAtRisk
 9917,cold,NotSpreader,atRisk
+=======
+9913,notdetected,NotSpreader,atRisk
+9914,flue,Spreader,atRisk
+9915,notdetected,Spreader,NotAtRisk
+9916,notdetected,Spreader,NotAtRisk
+9917,cold,Spreader,atRisk
+>>>>>>> Stashed changes
 9918,notdetected,NotSpreader,NotAtRisk
 9919,flue,NotSpreader,atRisk
 9920,notdetected,NotSpreader,NotAtRisk
-9921,flue,NotSpreader,atRisk
-9922,notdetected,NotSpreader,atRisk
+9921,flue,Spreader,atRisk
+9922,notdetected,Spreader,atRisk
 9923,flue,Spreader,NotAtRisk
 9924,flue,Spreader,atRisk
 9925,cold,NotSpreader,atRisk
@@ -930,37 +1509,57 @@ PatientID,Virus,Spreader,Risk
 9928,flue,NotSpreader,atRisk
 9929,cold,NotSpreader,NotAtRisk
 9930,notdetected,Spreader,NotAtRisk
+<<<<<<< Updated upstream
 9931,cold,NotSpreader,NotAtRisk
 9932,notdetected,NotSpreader,NotAtRisk
+=======
+9931,cold,NotSpreader,atRisk
+9932,notdetected,NotSpreader,atRisk
+>>>>>>> Stashed changes
 9933,covid,Spreader,atRisk
 9934,notdetected,Spreader,atRisk
-9935,cold,Spreader,NotAtRisk
-9936,notdetected,Spreader,NotAtRisk
+9935,covid,Spreader,NotAtRisk
+9936,notdetected,Spreader,atRisk
 9937,cold,Spreader,NotAtRisk
-9938,notdetected,Spreader,NotAtRisk
+9938,notdetected,Spreader,atRisk
 9939,flue,NotSpreader,NotAtRisk
 9940,measles,Spreader,atRisk
 9941,cold,NotSpreader,NotAtRisk
+<<<<<<< Updated upstream
 9942,covid,Spreader,atRisk
 9943,cmv,NotSpreader,atRisk
+=======
+9942,covid,Spreader,NotAtRisk
+9943,flue,NotSpreader,atRisk
+>>>>>>> Stashed changes
 9944,covid,Spreader,atRisk
 9945,cold,NotSpreader,atRisk
 9946,notdetected,Spreader,NotAtRisk
 9947,covid,Spreader,NotAtRisk
 9948,flue,NotSpreader,NotAtRisk
+<<<<<<< Updated upstream
 9949,flue,NotSpreader,atRisk
+=======
+9949,flue,Spreader,atRisk
+>>>>>>> Stashed changes
 9950,cold,NotSpreader,NotAtRisk
-9951,cmv,NotSpreader,NotAtRisk
+9951,flue,NotSpreader,NotAtRisk
 9952,cold,NotSpreader,atRisk
+<<<<<<< Updated upstream
 9953,notdetected,NotSpreader,atRisk
 9954,cold,Spreader,NotAtRisk
+=======
+9953,cmv,NotSpreader,atRisk
+9954,cold,Spreader,atRisk
+>>>>>>> Stashed changes
 9955,flue,NotSpreader,atRisk
 9956,notdetected,Spreader,atRisk
-9957,notdetected,NotSpreader,NotAtRisk
+9957,flue,NotSpreader,NotAtRisk
 9958,notdetected,Spreader,atRisk
 9959,notdetected,Spreader,atRisk
 9960,notdetected,Spreader,atRisk
 9961,flue,Spreader,NotAtRisk
+<<<<<<< Updated upstream
 9962,covid,Spreader,NotAtRisk
 9963,measles,NotSpreader,atRisk
 9964,notdetected,NotSpreader,atRisk
@@ -969,12 +1568,22 @@ PatientID,Virus,Spreader,Risk
 9967,cold,NotSpreader,NotAtRisk
 9968,flue,Spreader,atRisk
 9969,cold,NotSpreader,NotAtRisk
+=======
+9962,notdetected,Spreader,NotAtRisk
+9963,measles,NotSpreader,atRisk
+9964,notdetected,Spreader,atRisk
+9965,notdetected,Spreader,NotAtRisk
+9966,covid,Spreader,atRisk
+9967,cold,NotSpreader,atRisk
+9968,flue,Spreader,atRisk
+9969,covid,NotSpreader,NotAtRisk
+>>>>>>> Stashed changes
 9970,covid,NotSpreader,atRisk
 9971,notdetected,NotSpreader,atRisk
 9972,cold,NotSpreader,atRisk
 9973,cold,Spreader,NotAtRisk
 9974,notdetected,Spreader,atRisk
-9975,notdetected,Spreader,NotAtRisk
+9975,cold,Spreader,NotAtRisk
 9976,cold,Spreader,atRisk
 9977,flue,Spreader,NotAtRisk
 9978,covid,NotSpreader,NotAtRisk
@@ -986,6 +1595,7 @@ PatientID,Virus,Spreader,Risk
 9984,cmv,Spreader,NotAtRisk
 9985,cold,Spreader,atRisk
 9986,notdetected,NotSpreader,NotAtRisk
+<<<<<<< Updated upstream
 9987,notdetected,Spreader,atRisk
 9988,notdetected,NotSpreader,NotAtRisk
 9989,notdetected,Spreader,atRisk
@@ -995,7 +1605,18 @@ PatientID,Virus,Spreader,Risk
 9993,covid,NotSpreader,atRisk
 9994,cold,Spreader,NotAtRisk
 9995,covid,NotSpreader,atRisk
+=======
+9987,flue,Spreader,atRisk
+9988,covid,Spreader,NotAtRisk
+9989,covid,Spreader,atRisk
+9990,flue,NotSpreader,atRisk
+9991,cold,Spreader,atRisk
+9992,flue,Spreader,atRisk
+9993,covid,Spreader,atRisk
+9994,cold,Spreader,atRisk
+9995,covid,Spreader,atRisk
+>>>>>>> Stashed changes
 9996,flue,Spreader,NotAtRisk
 9997,flue,NotSpreader,atRisk
-9998,notdetected,NotSpreader,NotAtRisk
+9998,cold,NotSpreader,atRisk
 9999,measles,Spreader,NotAtRisk
