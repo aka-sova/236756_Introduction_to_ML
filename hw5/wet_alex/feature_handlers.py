@@ -450,42 +450,6 @@ class BMI_handler(CustomFeatureHandler):
 
         return df
 
-class Scale_All_Manually(CustomFeatureHandler):
-    """Scale the whole dataframe"""
-
-    def __init__(self, results_fields, feature_mean, feature_std):
-        super().__init__()
-        self.results_fields = results_fields
-        self.feature_mean = feature_mean
-        self.feature_std = feature_std
-
-
-    def transform(self, df : pd.DataFrame()):
-
-        df_scaled = copy.deepcopy(df)
-        #
-        # for result_field in self.results_fields:
-        #     if result_field in df_scaled.columns:
-        #         df_scaled = df_scaled.drop(result_field, axis=1)
-
-        # manually scale all the fields
-        # use the equation z = (X - mu) / std
-        # which should give new variable with mean of 0 and std of 1
-
-        for feature in list(df_scaled.columns):
-
-            if feature in self.results_fields:
-                continue
-
-            df_scaled[feature] = (df_scaled[feature] - self.feature_mean[feature]) / self.feature_std[feature]
-
-
-        # for result_field in self.results_fields:
-        #     if result_field in df.columns:
-        #         df_scaled[result_field] = df[result_field]
-
-        return df_scaled
-
 class Scale_All(CustomFeatureHandler):
     """Scale the whole dataframe"""
 
