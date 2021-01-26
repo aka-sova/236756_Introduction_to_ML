@@ -4,142 +4,217 @@
 
 Initializing model selection for task : Spreader_Detection
 
-Checking model : RandomForestClassifier(max_depth=3, max_features=10, n_estimators=500) over params {}
-Finished. Time elapsed: 0.572 [min]
+Checking model : KNeighborsClassifier() over params {'n_neighbors': [3, 5, 10, 20, 50]}
+Finished. Time elapsed: 0.142 [min]
 	Reached accuracies:
-		Score : 0.846 , Params : {}
+		Score : 0.824 , Params : {'n_neighbors': 50}
+		Score : 0.821 , Params : {'n_neighbors': 20}
+		Score : 0.813 , Params : {'n_neighbors': 10}
+		Score : 0.802 , Params : {'n_neighbors': 5}
+		Score : 0.788 , Params : {'n_neighbors': 3}
+
+Checking model : LinearSVC() over params {}
+Finished. Time elapsed: 0.03 [min]
+	Reached accuracies:
+		Score : 0.793 , Params : {}
+
+Checking model : OneVsRestClassifier(estimator=DecisionTreeClassifier(max_depth=5)) over params {}
+Finished. Time elapsed: 0.004 [min]
+	Reached accuracies:
+		Score : 0.83 , Params : {}
+
+Checking model : RandomForestClassifier(max_depth=3, max_features=10, n_estimators=500) over params {}
+Finished. Time elapsed: 0.673 [min]
+	Reached accuracies:
+		Score : 0.821 , Params : {}
 
 Checking model : AdaBoostClassifier(algorithm='SAMME',
-                   base_estimator=DecisionTreeClassifier(max_depth=4),
-                   learning_rate=0.07, random_state=0) over params {'n_estimators': [100, 700]}
-Finished. Time elapsed: 1.962 [min]
+                   base_estimator=DecisionTreeClassifier(max_depth=5),
+                   learning_rate=0.07, n_estimators=700, random_state=0) over params {}
+Finished. Time elapsed: 2.212 [min]
 	Reached accuracies:
-		Score : 0.895 , Params : {'n_estimators': 700}
-		Score : 0.893 , Params : {'n_estimators': 100}
+		Score : 0.868 , Params : {}
 
-Checking model : MLPClassifier(alpha=0.0005, early_stopping=True,
-              hidden_layer_sizes=(100, 500, 500, 100), max_iter=500,
-              random_state=1) over params {}
-Finished. Time elapsed: 0.56 [min]
+Checking model : MLPClassifier(alpha=0.0002, early_stopping=True,
+              hidden_layer_sizes=(100, 1000, 1000, 100),
+              learning_rate='adaptive', learning_rate_init=0.005, max_iter=1000,
+              n_iter_no_change=5, random_state=1, solver='sgd',
+              validation_fraction=0.15) over params {}
+Finished. Time elapsed: 5.221 [min]
 	Reached accuracies:
-		Best validation score: 0.8922413793103449
+		Best validation score: 0.8571428571428571
 ----------------------------------------
 
 
 Trying on the validation dataset with different metrics
                                                                        accuracy_score          precision_score                 f1_score             recall_score
-RandomForestClassifier(max_depth=3, max_features=10, n_estimators=500)                    0.824                    0.928                    0.802                    0.706
+                                      KNeighborsClassifier()                    0.814                    0.821                    0.814                    0.808
+                                                 LinearSVC()                    0.769                    0.779                    0.767                    0.755
+OneVsRestClassifier(estimator=DecisionTreeClassifier(max_depth=5))                    0.814                    0.759                    0.834                    0.925
+RandomForestClassifier(max_depth=3, max_features=10, n_estimators=500)                    0.823                    0.935                    0.799                    0.698
 AdaBoostClassifier(algorithm='SAMME',
-                   base_estimator=DecisionTreeClassifier(max_depth=4),
-                   learning_rate=0.07, random_state=0)                    0.853                    0.834                    0.859                    0.885
-MLPClassifier(alpha=0.0005, early_stopping=True,
-              hidden_layer_sizes=(100, 500, 500, 100), max_iter=500,
-              random_state=1)                    0.816                    0.803                    0.821                    0.839
+                   base_estimator=DecisionTreeClassifier(max_depth=5),
+                   learning_rate=0.07, n_estimators=700, random_state=0)                    0.851                     0.84                    0.855                     0.87
+MLPClassifier(alpha=0.0002, early_stopping=True,
+              hidden_layer_sizes=(100, 1000, 1000, 100),
+              learning_rate='adaptive', learning_rate_init=0.005, max_iter=1000,
+              n_iter_no_change=5, random_state=1, solver='sgd',
+              validation_fraction=0.15)                    0.849                    0.855                    0.849                    0.843
 ----------------------------------------
 
 
 Initializing model selection for task : At_Risk_Detection
 
-Checking model : RandomForestClassifier(max_depth=3, max_features=10, n_estimators=500) over params {}
-Finished. Time elapsed: 0.669 [min]
+Checking model : KNeighborsClassifier() over params {'n_neighbors': [3, 5, 10, 20, 50]}
+Finished. Time elapsed: 0.138 [min]
 	Reached accuracies:
-		Score : 0.871 , Params : {}
+		Score : 0.835 , Params : {'n_neighbors': 50}
+		Score : 0.83 , Params : {'n_neighbors': 20}
+		Score : 0.826 , Params : {'n_neighbors': 10}
+		Score : 0.812 , Params : {'n_neighbors': 5}
+		Score : 0.797 , Params : {'n_neighbors': 3}
+
+Checking model : LinearSVC() over params {}
+Finished. Time elapsed: 0.027 [min]
+	Reached accuracies:
+		Score : 0.835 , Params : {}
+
+Checking model : OneVsRestClassifier(estimator=DecisionTreeClassifier(max_depth=5)) over params {}
+Finished. Time elapsed: 0.004 [min]
+	Reached accuracies:
+		Score : 0.85 , Params : {}
+
+Checking model : RandomForestClassifier(max_depth=3, max_features=10, n_estimators=500) over params {}
+Finished. Time elapsed: 0.679 [min]
+	Reached accuracies:
+		Score : 0.849 , Params : {}
 
 Checking model : AdaBoostClassifier(algorithm='SAMME',
-                   base_estimator=DecisionTreeClassifier(max_depth=4),
-                   learning_rate=0.07, random_state=0) over params {'n_estimators': [100, 700]}
-Finished. Time elapsed: 1.759 [min]
+                   base_estimator=DecisionTreeClassifier(max_depth=5),
+                   learning_rate=0.07, n_estimators=700, random_state=0) over params {}
+Finished. Time elapsed: 2.349 [min]
 	Reached accuracies:
-		Score : 0.882 , Params : {'n_estimators': 100}
-		Score : 0.881 , Params : {'n_estimators': 700}
+		Score : 0.857 , Params : {}
 
-Checking model : MLPClassifier(alpha=0.0005, early_stopping=True,
-              hidden_layer_sizes=(100, 500, 500, 100), max_iter=500,
-              random_state=1) over params {}
-Finished. Time elapsed: 0.399 [min]
+Checking model : MLPClassifier(alpha=0.0002, early_stopping=True,
+              hidden_layer_sizes=(100, 1000, 1000, 100),
+              learning_rate='adaptive', learning_rate_init=0.005, max_iter=1000,
+              n_iter_no_change=5, random_state=1, solver='sgd',
+              validation_fraction=0.15) over params {}
+Finished. Time elapsed: 3.107 [min]
 	Reached accuracies:
-		Best validation score: 0.8778089887640449
+		Best validation score: 0.823170731707317
 ----------------------------------------
 
 
 Trying on the validation dataset with different metrics
                                                                        accuracy_score          precision_score                 f1_score             recall_score
-RandomForestClassifier(max_depth=3, max_features=10, n_estimators=500)                    0.833                    0.865                    0.832                    0.801
+                                      KNeighborsClassifier()                    0.834                    0.843                    0.838                    0.834
+                                                 LinearSVC()                    0.833                    0.835                    0.839                    0.842
+OneVsRestClassifier(estimator=DecisionTreeClassifier(max_depth=5))                    0.848                    0.903                    0.842                    0.788
+RandomForestClassifier(max_depth=3, max_features=10, n_estimators=500)                    0.848                     0.91                    0.841                    0.782
 AdaBoostClassifier(algorithm='SAMME',
-                   base_estimator=DecisionTreeClassifier(max_depth=4),
-                   learning_rate=0.07, random_state=0)                    0.829                     0.81                     0.84                    0.873
-MLPClassifier(alpha=0.0005, early_stopping=True,
-              hidden_layer_sizes=(100, 500, 500, 100), max_iter=500,
-              random_state=1)                    0.854                    0.901                    0.851                    0.806
+                   base_estimator=DecisionTreeClassifier(max_depth=5),
+                   learning_rate=0.07, n_estimators=700, random_state=0)                    0.851                    0.878                    0.851                    0.825
+MLPClassifier(alpha=0.0002, early_stopping=True,
+              hidden_layer_sizes=(100, 1000, 1000, 100),
+              learning_rate='adaptive', learning_rate_init=0.005, max_iter=1000,
+              n_iter_no_change=5, random_state=1, solver='sgd',
+              validation_fraction=0.15)                    0.848                    0.861                     0.85                     0.84
 ----------------------------------------
 
 
 Initializing model selection for task : Disease_Detection
 
-Checking model : RandomForestClassifier(max_depth=3, max_features=10, n_estimators=500) over params {}
-Finished. Time elapsed: 1.815 [min]
+Checking model : KNeighborsClassifier() over params {'n_neighbors': [3, 5, 10, 20, 50]}
+Finished. Time elapsed: 0.137 [min]
 	Reached accuracies:
-		Score : 0.582 , Params : {}
+		Score : 0.505 , Params : {'n_neighbors': 20}
+		Score : 0.498 , Params : {'n_neighbors': 50}
+		Score : 0.488 , Params : {'n_neighbors': 10}
+		Score : 0.464 , Params : {'n_neighbors': 5}
+		Score : 0.429 , Params : {'n_neighbors': 3}
+
+Checking model : LinearSVC() over params {}
+Finished. Time elapsed: 0.151 [min]
+	Reached accuracies:
+		Score : 0.549 , Params : {}
+
+Checking model : OneVsRestClassifier(estimator=DecisionTreeClassifier(max_depth=5)) over params {}
+Finished. Time elapsed: 0.02 [min]
+	Reached accuracies:
+		Score : 0.781 , Params : {}
+
+Checking model : RandomForestClassifier(max_depth=3, max_features=10, n_estimators=500) over params {}
+Finished. Time elapsed: 0.718 [min]
+	Reached accuracies:
+		Score : 0.688 , Params : {}
 
 Checking model : AdaBoostClassifier(algorithm='SAMME',
-                   base_estimator=DecisionTreeClassifier(max_depth=4),
-                   learning_rate=0.07, random_state=0) over params {'n_estimators': [100, 700]}
-Finished. Time elapsed: 6.446 [min]
+                   base_estimator=DecisionTreeClassifier(max_depth=5),
+                   learning_rate=0.07, n_estimators=700, random_state=0) over params {}
+Finished. Time elapsed: 2.505 [min]
 	Reached accuracies:
-		Score : 0.83 , Params : {'n_estimators': 700}
-		Score : 0.788 , Params : {'n_estimators': 100}
+		Score : 0.81 , Params : {}
 
-Checking model : MLPClassifier(alpha=0.0005, early_stopping=True,
-              hidden_layer_sizes=(100, 500, 500, 100), max_iter=500,
-              random_state=1) over params {}
-Finished. Time elapsed: 2.439 [min]
+Checking model : MLPClassifier(alpha=0.0002, early_stopping=True,
+              hidden_layer_sizes=(100, 1000, 1000, 100),
+              learning_rate='adaptive', learning_rate_init=0.005, max_iter=1000,
+              n_iter_no_change=5, random_state=1, solver='sgd',
+              validation_fraction=0.15) over params {}
+Finished. Time elapsed: 5.806 [min]
 	Reached accuracies:
-		Best validation score: 0.9125651418645049
+		Best validation score: 0.7395470383275261
 ----------------------------------------
 
 
 Trying on the validation dataset with different metrics
                                                                        accuracy_score          precision_score                 f1_score             recall_score
-RandomForestClassifier(max_depth=3, max_features=10, n_estimators=500)                    0.622                     0.71                    0.641                    0.622
+                                      KNeighborsClassifier()                    0.513                    0.537                    0.508                    0.513
+                                                 LinearSVC()                    0.557                    0.448                    0.473                    0.557
+OneVsRestClassifier(estimator=DecisionTreeClassifier(max_depth=5))                    0.776                    0.781                    0.775                    0.776
+RandomForestClassifier(max_depth=3, max_features=10, n_estimators=500)                    0.716                    0.677                    0.673                    0.716
 AdaBoostClassifier(algorithm='SAMME',
-                   base_estimator=DecisionTreeClassifier(max_depth=4),
-                   learning_rate=0.07, random_state=0)                    0.694                    0.744                    0.693                    0.694
-MLPClassifier(alpha=0.0005, early_stopping=True,
-              hidden_layer_sizes=(100, 500, 500, 100), max_iter=500,
-              random_state=1)                    0.682                    0.694                    0.686                    0.682
+                   base_estimator=DecisionTreeClassifier(max_depth=5),
+                   learning_rate=0.07, n_estimators=700, random_state=0)                    0.812                    0.812                    0.812                    0.812
+MLPClassifier(alpha=0.0002, early_stopping=True,
+              hidden_layer_sizes=(100, 1000, 1000, 100),
+              learning_rate='adaptive', learning_rate_init=0.005, max_iter=1000,
+              n_iter_no_change=5, random_state=1, solver='sgd',
+              validation_fraction=0.15)                      0.7                    0.705                    0.699                      0.7
 ========================================
 SUMMARY
 ========================================
 
 For task : Spreader_Detection
 	Chosen model : (AdaBoostClassifier(algorithm='SAMME',
-                   base_estimator=DecisionTreeClassifier(max_depth=4),
-                   learning_rate=0.07, random_state=0), {'n_estimators': [100, 700]})
+                   base_estimator=DecisionTreeClassifier(max_depth=5),
+                   learning_rate=0.07, n_estimators=700, random_state=0), {}, True)
 	Metrics : accuracy_score
-	Value : 0.895
+	Value : 0.868
 
 For task : At_Risk_Detection
 	Chosen model : (AdaBoostClassifier(algorithm='SAMME',
-                   base_estimator=DecisionTreeClassifier(max_depth=4),
-                   learning_rate=0.07, random_state=0), {'n_estimators': [100, 700]})
+                   base_estimator=DecisionTreeClassifier(max_depth=5),
+                   learning_rate=0.07, n_estimators=700, random_state=0), {}, True)
 	Metrics : accuracy_score
-	Value : 0.882
+	Value : 0.857
 
 For task : Disease_Detection
-	Chosen model : (MLPClassifier(alpha=0.0005, early_stopping=True,
-              hidden_layer_sizes=(100, 500, 500, 100), max_iter=500,
-              random_state=1), {}, False)
+	Chosen model : (AdaBoostClassifier(algorithm='SAMME',
+                   base_estimator=DecisionTreeClassifier(max_depth=5),
+                   learning_rate=0.07, n_estimators=700, random_state=0), {}, True)
 	Metrics : accuracy_score
-	Value : 0.913
+	Value : 0.81
 
 
 
 Evaluating best model on the test dataset
 
 Result will be printed in : 	S:\236756_intro_machine_learning\git\hw5\wet_alex\outputs_clf\test_predicted.csv
-	Task : Disease_Detection, targets were supplied. accuracy_score = 0.6777777777777778
+	Task : Disease_Detection, targets were supplied. accuracy_score = 0.8288888888888889
 	Task : Spreader_Detection, targets were supplied. accuracy_score = 0.8644444444444445
-	Task : At_Risk_Detection, targets were supplied. accuracy_score = 0.8
+	Task : At_Risk_Detection, targets were supplied. accuracy_score = 0.84
 
 
 
