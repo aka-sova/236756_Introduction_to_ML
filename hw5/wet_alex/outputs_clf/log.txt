@@ -4,7 +4,6 @@
 
 Initializing model selection for task : Spreader_Detection
 
-<<<<<<< Updated upstream
 Checking model : KNeighborsClassifier() over params {'n_neighbors': [3, 5, 10, 20, 50]}
 Finished. Time elapsed: 0.142 [min]
 	Reached accuracies:
@@ -44,51 +43,11 @@ Checking model : MLPClassifier(alpha=0.0002, early_stopping=True,
 Finished. Time elapsed: 5.221 [min]
 	Reached accuracies:
 		Best validation score: 0.8571428571428571
-=======
-Checking model : DecisionTreeClassifier() over params {'max_depth': [5, 10, 15]}
-Finished. Time elapsed: 0.018 [min]
-	Reached accuracies:
-		Score : 0.954 , Params : {'max_depth': 5}
-		Score : 0.885 , Params : {'max_depth': 10}
-		Score : 0.865 , Params : {'max_depth': 15}
-
-Checking model : MLPClassifier(early_stopping=True, hidden_layer_sizes=(100, 500, 500, 100),
-              max_iter=100000, solver='sgd') over params {}
-Finished. Time elapsed: 1.729 [min]
-	Reached accuracies:
-		Best validation score: 0.8663793103448276
-
-Checking model : AdaBoostClassifier() over params {'n_estimators': [50, 100], 'base_estimator': [DecisionTreeClassifier(max_depth=1)]}
-Finished. Time elapsed: 0.124 [min]
-	Reached accuracies:
-		Score : 0.917 , Params : {'base_estimator': DecisionTreeClassifier(max_depth=1), 'n_estimators': 50}
-		Score : 0.911 , Params : {'base_estimator': DecisionTreeClassifier(max_depth=1), 'n_estimators': 100}
-
-Checking model : VotingClassifier(estimators=[('mlp1',
-                              MLPClassifier(hidden_layer_sizes=(100, 150, 150,
-                                                                100, 10),
-                                            max_iter=150)),
-                             ('mlp2',
-                              MLPClassifier(hidden_layer_sizes=(50, 100, 200,
-                                                                200, 100),
-                                            max_iter=150)),
-                             ('mlp3',
-                              MLPClassifier(hidden_layer_sizes=(50, 100, 100,
-                                                                200, 100),
-                                            max_iter=150)),
-                             ('ada',
-                              AdaBoostClassifier(base_estimator=DecisionTreeClassifier(max_depth=4),
-                                                 n_estimators=100))]) over params {}
-Finished. Time elapsed: 5.886 [min]
-	Reached accuracies:
-		Score : 0.849 , Params : {}
->>>>>>> Stashed changes
 ----------------------------------------
 
 
 Trying on the validation dataset with different metrics
                                                                        accuracy_score          precision_score                 f1_score             recall_score
-<<<<<<< Updated upstream
                                       KNeighborsClassifier()                    0.814                    0.821                    0.814                    0.808
                                                  LinearSVC()                    0.769                    0.779                    0.767                    0.755
 OneVsRestClassifier(estimator=DecisionTreeClassifier(max_depth=5))                    0.814                    0.759                    0.834                    0.925
@@ -101,33 +60,11 @@ MLPClassifier(alpha=0.0002, early_stopping=True,
               learning_rate='adaptive', learning_rate_init=0.005, max_iter=1000,
               n_iter_no_change=5, random_state=1, solver='sgd',
               validation_fraction=0.15)                    0.849                    0.855                    0.849                    0.843
-=======
-                                    DecisionTreeClassifier()                    0.817                    0.761                    0.836                    0.927
-MLPClassifier(early_stopping=True, hidden_layer_sizes=(100, 500, 500, 100),
-              max_iter=100000, solver='sgd')                     0.78                    0.804                    0.773                    0.744
-                                        AdaBoostClassifier()                    0.852                    0.829                    0.858                     0.89
-VotingClassifier(estimators=[('mlp1',
-                              MLPClassifier(hidden_layer_sizes=(100, 150, 150,
-                                                                100, 10),
-                                            max_iter=150)),
-                             ('mlp2',
-                              MLPClassifier(hidden_layer_sizes=(50, 100, 200,
-                                                                200, 100),
-                                            max_iter=150)),
-                             ('mlp3',
-                              MLPClassifier(hidden_layer_sizes=(50, 100, 100,
-                                                                200, 100),
-                                            max_iter=150)),
-                             ('ada',
-                              AdaBoostClassifier(base_estimator=DecisionTreeClassifier(max_depth=4),
-                                                 n_estimators=100))])                    0.831                    0.852                    0.827                    0.804
->>>>>>> Stashed changes
 ----------------------------------------
 
 
 Initializing model selection for task : At_Risk_Detection
 
-<<<<<<< Updated upstream
 Checking model : KNeighborsClassifier() over params {'n_neighbors': [3, 5, 10, 20, 50]}
 Finished. Time elapsed: 0.138 [min]
 	Reached accuracies:
@@ -167,51 +104,11 @@ Checking model : MLPClassifier(alpha=0.0002, early_stopping=True,
 Finished. Time elapsed: 3.107 [min]
 	Reached accuracies:
 		Best validation score: 0.823170731707317
-=======
-Checking model : DecisionTreeClassifier() over params {'max_depth': [5, 10, 15]}
-Finished. Time elapsed: 0.011 [min]
-	Reached accuracies:
-		Score : 0.868 , Params : {'max_depth': 5}
-		Score : 0.852 , Params : {'max_depth': 10}
-		Score : 0.84 , Params : {'max_depth': 15}
-
-Checking model : MLPClassifier(early_stopping=True, hidden_layer_sizes=(100, 500, 500, 100),
-              max_iter=100000, solver='sgd') over params {}
-Finished. Time elapsed: 0.861 [min]
-	Reached accuracies:
-		Best validation score: 0.8679775280898876
-
-Checking model : AdaBoostClassifier() over params {'n_estimators': [50, 100], 'base_estimator': [DecisionTreeClassifier(max_depth=1)]}
-Finished. Time elapsed: 0.126 [min]
-	Reached accuracies:
-		Score : 0.877 , Params : {'base_estimator': DecisionTreeClassifier(max_depth=1), 'n_estimators': 50}
-		Score : 0.875 , Params : {'base_estimator': DecisionTreeClassifier(max_depth=1), 'n_estimators': 100}
-
-Checking model : VotingClassifier(estimators=[('mlp1',
-                              MLPClassifier(hidden_layer_sizes=(100, 150, 150,
-                                                                100, 10),
-                                            max_iter=150)),
-                             ('mlp2',
-                              MLPClassifier(hidden_layer_sizes=(50, 100, 200,
-                                                                200, 100),
-                                            max_iter=150)),
-                             ('mlp3',
-                              MLPClassifier(hidden_layer_sizes=(50, 100, 100,
-                                                                200, 100),
-                                            max_iter=150)),
-                             ('ada',
-                              AdaBoostClassifier(base_estimator=DecisionTreeClassifier(max_depth=4),
-                                                 n_estimators=100))]) over params {}
-Finished. Time elapsed: 6.034 [min]
-	Reached accuracies:
-		Score : 0.859 , Params : {}
->>>>>>> Stashed changes
 ----------------------------------------
 
 
 Trying on the validation dataset with different metrics
                                                                        accuracy_score          precision_score                 f1_score             recall_score
-<<<<<<< Updated upstream
                                       KNeighborsClassifier()                    0.834                    0.843                    0.838                    0.834
                                                  LinearSVC()                    0.833                    0.835                    0.839                    0.842
 OneVsRestClassifier(estimator=DecisionTreeClassifier(max_depth=5))                    0.848                    0.903                    0.842                    0.788
@@ -224,33 +121,11 @@ MLPClassifier(alpha=0.0002, early_stopping=True,
               learning_rate='adaptive', learning_rate_init=0.005, max_iter=1000,
               n_iter_no_change=5, random_state=1, solver='sgd',
               validation_fraction=0.15)                    0.848                    0.861                     0.85                     0.84
-=======
-                                    DecisionTreeClassifier()                    0.789                    0.786                    0.798                     0.81
-MLPClassifier(early_stopping=True, hidden_layer_sizes=(100, 500, 500, 100),
-              max_iter=100000, solver='sgd')                    0.842                    0.844                    0.847                    0.851
-                                        AdaBoostClassifier()                    0.802                    0.769                    0.821                    0.879
-VotingClassifier(estimators=[('mlp1',
-                              MLPClassifier(hidden_layer_sizes=(100, 150, 150,
-                                                                100, 10),
-                                            max_iter=150)),
-                             ('mlp2',
-                              MLPClassifier(hidden_layer_sizes=(50, 100, 200,
-                                                                200, 100),
-                                            max_iter=150)),
-                             ('mlp3',
-                              MLPClassifier(hidden_layer_sizes=(50, 100, 100,
-                                                                200, 100),
-                                            max_iter=150)),
-                             ('ada',
-                              AdaBoostClassifier(base_estimator=DecisionTreeClassifier(max_depth=4),
-                                                 n_estimators=100))])                    0.819                    0.847                    0.818                     0.79
->>>>>>> Stashed changes
 ----------------------------------------
 
 
 Initializing model selection for task : Disease_Detection
 
-<<<<<<< Updated upstream
 Checking model : KNeighborsClassifier() over params {'n_neighbors': [3, 5, 10, 20, 50]}
 Finished. Time elapsed: 0.137 [min]
 	Reached accuracies:
@@ -290,51 +165,11 @@ Checking model : MLPClassifier(alpha=0.0002, early_stopping=True,
 Finished. Time elapsed: 5.806 [min]
 	Reached accuracies:
 		Best validation score: 0.7395470383275261
-=======
-Checking model : DecisionTreeClassifier() over params {'max_depth': [5, 10, 15]}
-Finished. Time elapsed: 0.052 [min]
-	Reached accuracies:
-		Score : 0.825 , Params : {'max_depth': 15}
-		Score : 0.798 , Params : {'max_depth': 10}
-		Score : 0.683 , Params : {'max_depth': 5}
-
-Checking model : MLPClassifier(early_stopping=True, hidden_layer_sizes=(100, 500, 500, 100),
-              max_iter=100000, solver='sgd') over params {}
-Finished. Time elapsed: 11.38 [min]
-	Reached accuracies:
-		Best validation score: 0.8627678054429647
-
-Checking model : AdaBoostClassifier() over params {'n_estimators': [50, 100], 'base_estimator': [DecisionTreeClassifier(max_depth=1)]}
-Finished. Time elapsed: 0.385 [min]
-	Reached accuracies:
-		Score : 0.696 , Params : {'base_estimator': DecisionTreeClassifier(max_depth=1), 'n_estimators': 100}
-		Score : 0.689 , Params : {'base_estimator': DecisionTreeClassifier(max_depth=1), 'n_estimators': 50}
-
-Checking model : VotingClassifier(estimators=[('mlp1',
-                              MLPClassifier(hidden_layer_sizes=(100, 150, 150,
-                                                                100, 10),
-                                            max_iter=150)),
-                             ('mlp2',
-                              MLPClassifier(hidden_layer_sizes=(50, 100, 200,
-                                                                200, 100),
-                                            max_iter=150)),
-                             ('mlp3',
-                              MLPClassifier(hidden_layer_sizes=(50, 100, 100,
-                                                                200, 100),
-                                            max_iter=150)),
-                             ('ada',
-                              AdaBoostClassifier(base_estimator=DecisionTreeClassifier(max_depth=4),
-                                                 n_estimators=100))]) over params {}
-Finished. Time elapsed: 21.577 [min]
-	Reached accuracies:
-		Score : 0.916 , Params : {}
->>>>>>> Stashed changes
 ----------------------------------------
 
 
 Trying on the validation dataset with different metrics
                                                                        accuracy_score          precision_score                 f1_score             recall_score
-<<<<<<< Updated upstream
                                       KNeighborsClassifier()                    0.513                    0.537                    0.508                    0.513
                                                  LinearSVC()                    0.557                    0.448                    0.473                    0.557
 OneVsRestClassifier(estimator=DecisionTreeClassifier(max_depth=5))                    0.776                    0.781                    0.775                    0.776
@@ -347,33 +182,11 @@ MLPClassifier(alpha=0.0002, early_stopping=True,
               learning_rate='adaptive', learning_rate_init=0.005, max_iter=1000,
               n_iter_no_change=5, random_state=1, solver='sgd',
               validation_fraction=0.15)                      0.7                    0.705                    0.699                      0.7
-=======
-                                    DecisionTreeClassifier()                    0.643                    0.707                    0.648                    0.643
-MLPClassifier(early_stopping=True, hidden_layer_sizes=(100, 500, 500, 100),
-              max_iter=100000, solver='sgd')                    0.692                    0.706                    0.694                    0.692
-                                        AdaBoostClassifier()                    0.556                    0.634                    0.559                    0.556
-VotingClassifier(estimators=[('mlp1',
-                              MLPClassifier(hidden_layer_sizes=(100, 150, 150,
-                                                                100, 10),
-                                            max_iter=150)),
-                             ('mlp2',
-                              MLPClassifier(hidden_layer_sizes=(50, 100, 200,
-                                                                200, 100),
-                                            max_iter=150)),
-                             ('mlp3',
-                              MLPClassifier(hidden_layer_sizes=(50, 100, 100,
-                                                                200, 100),
-                                            max_iter=150)),
-                             ('ada',
-                              AdaBoostClassifier(base_estimator=DecisionTreeClassifier(max_depth=4),
-                                                 n_estimators=100))])                    0.704                    0.722                    0.705                    0.704
->>>>>>> Stashed changes
 ========================================
 SUMMARY
 ========================================
 
 For task : Spreader_Detection
-<<<<<<< Updated upstream
 	Chosen model : (AdaBoostClassifier(algorithm='SAMME',
                    base_estimator=DecisionTreeClassifier(max_depth=5),
                    learning_rate=0.07, n_estimators=700, random_state=0), {}, True)
@@ -393,54 +206,18 @@ For task : Disease_Detection
                    learning_rate=0.07, n_estimators=700, random_state=0), {}, True)
 	Metrics : accuracy_score
 	Value : 0.81
-=======
-	Chosen model : (DecisionTreeClassifier(), {'max_depth': [5, 10, 15]}, True)
-	Metrics : recall_score
-	Value : 0.954
-
-For task : At_Risk_Detection
-	Chosen model : (AdaBoostClassifier(), {'n_estimators': [50, 100], 'base_estimator': [DecisionTreeClassifier(max_depth=1)]})
-	Metrics : f1_score
-	Value : 0.877
-
-For task : Disease_Detection
-	Chosen model : (VotingClassifier(estimators=[('mlp1',
-                              MLPClassifier(hidden_layer_sizes=(100, 150, 150,
-                                                                100, 10),
-                                            max_iter=150)),
-                             ('mlp2',
-                              MLPClassifier(hidden_layer_sizes=(50, 100, 200,
-                                                                200, 100),
-                                            max_iter=150)),
-                             ('mlp3',
-                              MLPClassifier(hidden_layer_sizes=(50, 100, 100,
-                                                                200, 100),
-                                            max_iter=150)),
-                             ('ada',
-                              AdaBoostClassifier(base_estimator=DecisionTreeClassifier(max_depth=4),
-                                                 n_estimators=100))]), {}, True)
-	Metrics : accuracy_score
-	Value : 0.916
->>>>>>> Stashed changes
 
 
 
 Evaluating best model on the test dataset
 
-<<<<<<< Updated upstream
 Result will be printed in : 	S:\236756_intro_machine_learning\git\hw5\wet_alex\outputs_clf\test_predicted.csv
 	Task : Disease_Detection, targets were supplied. accuracy_score = 0.8288888888888889
 	Task : Spreader_Detection, targets were supplied. accuracy_score = 0.8644444444444445
 	Task : At_Risk_Detection, targets were supplied. accuracy_score = 0.84
-=======
-Result will be printed in : 	C:\Users\Snir\Documents\GitHub\236756_Introduction_to_ML\hw5\wet_alex\outputs_clf\test_predicted.csv
-	Task : Disease_Detection, targets were supplied. accuracy_score = 0.6955555555555556
-	Task : Spreader_Detection, targets were supplied. recall_score = 0.9466666666666667
-	Task : At_Risk_Detection, targets were supplied. f1_score = 0.7795918367346939
->>>>>>> Stashed changes
 
 
 
 Evaluating best model on the test dataset
 
-Result will be printed in : 	C:\Users\Snir\Documents\GitHub\236756_Introduction_to_ML\hw5\wet_alex\outputs_clf\unseen_predicted.csv
+Result will be printed in : 	S:\236756_intro_machine_learning\git\hw5\wet_alex\outputs_clf\unseen_predicted.csv

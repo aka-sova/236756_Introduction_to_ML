@@ -95,26 +95,18 @@ def init_automatic_classification(regenerate_features: bool, evaluate_on_test: b
     #          if parameters = {}, and the model is not MLP, set use_cv=True, to use the CV anyway.
 
     models = []
-<<<<<<< Updated upstream
     models.append((KNeighborsClassifier(), {'n_neighbors':[3, 5, 10, 20, 50]}))
     models.append((LinearSVC(max_iter=1000), {} , True))
     # models.append((GaussianNB(), {}, True))
     # models.append((DecisionTreeClassifier(), {'max_depth':[5, 10, 15, 20]}))
-=======
-    # models.append((KNeighborsClassifier(), {'n_neighbors':[3, 5, 10, 20, 50]}))
-    # models.append((LinearSVC(max_iter=1000), {}))
-    # models.append((GaussianNB(), {}))
-    models.append((DecisionTreeClassifier(), {'max_depth':[5, 10, 15, 20 ,50]}, True))
->>>>>>> Stashed changes
     # models.append((LogisticRegression(max_iter=1000), {}))
 <<<<<<< HEAD
     # models.append((OneVsRestClassifier(DecisionTreeClassifier(max_depth=5)), {}))
-    models.append((MLPClassifier(alpha=0.0001, max_iter=100000, hidden_layer_sizes = (100,500,500,100),
-                                  solver='sgd', momentum=0.9, early_stopping=True), {}))
-    #models.append((RandomForestClassifier(max_depth=3, n_estimators=500, max_features=10), {}))
+    #models.append((MLPClassifier(alpha=0.0001, max_iter=100000, hidden_layer_sizes = (100,100,100),
+    #                              solver='sgd', momentum=0.9, early_stopping=True), {}))
+    # models.append((RandomForestClassifier(max_depth=3, n_estimators=500, max_features=10), {}))
 
     models.append((AdaBoostClassifier(), {'n_estimators': [50, 100],
-<<<<<<< Updated upstream
                                           'base_estimator': [DecisionTreeClassifier(max_depth=1)]}))
     models.append( (VotingClassifier(estimators=[('mlp', MLPClassifier(alpha=0.0001, max_iter=100000, hidden_layer_sizes = (100,100,100))),
     ('rf', RandomForestClassifier(max_depth=3, n_estimators=500, max_features=10)),
@@ -177,14 +169,6 @@ def init_automatic_classification(regenerate_features: bool, evaluate_on_test: b
 
 >>>>>>> 9e08705bae64fa3d16a976c0706064cf693db872
     # 3.1 Choose the metrics for validation to display
-=======
-                                          'base_estimator': [DecisionTreeClassifier(max_depth=4)]}))
-    models.append( (VotingClassifier(estimators=[('mlp1', MLPClassifier(alpha=0.0001, max_iter=150, hidden_layer_sizes = (100,150,150,100,10))),
-    ('mlp2', MLPClassifier(alpha=0.0001, max_iter=150, hidden_layer_sizes = (50,100,200,200,100))),
-    ('mlp3', MLPClassifier(alpha=0.0001, max_iter=150, hidden_layer_sizes = (50,100,100,200,100))),
-    ('ada', AdaBoostClassifier(n_estimators=100, base_estimator=DecisionTreeClassifier(max_depth=4))) ],voting='hard'), {} , True) )
-    #3.1 Choose the metrics for validation to display
->>>>>>> Stashed changes
     validation_metrics = []
     validation_metrics.append((metrics.accuracy_score, {}))
     validation_metrics.append((metrics.precision_score, {'average': 'weighted'}))
