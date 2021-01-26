@@ -70,6 +70,35 @@ def given_features_pipe(dataset_path : str, split_list : list):
 
     z_threshold = 2
 
+    # Scaling parameters from the training dataset
+    feature_mean = {}
+    feature_mean["AgeGroup"] = 3.360444136
+    feature_mean["DisciplineScore"] = 4.8840801559
+    feature_mean["StepsPerYear"] = 11538977.981471933
+    feature_mean["SyndromeClass"] = 2.9898888889
+    feature_mean["TimeOnSocialActivities"] = 55.0343859087
+    feature_mean["pcrResult1"] = 0.1602452074
+    feature_mean["pcrResult12"] = -0.8498761528
+    feature_mean["pcrResult14"] = 12.7732660013
+    feature_mean["pcrResult16"] = 1.6052960456
+    feature_mean["pcrResult4"] = 0.112480797
+    feature_mean["pcrResult5"] = 0.0054885582
+
+
+    feature_std = {}
+    feature_std["AgeGroup"] = 1.1370979914
+    feature_std["DisciplineScore"] = 1.365627197
+    feature_std["StepsPerYear"] = 6320772.303302099
+    feature_std["SyndromeClass"] = 1.2604267306
+    feature_std["TimeOnSocialActivities"] = 15.1141476421
+    feature_std["pcrResult1"] = 0.942804486
+    feature_std["pcrResult12"] = 3.865892107
+    feature_std["pcrResult14"] = 28.0027211667
+    feature_std["pcrResult16"] = 0.7108454621
+    feature_std["pcrResult4"] = 0.9461853683
+    feature_std["pcrResult5"] = 0.5031145828
+
+
 
     results_fields = ['Disease', 'Spreader', 'atRisk']
 
@@ -83,7 +112,7 @@ def given_features_pipe(dataset_path : str, split_list : list):
                                            ('SyndromClassHandler', SyndromClassHandler()),
                                            ('Modify_Results_Code', Modify_Results_Code()),
                                            ('Leave_Relevant_Features', Leave_Relevant(relevant_features, results_fields)),
-                                           ('Total_Scaler', Scale_All(results_fields)),
+                                           ('Total_Scaler', Scale_All_Manually(results_fields, feature_mean, feature_std)),
                                            ('DropNA', DropNA()),
                                            ])
 
