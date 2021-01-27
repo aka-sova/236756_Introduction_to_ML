@@ -11,7 +11,7 @@ from sklearn.svm import LinearSVC
 from sklearn.multiclass import OneVsRestClassifier
 from sklearn.neural_network import MLPClassifier
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.ensemble import AdaBoostClassifier
+from sklearn.ensemble import AdaBoostClassifier, VotingClassifier
 
 import sklearn.metrics
 
@@ -38,7 +38,7 @@ def init_automatic_classification(regenerate_features: bool, evaluate_on_test: b
     if dataset_type == 'virus':
         tasks.append(Task(task_name='Spreader_Detection',
                           target_type='Spreader',
-                          main_metrics=metrics.accuracy_score,
+                          main_metrics=metrics.recall_score,
                           pipeline=given_features_pipe(dataset_path=virus_dataset_path,
                                                        split_list=split_list),
                           mapping_dict=targets_mappings['spreader_mapping'],
@@ -47,7 +47,7 @@ def init_automatic_classification(regenerate_features: bool, evaluate_on_test: b
 
         tasks.append(Task(task_name='At_Risk_Detection',
                           target_type='atRisk',
-                          main_metrics=metrics.accuracy_score,
+                          main_metrics=metrics.f1_score,
                           pipeline=given_features_pipe(dataset_path=virus_dataset_path,
                                                        split_list=split_list),
                           mapping_dict=targets_mappings['at_risk_mapping'],
@@ -93,16 +93,34 @@ def init_automatic_classification(regenerate_features: bool, evaluate_on_test: b
     #          those models are later inserted into the cross validation,
     #          if parameters = {}, and the model is not MLP, set use_cv=True, to use the CV anyway.
 
+   
+
     models = []
+    
+    models.append((RandomForestClassifier(max_depth=3, n_estimators=500, max_features=10), {}, True))    
+    
     models.append((KNeighborsClassifier(), {'n_neighbors':[3, 5, 10, 20, 50]}))
-    models.append((LinearSVC(max_iter=1000), {} , True))
-    # models.append((GaussianNB(), {}, True))
-    # models.append((DecisionTreeClassifier(), {'max_depth':[5, 10, 15, 20]}))
-    # models.append((LogisticRegression(max_iter=1000), {}))
+    
+    models.append((LinearSVC(max_iter=1000), {}, True))
+    
+    models.append((GaussianNB(), {}, True))
+    
+    models.append((DecisionTreeClassifier(), {'max_depth':[5, 10, 15, 20]}))
+    
+    models.append((LogisticRegression(max_iter=1000), {}, True))
+    
     models.append((OneVsRestClassifier(DecisionTreeClassifier(max_depth=5)), {}, True))
 
+    models.append((VotingClassifier(estimators=[('mlp', MLPClassifier(alpha=0.0001, max_iter=100000, hidden_layer_sizes = (100,100,100))),
+                                                ('rf', RandomForestClassifier(max_depth=3, n_estimators=500, max_features=10)),
+                                                ('ada', AdaBoostClassifier(n_estimators=100, 
+                                                                            base_estimator=DecisionTreeClassifier(max_depth=5)))], voting='hard'), {}, True ))
 
-    models.append((RandomForestClassifier(max_depth=3, n_estimators=500, max_features=10), {}, True))
+    models.append((VotingClassifier(estimators=[('mlp1', MLPClassifier(alpha=0.0001, max_iter=150, hidden_layer_sizes = (100,150,150,100,10))),
+                                             ('mlp2', MLPClassifier(alpha=0.0001, max_iter=150, hidden_layer_sizes = (50,100,200,200,100))),
+                                             ('mlp3', MLPClassifier(alpha=0.0001, max_iter=150, hidden_layer_sizes = (50,100,100,200,100))),
+                                             ('ada', AdaBoostClassifier(n_estimators=100, base_estimator=DecisionTreeClassifier(max_depth=4)))],voting='hard'), {} , True) )
+                                         
 
     # clf_adaboost = AdaBoostClassifier(random_state=0,
     #                                  algorithm = 'SAMME')
